@@ -1,0 +1,731 @@
+﻿
+@import url("https://fonts.googleapis.com/css?family=Inter:400|Roboto:700");
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #F7CABA;
+    text-align: center;
+}
+
+.website-porto {
+    height: 4911px;
+    mix-blend-mode: normal;
+    pointer-events: auto;
+    transition: all 0.2s ease;
+    width: 1440px;
+}
+
+    .website-porto .about-me {
+        letter-spacing: 0;
+        color: #ffffff;
+        line-height: 34px;
+        margin-left: 12px;
+        min-height: 33px;
+        min-width: 115px;
+        mix-blend-mode: normal;
+        text-align: center;
+        white-space: nowrap;
+        width: 115px;
+    }
+
+    .website-porto .about-me-1 {
+        align-items: center;
+        border-radius: 34px;
+        background-color: #ffffff;
+        box-shadow: 0px 4px 4px #00000040;
+        display: flex;
+        height: 276px;
+        justify-content: flex-end;
+        left: 202px;
+        mix-blend-mode: normal;
+        padding: 0 43.5px;
+        position: absolute;
+        top: 782px;
+    }
+
+    .website-porto .about-me-button {
+        cursor: pointer;
+        border-color: white;
+        height: 66px;
+        left: 631px;
+        mix-blend-mode: normal;
+        pointer-events: auto;
+        position: absolute;
+        top: 568px;
+        transition: all 0.2s ease;
+        width: 177px;
+        border-radius: 6px;
+    }
+
+        .website-porto .about-me-button:hover {
+            box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.2);
+        }
+
+    .website-porto .bg {
+        height: 1400px;
+        left: 280px;
+        mix-blend-mode: normal;
+        position: absolute;
+        top: 47px;
+        width: 880px;
+    }
+
+    .website-porto .button-ghost-la-eft-icon-active {
+        border-radius: 4px;
+        border: 1px solid #8A8989;
+        height: 48px;
+        margin-top: 24px;
+        overflow: hidden;
+        pointer-events: auto;
+        position: relative;
+        transition: all 0.2s ease;
+        width: 720px;
+    }
+
+    .website-porto .button-ghost-la-eft-icon-active-1 {
+        border-radius: 4px;
+        border: 1px solid #8A8989;
+        cursor: pointer;
+        height: 48px;
+        margin-top: 70px;
+        overflow: hidden;
+        pointer-events: auto;
+        transition: all 0.2s ease;
+        width: 720px;
+    }
+
+        .website-porto .button-ghost-la-eft-icon-active-1:hover {
+            box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.2);
+        }
+
+    .website-porto .button-ghost-la-eft-icon-active-2 {
+        border-radius: 4px;
+        border: 1px solid #8A8989;
+        cursor: pointer;
+        height: 48px;
+        overflow: hidden;
+        pointer-events: auto;
+        position: relative;
+        transition: all 0.2s ease;
+        width: 720px;
+    }
+
+        .website-porto .button-ghost-la-eft-icon-active-2:hover {
+            box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.2);
+        }
+
+    .website-porto .button-ghost-la-eft-icon-active:hover {
+        box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.2);
+    }
+
+    .website-porto .contact {
+        align-items: center;
+        background-color: #ffffff;
+        border-radius: 34px;
+        box-shadow: 0px 4px 4px #00000040;
+        display: flex;
+        flex-direction: column;
+        left: 197px;
+        mix-blend-mode: normal;
+        padding: 70px 0;
+        position: absolute;
+        top: 3642px;
+        width: 1042px;
+    }
+
+    .website-porto .contact-button {
+        cursor: pointer;
+        height: 66px;
+        left: 631px;
+        mix-blend-mode: normal;
+        pointer-events: auto;
+        position: absolute;
+        top: 3428px;
+        transition: all 0.2s ease;
+        width: 177px;
+        border-radius: 6px;
+    }
+
+        .website-porto .contact-button:hover {
+            box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.2);
+        }
+
+    .website-porto .content-large-0-text-right-icon {
+        align-items: flex-start;
+        display: flex;
+        height: 19px;
+        left: 334px;
+        overflow: hidden;
+        position: absolute;
+        top: 14px;
+        width: 87px;
+    }
+
+    .website-porto .content-large-0-text-right-icon-1 {
+        align-items: center;
+        display: flex;
+        left: 300px;
+        position: relative;
+        top: 12px;
+        width: 120px;
+    }
+
+    .website-porto .content-large-0-text-right-icon-2 {
+        align-items: flex-start;
+        display: flex;
+        height: 19px;
+        left: 334px;
+        overflow: hidden;
+        position: absolute;
+        top: 14px;
+        width: 75px;
+    }
+
+    .website-porto .content-large-0-text-right-icon-3 {
+        align-items: flex-start;
+        display: flex;
+        height: 19px;
+        left: 294px;
+        overflow: hidden;
+        position: absolute;
+        top: 14px;
+        width: 165px;
+    }
+
+    .website-porto .dsc0353-1 {
+        cursor: pointer;
+        height: 312px;
+        margin-top: 73px;
+        mix-blend-mode: normal;
+        object-fit: cover;
+        pointer-events: auto;
+        transition: all 0.2s ease;
+        width: 312px;
+    }
+
+        .website-porto .dsc0353-1:hover {
+            transform: scale(1.1);
+        }
+
+    .website-porto .end {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        left: 687px;
+        min-height: 214px;
+        mix-blend-mode: normal;
+        position: absolute;
+        top: 4206px;
+        width: 66px;
+    }
+
+    .website-porto .frame-4880 {
+        align-items: center;
+        display: flex;
+        height: 33px;
+        left: 14px;
+        min-width: 149px;
+        mix-blend-mode: normal;
+        position: absolute;
+        top: 16px;
+    }
+
+    .website-porto .frame-4881 {
+        align-items: flex-start;
+        display: flex;
+        min-width: 720px;
+        mix-blend-mode: normal;
+    }
+
+    .website-porto .frame-4883 {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        margin-top: 58px;
+        min-height: 264px;
+        mix-blend-mode: normal;
+        width: 720px;
+    }
+
+    .website-porto .frame-4888 {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        min-height: 697px;
+        mix-blend-mode: normal;
+        width: 312px;
+    }
+
+    .website-porto .frame-4889 {
+        align-items: flex-start;
+        display: flex;
+        margin-top: 70px;
+        min-width: 720px;
+        mix-blend-mode: normal;
+    }
+
+    .website-porto .frame-4890 {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        min-height: 1464px;
+        mix-blend-mode: normal;
+        width: 720px;
+    }
+
+    .website-porto .frame-4891 {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        margin-top: 70px;
+        min-height: 1582px;
+        mix-blend-mode: normal;
+        width: 720px;
+    }
+
+    .website-porto .hero {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        left: 574px;
+        min-height: 244px;
+        mix-blend-mode: normal;
+        position: absolute;
+        top: 285px;
+        width: 291px;
+    }
+
+    .website-porto .hi-im-wildan {
+        letter-spacing: 0;
+        color: #ffffff;
+        line-height: 34px;
+        margin-left: 2.0px;
+        margin-top: 36px;
+        min-height: 34px;
+        min-width: 293px;
+        mix-blend-mode: normal;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .website-porto .img202004270002 {
+        height: 104px;
+        mix-blend-mode: normal;
+        pointer-events: auto;
+        transition: all 0.2s ease;
+        width: 105px;
+        border-radius: 34px;
+    }
+
+    .website-porto .line-38 {
+        height: 148px;
+        left: 88px;
+        position: absolute;
+        top: 67px;
+        width: 2px;
+    }
+
+    .website-porto .line-38-1 {
+        height: 148px;
+        left: 88px;
+        position: absolute;
+        top: -148px;
+        width: 2px;
+    }
+
+    .website-porto .line-39 {
+        height: 148px;
+        margin-right: 2.0px;
+        width: 2px;
+    }
+
+    .website-porto .link {
+        cursor: pointer;
+        height: 697px;
+        margin-left: 96px;
+        mix-blend-mode: normal;
+        pointer-events: auto;
+        transition: all 0.2s ease;
+        width: 312px;
+    }
+
+        .website-porto .link:hover {
+            transform: scale(1.1);
+        }
+
+    .website-porto .overlap-group {
+        border-color: white;
+        height: 4911px;
+        position: relative;
+    }
+
+    .website-porto .overlap-group1 {
+        border-color: white;
+        height: 13px;
+        margin-top: -0.77px;
+        position: relative;
+        width: 14px;
+    }
+
+    .website-porto .overlap-group1-1 {
+        border-color: white;
+        border: 1px solid #ffffff;
+        border-radius: 6px;
+        height: 66px;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 177px;
+    }
+
+    .website-porto .overlap-group2 {
+        border-radius: 6px;
+        border: 1px solid #ffffff;
+        height: 66px;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 177px;
+    }
+
+    .website-porto .overlap-group3 {
+        border-radius: 6px;
+        border: 1px solid #ffffff;
+        height: 66px;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 177px;
+    }
+
+    .website-porto .place {
+        letter-spacing: 0;
+        color: #ffffff;
+        line-height: 34px;
+        margin-left: 12px;
+        min-height: 33px;
+        min-width: 115px;
+        mix-blend-mode: normal;
+        text-align: center;
+        white-space: nowrap;
+        width: 115px;
+    }
+
+    .website-porto .portfolio {
+        letter-spacing: 0;
+        color: #ffffff;
+        line-height: 34px;
+        margin-left: 12px;
+        min-height: 33px;
+        min-width: 115px;
+        mix-blend-mode: normal;
+        text-align: center;
+        white-space: nowrap;
+        width: 115px;
+    }
+
+    .website-porto .portfolio-1 {
+        align-items: center;
+        background-color: #ffffff;
+        border-radius: 34px;
+        box-shadow: 0px 4px 4px #00000040;
+        display: flex;
+        flex-direction: column;
+        left: 199px;
+        mix-blend-mode: normal;
+        padding: 70px 0;
+        position: absolute;
+        top: 1420px;
+        width: 1040px;
+    }
+
+    .website-porto .portfolio-button {
+        cursor: pointer;
+        height: 66px;
+        left: 631px;
+        border-color: #ffffff;
+        mix-blend-mode: normal;
+        pointer-events: auto;
+        position: absolute;
+        top: 1206px;
+        transition: all 0.2s ease;
+        width: 177px;
+        border-radius: 6px;
+    }
+
+        .website-porto .portfolio-button:hover {
+            box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.2);
+        }
+
+    .website-porto .qazarazaq {
+        letter-spacing: 0;
+        color: #8A8989;
+        min-height: 19px;
+        min-width: 77px;
+        mix-blend-mode: normal;
+        text-align: center;
+    }
+
+    .website-porto .qazarazaqgmailcom {
+        letter-spacing: 0;
+        color: #8A8989;
+        min-height: 19px;
+        min-width: 167px;
+        mix-blend-mode: normal;
+        text-align: center;
+    }
+
+    .website-porto .rectangle-1263 {
+        border-radius: 6px;
+        border-color: white;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 177px;
+    }
+
+    .website-porto .rectangle-1263-1 {
+        border-radius: 6px;
+        height: 66px;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 177px;
+    }
+
+    .website-porto .rectangle-1263-2 {
+        border-radius: 6px;
+        height: 66px;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 177px;
+    }
+
+    .website-porto .row-x5-f-7-1 {
+        align-items: flex-start;
+        display: flex;
+        height: 24px;
+        min-width: 24px;
+    }
+
+    .website-porto .row-x5-f-7-1-1 {
+        height: 25px;
+        width: 24px;
+    }
+
+    .website-porto .see-more {
+        letter-spacing: 0;
+        color: #8A8989;
+        margin-left: 10px;
+        min-height: 19px;
+        min-width: 71px;
+        mix-blend-mode: normal;
+        text-align: center;
+    }
+
+    .website-porto .subtract {
+        cursor: pointer;
+        height: 66px;
+        mix-blend-mode: normal;
+        pointer-events: auto;
+        transition: all 0.2s ease;
+        width: 66px;
+    }
+
+    .website-porto .switch-banner-1 {
+        cursor: pointer;
+        height: 697px;
+        mix-blend-mode: normal;
+        pointer-events: auto;
+        transition: all 0.2s ease;
+        width: 312px;
+    }
+
+        .website-porto .switch-banner-1:hover {
+            transform: scale(1.1);
+        }
+
+    .website-porto .tehkotak-2 {
+        cursor: pointer;
+        height: 312px;
+        mix-blend-mode: normal;
+        object-fit: cover;
+        pointer-events: auto;
+        transition: all 0.2s ease;
+        width: 312px;
+    }
+
+        .website-porto .tehkotak-2:hover {
+            transform: scale(1.1);
+        }
+
+    .website-porto .text-1 {
+        letter-spacing: 0;
+        color: #ffffff;
+        line-height: 34px;
+        margin-left: 2.0px;
+        min-height: 34px;
+        min-width: 276px;
+        mix-blend-mode: normal;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .website-porto .text-2 {
+        letter-spacing: 0;
+        color: #8A8989;
+        line-height: 34px;
+        min-width: 951px;
+        mix-blend-mode: normal;
+        text-align: center;
+        width: 951px;
+    }
+
+    .website-porto .text-3 {
+        letter-spacing: 0;
+        color: #8A8989;
+        line-height: 34px;
+        margin-left: 2.0px;
+        min-height: 68px;
+        min-width: 555px;
+        mix-blend-mode: normal;
+        text-align: center;
+    }
+
+    .website-porto .text-4 {
+        letter-spacing: 0;
+        color: #8A8989;
+        line-height: 34px;
+        margin-left: 2.0px;
+        min-height: 102px;
+        min-width: 506px;
+        mix-blend-mode: normal;
+        text-align: center;
+        width: 506px;
+    }
+
+    .website-porto .text-5 {
+        left: 600px;
+        color: #ffffff;
+        letter-spacing: 0;
+        line-height: 34px;
+        mix-blend-mode: normal;
+        position: absolute;
+        text-align: center;
+        top: 4807px;
+        white-space: nowrap;
+    }
+
+    .website-porto .uilbehance-alt {
+        height: 24px;
+        left: 300px;
+        mix-blend-mode: normal;
+        position: absolute;
+        top: 12px;
+        width: 24px;
+    }
+
+    .website-porto .uilfast-mail {
+        height: 24px;
+        left: 260px;
+        mix-blend-mode: normal;
+        position: absolute;
+        top: 12px;
+        width: 25px;
+    }
+
+    .website-porto .uilgoogle-drive-alt {
+        height: 24px;
+        color: #8A8989;
+        mix-blend-mode: normal;
+        width: 24px;
+    }
+
+    .website-porto .uilinstagram {
+        height: 24px;
+        left: 300px;
+        mix-blend-mode: normal;
+        position: absolute;
+        top: 12px;
+        width: 24px;
+    }
+
+    .website-porto .uillinkedin-alt {
+        height: 24px;
+        left: 300px;
+        mix-blend-mode: normal;
+        position: absolute;
+        top: 12px;
+        width: 24px;
+    }
+
+    .website-porto .vector {
+        height: 25px;
+        left: 12px;
+        mix-blend-mode: normal;
+        top: 13px;
+        width: 24px;
+    }
+
+    .website-porto .vector-1 {
+        height: 9px;
+        left: 6px;
+        mix-blend-mode: normal;
+        position: absolute;
+        top: 8px;
+        width: 14px;
+    }
+
+    .website-porto .website-porto-1 {
+        height: 4911px;
+        left: 0;
+        mix-blend-mode: normal;
+        pointer-events: auto;
+        position: absolute;
+        top: 0;
+        transition: all 0.2s ease;
+        width: 1440px;
+    }
+
+    .website-porto .wildanrazaq {
+        letter-spacing: 0;
+        color: #8A8989;
+        min-height: 19px;
+        min-width: 89px;
+        mix-blend-mode: normal;
+        text-align: center;
+    }
+
+
+.container-center-horizontal {
+    pointer-events: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+    .container-center-horizontal > * {
+        pointer-events: auto;
+        flex-shrink: 0;
+    }
+
+.hidden,
+.hidden * {
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.screen a {
+    text-decoration: none;
+    display: contents;
+}
+
+.smart-layers-pointers,
+.smart-layers-pointers * {
+    pointer-events: auto;
+    visibility: visible;
+}
