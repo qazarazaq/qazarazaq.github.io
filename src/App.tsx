@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <main id="top">
+      <main>
         <Hero />
         <Portfolio />
         <TravelSection />
