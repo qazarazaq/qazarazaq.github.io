@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://qazarazaq.github.io/sitemap.xml
+

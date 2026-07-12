@@ -1,154 +1,140 @@
-import { useEffect, useRef, useState } from "react";
-import {
-  motion,
-  type MotionValue,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-} from "framer-motion";
 import type { PortfolioProject } from "../data/portfolio";
 import { portfolioProjects } from "../data/portfolio";
-import { Reveal } from "./Reveal";
 
-const stackOffsets = [
-  { x: 310, y: 150, rotate: -4, scale: 0.95 },
-  { x: -310, y: 160, rotate: 3, scale: 0.94 },
-  { x: 300, y: -170, rotate: 2, scale: 0.93 },
-  { x: -300, y: -160, rotate: -3, scale: 0.92 },
-];
-
-function useDesktopMotion() {
-  const [isDesktop, setIsDesktop] = useState(false);
-
-  useEffect(() => {
-    const query = window.matchMedia("(min-width: 900px)");
-    const update = () => setIsDesktop(query.matches);
-
-    update();
-    query.addEventListener("change", update);
-    return () => query.removeEventListener("change", update);
-  }, []);
-
-  return isDesktop;
+function SystemMap({ project }: { project: PortfolioProject }) {
+  return (
+    <div className="project-map" aria-hidden="true">
+      <div className="project-map__header">
+        <span>System view</span>
+        <span>{project.platform.join(" / ")}</span>
+      </div>
+      <div className="project-map__track">
+        {project.systemMap.map((node, index) => (
+          <div className="project-map__node" key={node}>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <strong>{node}</strong>
+          </div>
+        ))}
+      </div>
+      <p>Public-safe representation. No product interface is reproduced.</p>
+    </div>
+  );
 }
 
-function PortfolioCard({
-  project,
-  index,
-  progress,
-  animateDolly,
-}: {
-  project: PortfolioProject;
-  index: number;
-  progress: MotionValue<number>;
-  animateDolly: boolean;
-}) {
-  const offset = stackOffsets[index] ?? stackOffsets[0];
-  const x = useTransform(progress, [0, 1], [offset.x, 0]);
-  const y = useTransform(progress, [0, 1], [offset.y, 0]);
-  const rotate = useTransform(progress, [0, 1], [offset.rotate, 0]);
-  const scale = useTransform(progress, [0, 1], [offset.scale, 1]);
-  const opacity = useTransform(progress, [0, 0.22, 1], [index === 0 ? 1 : 0.5, 1, 1]);
-
+function ProjectDetails({ project }: { project: PortfolioProject }) {
   return (
-    <motion.article
-      className={`portfolio-card portfolio-card--${project.accent}`}
-      style={
-        animateDolly
-          ? {
-              x,
-              y,
-              rotate,
-              scale,
-              opacity,
-              zIndex: portfolioProjects.length - index,
-            }
-          : undefined
-      }
-    >
-      <div className="portfolio-media">
-        <img
-          src={project.cover}
-          alt={`${project.title} generated portfolio key visual`}
-          loading={index < 2 ? "eager" : "lazy"}
-        />
+    <details className="project-details">
+      <summary>Read project context</summary>
+      <div className="project-details__content">
+        <div>
+          <h4>Context</h4>
+          <p>{project.domain}</p>
+        </div>
+        <div>
+          <h4>Challenge</h4>
+          <p>{project.problem}</p>
+        </div>
+        <div>
+          <h4>Role</h4>
+          <p>{project.role}</p>
+        </div>
+        <div>
+          <h4>Responsibilities</h4>
+          <ul>
+            {project.responsibilities.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h4>Constraints</h4>
+          <p className={project.approvedConstraints ? "" : "content-placeholder"}>
+            {project.approvedConstraints ?? "Editable: add approved project constraints."}
+          </p>
+        </div>
+        <div>
+          <h4>Process and key decisions</h4>
+          <p className="content-placeholder">
+            Editable: add approved process notes and decision rationale.
+          </p>
+        </div>
+        <div>
+          <h4>States and edge cases</h4>
+          <p>{project.systemMap.join(" → ")}</p>
+        </div>
+        <div>
+          <h4>Final experience</h4>
+          <p>Detailed interface material is not published on this public page.</p>
+        </div>
+        <div>
+          <h4>Outcome or learnings</h4>
+          <p className={project.approvedOutcome ? "" : "content-placeholder"}>
+            {project.approvedOutcome ?? "Editable: add an approved outcome or learning."}
+          </p>
+        </div>
       </div>
+    </details>
+  );
+}
 
-      <div className="portfolio-card__body">
-        <div className="portfolio-card__meta">
-          <span>{project.category}</span>
-          <span>{project.company}</span>
+function ProjectCard({ project, index }: { project: PortfolioProject; index: number }) {
+  return (
+    <article id={`project-${project.slug}`} className="project-card">
+      <SystemMap project={project} />
+      <div className="project-card__content">
+        <div className="project-card__index">{String(index + 1).padStart(2, "0")}</div>
+        <div className="project-card__meta">
+          <span>{project.organization}</span>
+          <span>{project.confidentiality}</span>
+          {project.year ? <span>{project.year}</span> : null}
+          {project.projectStatus ? <span>{project.projectStatus}</span> : null}
         </div>
         <h3>{project.title}</h3>
-        <p className="portfolio-card__role">{project.role}</p>
+        <p className="project-card__domain">{project.domain}</p>
+        <p className="project-card__problem">{project.problem}</p>
+        <p className="project-card__contribution">{project.contribution}</p>
 
-        <div className="portfolio-card__copy">
-          <p>
-            <span>Problem: </span>
-            {project.problem}
-          </p>
-          <p>
-            <span>Contribution: </span>
-            {project.contribution}
-          </p>
-        </div>
-
-        <div className="portfolio-card__tags">
+        <ul className="tag-list" aria-label={`${project.title} capabilities`}>
           {project.tags.map((tag) => (
-            <span key={tag}>{tag}</span>
+            <li key={tag}>{tag}</li>
           ))}
-        </div>
+        </ul>
 
-        <div className="portfolio-card__actions">
-          {project.links.map((link) => (
-            <a
-              key={`${project.slug}-${link.label}`}
-              href={link.href}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={`${link.label} for ${project.title}`}
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
+        <ProjectDetails project={project} />
+
+        {project.caseStudyUrl ? (
+          <a className="text-link" href={project.caseStudyUrl}>
+            View case study <span aria-hidden="true">↗</span>
+          </a>
+        ) : (
+          <a className="text-link" href="#contact">
+            Discuss this work <span aria-hidden="true">→</span>
+          </a>
+        )}
       </div>
-    </motion.article>
+    </article>
   );
 }
 
 export function Portfolio() {
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const reducedMotion = useReducedMotion();
-  const isDesktop = useDesktopMotion();
-  const animateDolly = isDesktop && !reducedMotion;
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start 88%", "start 24%"],
-  });
-
   return (
-    <section id="work" ref={sectionRef} className="portfolio-section">
-      <div className="mx-auto max-w-[1180px] px-5 py-20 sm:px-8 sm:py-28 lg:px-10 lg:py-32">
-        <Reveal className="portfolio-section__intro">
-          <p className="eyebrow text-skyline">Selected Portfolio</p>
-          <h2>Product work for banking-grade complexity.</h2>
+    <section id="work" className="work section" aria-labelledby="work-title">
+      <div className="container">
+        <div className="section-heading section-heading--split">
+          <div>
+            <p className="kicker">Selected work</p>
+            <h2 id="work-title">Product design for systems with real constraints.</h2>
+          </div>
           <p>
-            Four selected snapshots across financing, donation commerce, corporate
-            banking, and enterprise procurement. Each card uses a generated key visual
-            built from the project reference screens.
+            Public-safe summaries of work across digital banking, commerce, corporate
+            operations, and enterprise procurement. Detailed material is shared only
+            where publication is approved.
           </p>
-        </Reveal>
+        </div>
 
-        <div className={animateDolly ? "portfolio-grid portfolio-grid--dolly" : "portfolio-grid"}>
+        <div className="project-grid">
           {portfolioProjects.map((project, index) => (
-            <PortfolioCard
-              key={project.slug}
-              project={project}
-              index={index}
-              progress={scrollYProgress}
-              animateDolly={animateDolly}
-            />
+            <ProjectCard key={project.slug} project={project} index={index} />
           ))}
         </div>
       </div>

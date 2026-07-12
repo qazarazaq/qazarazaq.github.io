@@ -1,127 +1,133 @@
-export type PortfolioLink = {
-  label: "View Figma" | "View Behance";
-  href: string;
-  isPlaceholder?: boolean;
-};
-
 export type PortfolioProject = {
   slug: string;
   title: string;
-  company: string;
-  category: string;
-  role: string;
+  organization: string;
+  domain: string;
   problem: string;
   contribution: string;
+  role: string;
+  responsibilities: string[];
+  platform: string[];
+  year: string | null;
+  projectStatus: string | null;
+  caseStudyUrl: string | null;
+  confidentiality: string;
+  impact: string | null;
   tags: string[];
-  links: PortfolioLink[];
-  cover: string;
-  accent: "blue" | "pink" | "gold" | "red";
+  systemMap: string[];
+  approvedConstraints: string | null;
+  approvedOutcome: string | null;
 };
 
-// Replace placeholder URLs here when the exact Figma or Behance project links are ready.
+// Public-safe summaries only. Add dates, outcomes, URLs, and project-specific
+// constraints here after confirming they are approved for publication.
 export const portfolioProjects: PortfolioProject[] = [
   {
     slug: "livin-auto",
     title: "Livin Auto",
-    company: "Bank Mandiri / Livin'",
-    category: "Financing / mobile banking",
-    role: "Product design, UX flow, UI execution",
+    organization: "Bank Mandiri / Livin'",
+    domain: "Automotive financing and digital banking",
     problem:
-      "Automotive financing can feel fragmented when users need to compare vehicles, understand loan options, and continue into application steps.",
+      "Automotive financing can become fragmented when users need to discover vehicles, understand options, simulate affordability, and continue into an application.",
     contribution:
-      "Structured discovery, calculator, eligibility, and application moments into a clearer mobile banking flow.",
-    tags: ["Mobile banking", "Financing", "Discovery", "Application flow"],
-    cover: "/portfolio/portfolio-livin-auto-cover.jpg",
-    accent: "blue",
-    links: [
-      {
-        label: "View Figma",
-        href: "https://www.figma.com/",
-        isPlaceholder: true,
-      },
-      {
-        label: "View Behance",
-        href: "https://www.behance.net/wildanrazaq",
-        isPlaceholder: true,
-      },
+      "Structured the journey into clearer decision points and reusable states for a mobile banking context.",
+    role: "Product design, journey structure, and interface execution",
+    responsibilities: [
+      "Journey structure",
+      "Interaction design",
+      "Reusable UI states",
+      "High-fidelity specification",
     ],
+    platform: ["Mobile"],
+    year: null,
+    projectStatus: null,
+    caseStudyUrl: null,
+    confidentiality: "Public-safe summary",
+    impact: null,
+    tags: ["Digital banking", "Financing", "Complex journeys"],
+    systemMap: ["Discover", "Compare", "Simulate", "Apply"],
+    approvedConstraints: null,
+    approvedOutcome: null,
   },
   {
     slug: "sukha-donasi",
     title: "Sukha Donasi",
-    company: "Bank Mandiri / Livin'",
-    category: "Donation / lifestyle commerce inside banking",
-    role: "Product design, interaction, visual system execution",
+    organization: "Bank Mandiri / Livin'",
+    domain: "Donation experience inside a banking product",
     problem:
-      "Donation flows inside banking need emotional clarity while still feeling fast, trustworthy, and payment-ready.",
+      "A giving journey needs emotional clarity while remaining fast, trustworthy, and consistent with a financial product.",
     contribution:
-      "Connected campaign discovery, nominal selection, donor details, and payment continuation into a clearer giving experience.",
-    tags: ["Donation", "Sukha", "Payments", "Mobile UX"],
-    cover: "/portfolio/portfolio-sukha-donasi-cover.jpg",
-    accent: "pink",
-    links: [
-      {
-        label: "View Figma",
-        href: "https://www.figma.com/",
-        isPlaceholder: true,
-      },
-      {
-        label: "View Behance",
-        href: "https://www.behance.net/wildanrazaq",
-        isPlaceholder: true,
-      },
+      "Connected campaign context, amount selection, donor details, review, and payment continuation into a coherent mobile flow.",
+    role: "Product design, interaction design, and visual system execution",
+    responsibilities: [
+      "Flow definition",
+      "State design",
+      "Payment continuity",
+      "Interface consistency",
     ],
+    platform: ["Mobile"],
+    year: null,
+    projectStatus: null,
+    caseStudyUrl: null,
+    confidentiality: "Public-safe summary",
+    impact: null,
+    tags: ["Commerce", "Payments", "Mobile UX"],
+    systemMap: ["Campaign", "Amount", "Review", "Payment"],
+    approvedConstraints: null,
+    approvedOutcome: null,
   },
   {
     slug: "kopra-scm",
     title: "Kopra SCM",
-    company: "Bank Mandiri",
-    category: "Business / corporate banking platform",
-    role: "UX simplification, workflow design, product UI",
+    organization: "Bank Mandiri",
+    domain: "Corporate banking and supply-chain workflows",
     problem:
-      "Corporate banking workflows often combine dense data, approvals, and operational tasks that can overwhelm daily users.",
+      "Enterprise workflows combine dense information, approvals, operational tasks, and status changes that must remain understandable for daily users.",
     contribution:
-      "Brought structure to enterprise flows across SCM, productivity, and complex task simplification.",
-    tags: ["Corporate banking", "Enterprise UX", "SCM", "Productivity"],
-    cover: "/portfolio/portfolio-kopra-scm-cover.jpg",
-    accent: "gold",
-    links: [
-      {
-        label: "View Figma",
-        href: "https://www.figma.com/",
-        isPlaceholder: true,
-      },
-      {
-        label: "View Behance",
-        href: "https://www.behance.net/wildanrazaq",
-        isPlaceholder: true,
-      },
+      "Brought hierarchy and reusable interaction patterns to complex task and account-receivable workflows.",
+    role: "Product design, enterprise workflow design, and product UI",
+    responsibilities: [
+      "Workflow mapping",
+      "Information hierarchy",
+      "State consistency",
+      "Handoff detail",
     ],
+    platform: ["Responsive web"],
+    year: null,
+    projectStatus: null,
+    caseStudyUrl: null,
+    confidentiality: "Public-safe summary",
+    impact: null,
+    tags: ["Corporate banking", "Enterprise UX", "SCM"],
+    systemMap: ["Task", "Approval", "Status", "History"],
+    approvedConstraints: null,
+    approvedOutcome: null,
   },
   {
     slug: "telkom-gealileo",
     title: "Telkom Gealileo",
-    company: "Telkom Indonesia",
-    category: "Enterprise procurement workflow",
-    role: "Web UX, workflow clarity, high-fidelity UI",
+    organization: "Telkom Indonesia",
+    domain: "Enterprise procurement workflow",
     problem:
-      "Procurement teams need to review documents, track proposal stages, and coordinate uploads without losing operational context.",
+      "Procurement teams need to review documents, understand proposal stages, and coordinate uploads without losing operational context.",
     contribution:
-      "Clarified procurement progress, document upload states, and supporting information into a calmer enterprise workflow.",
-    tags: ["Telkom", "Procurement", "Enterprise UX", "Workflow"],
-    cover: "/portfolio/portfolio-telkom-gealileo-cover.jpg",
-    accent: "red",
-    links: [
-      {
-        label: "View Figma",
-        href: "https://www.figma.com/",
-        isPlaceholder: true,
-      },
-      {
-        label: "View Behance",
-        href: "https://www.behance.net/wildanrazaq",
-        isPlaceholder: true,
-      },
+      "Clarified progress, document states, and supporting information within a calmer enterprise workflow.",
+    role: "Web UX, workflow clarity, and high-fidelity UI",
+    responsibilities: [
+      "Workflow structure",
+      "Document states",
+      "Progress visibility",
+      "Interface refinement",
     ],
+    platform: ["Web"],
+    year: null,
+    projectStatus: null,
+    caseStudyUrl: null,
+    confidentiality: "Public-safe summary",
+    impact: null,
+    tags: ["Procurement", "Enterprise UX", "Internal tools"],
+    systemMap: ["Proposal", "Documents", "Review", "Progress"],
+    approvedConstraints: null,
+    approvedOutcome: null,
   },
 ];
