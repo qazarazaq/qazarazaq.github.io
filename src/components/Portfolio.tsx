@@ -1,22 +1,26 @@
-import type { PortfolioProject } from "../data/portfolio";
-import { portfolioProjects } from "../data/portfolio";
+import { useState } from "react";
+import type { CSSProperties } from "react";
+import { portfolioProjects, type PortfolioProject } from "../data/portfolio";
 
-function SystemMap({ project }: { project: PortfolioProject }) {
+function ProjectVisual({ project, index }: { project: PortfolioProject; index: number }) {
+  const [selected, setSelected] = useState(0);
   return (
-    <div className="project-map" aria-hidden="true">
-      <div className="project-map__header">
-        <span>System view</span>
-        <span>{project.platform.join(" / ")}</span>
+    <div className={`project-visual project-visual--${index}`}>
+      <div className="project-visual__top"><span>{project.platform.join(" / ")}</span><span>Journey map / 0{index + 1}</span></div>
+      <div className="journey-composition">
+        <span className="journey-composition__word" aria-hidden="true">{project.systemMap[selected]}</span>
+        <div className="journey-nodes" aria-label={`${project.title} journey stages`}>
+          {project.systemMap.map((stage, stageIndex) => (
+            <button key={stage} type="button" className="journey-node" aria-pressed={selected === stageIndex} onClick={() => setSelected(stageIndex)} style={{ "--node": stageIndex } as CSSProperties}>
+              <span className="journey-node__number">0{stageIndex + 1}</span>
+              <strong>{stage}</strong>
+              <span className="journey-node__line" aria-hidden="true"><i /><i /><i /></span>
+              <span className="journey-node__marker" aria-hidden="true">{selected === stageIndex ? "●" : "○"}</span>
+            </button>
+          ))}
+        </div>
       </div>
-      <div className="project-map__track">
-        {project.systemMap.map((node, index) => (
-          <div className="project-map__node" key={node}>
-            <span>{String(index + 1).padStart(2, "0")}</span>
-            <strong>{node}</strong>
-          </div>
-        ))}
-      </div>
-      <p>Public-safe representation. No product interface is reproduced.</p>
+      <div className="project-visual__bottom"><span>Public-safe journey diagram</span><span>0{selected + 1} / 04</span></div>
     </div>
   );
 }
@@ -24,120 +28,50 @@ function SystemMap({ project }: { project: PortfolioProject }) {
 function ProjectDetails({ project }: { project: PortfolioProject }) {
   return (
     <details className="project-details">
-      <summary>Read project context</summary>
+      <summary>Role &amp; responsibilities</summary>
       <div className="project-details__content">
-        <div>
-          <h4>Context</h4>
-          <p>{project.domain}</p>
-        </div>
-        <div>
-          <h4>Challenge</h4>
-          <p>{project.problem}</p>
-        </div>
-        <div>
-          <h4>Role</h4>
-          <p>{project.role}</p>
-        </div>
-        <div>
-          <h4>Responsibilities</h4>
-          <ul>
-            {project.responsibilities.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h4>Constraints</h4>
-          <p className={project.approvedConstraints ? "" : "content-placeholder"}>
-            {project.approvedConstraints ?? "Editable: add approved project constraints."}
-          </p>
-        </div>
-        <div>
-          <h4>Process and key decisions</h4>
-          <p className="content-placeholder">
-            Editable: add approved process notes and decision rationale.
-          </p>
-        </div>
-        <div>
-          <h4>States and edge cases</h4>
-          <p>{project.systemMap.join(" → ")}</p>
-        </div>
-        <div>
-          <h4>Final experience</h4>
-          <p>Detailed interface material is not published on this public page.</p>
-        </div>
-        <div>
-          <h4>Outcome or learnings</h4>
-          <p className={project.approvedOutcome ? "" : "content-placeholder"}>
-            {project.approvedOutcome ?? "Editable: add an approved outcome or learning."}
-          </p>
-        </div>
+        <p>{project.role}</p>
+        <ul>{project.responsibilities.map((item) => <li key={item}>{item}</li>)}</ul>
+        {project.approvedConstraints && <p>{project.approvedConstraints}</p>}
+        {project.approvedOutcome && <p>{project.approvedOutcome}</p>}
+        {project.impact && <p>{project.impact}</p>}
       </div>
     </details>
   );
 }
 
-function ProjectCard({ project, index }: { project: PortfolioProject; index: number }) {
-  return (
-    <article id={`project-${project.slug}`} className="project-card">
-      <SystemMap project={project} />
-      <div className="project-card__content">
-        <div className="project-card__index">{String(index + 1).padStart(2, "0")}</div>
-        <div className="project-card__meta">
-          <span>{project.organization}</span>
-          <span>{project.confidentiality}</span>
-          {project.year ? <span>{project.year}</span> : null}
-          {project.projectStatus ? <span>{project.projectStatus}</span> : null}
-        </div>
-        <h3>{project.title}</h3>
-        <p className="project-card__domain">{project.domain}</p>
-        <p className="project-card__problem">{project.problem}</p>
-        <p className="project-card__contribution">{project.contribution}</p>
-
-        <ul className="tag-list" aria-label={`${project.title} capabilities`}>
-          {project.tags.map((tag) => (
-            <li key={tag}>{tag}</li>
-          ))}
-        </ul>
-
-        <ProjectDetails project={project} />
-
-        {project.caseStudyUrl ? (
-          <a className="text-link" href={project.caseStudyUrl}>
-            View case study <span aria-hidden="true">↗</span>
-          </a>
-        ) : (
-          <a className="text-link" href="#contact">
-            Discuss this work <span aria-hidden="true">→</span>
-          </a>
-        )}
-      </div>
-    </article>
-  );
-}
-
 export function Portfolio() {
   return (
-    <section id="work" className="work section" aria-labelledby="work-title">
-      <div className="container">
-        <div className="section-heading section-heading--split">
-          <div>
-            <p className="kicker">Selected work</p>
-            <h2 id="work-title">Product design for systems with real constraints.</h2>
-          </div>
-          <p>
-            Public-safe summaries of work across digital banking, commerce, corporate
-            operations, and enterprise procurement. Detailed material is shared only
-            where publication is approved.
-          </p>
-        </div>
-
-        <div className="project-grid">
-          {portfolioProjects.map((project, index) => (
-            <ProjectCard key={project.slug} project={project} index={index} />
-          ))}
-        </div>
+    <section id="work" className="work" aria-labelledby="work-title">
+      <div className="container work-heading">
+        <p className="kicker">Selected work / 01—04</p>
+        <h2 id="work-title">Complex underneath.<br /><span>Clear on the surface.</span></h2>
+        <p>Product design across digital banking, commerce, corporate operations, and enterprise procurement.</p>
+        <nav className="work-index" aria-label="Project index">{portfolioProjects.map((project, index) => <a key={project.slug} href={`#project-${project.slug}`}><span>0{index + 1}</span>{project.title}<span aria-hidden="true">↘</span></a>)}</nav>
       </div>
+      {portfolioProjects.map((project, index) => (
+        <article id={`project-${project.slug}`} key={project.slug} className={`project-chapter project-chapter--${index} motion-scene`}>
+          <div className="container project-chapter__grid">
+            <div className="project-story">
+              <div className="project-story__heading">
+                <p className="kicker"><span>0{index + 1}</span> {project.organization}</p>
+                <h3>{project.title}</h3>
+                <p className="project-domain">{project.domain}</p>
+              </div>
+              <div className="project-story__body">
+                <div className="story-block"><h4>The challenge</h4><p>{project.problem}</p></div>
+                <div className="story-block"><h4>My contribution</h4><p>{project.contribution}</p></div>
+                <ul className="tag-list" aria-label={`${project.title} focus`}>{project.tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
+                <ProjectDetails project={project} />
+                {(project.year || project.projectStatus) && <p className="project-extra">{[project.year, project.projectStatus].filter(Boolean).join(" / ")}</p>}
+                <a className="text-link" href={project.caseStudyUrl ?? "#contact"} {...(project.caseStudyUrl ? { target: "_blank", rel: "noreferrer" } : {})}>{project.caseStudyUrl ? "View case study" : "Discuss this work"}<span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+            <div className="project-stage"><ProjectVisual project={project} index={index} /></div>
+          </div>
+        </article>
+      ))}
+      <p className="container work-note">Public-safe summaries. Detailed interface material is shared only where publication is approved.</p>
     </section>
   );
 }

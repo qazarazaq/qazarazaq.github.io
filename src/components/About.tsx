@@ -17,6 +17,7 @@ export function About() {
         <div className="about__copy">
           <p className="kicker">About</p>
           <h2 id="about-title">{siteContent.about.title}</h2>
+          <p>{siteContent.identity.detail}</p>
           {siteContent.about.paragraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
@@ -30,4 +31,3 @@ export function About() {
     </section>
   );
 }
-

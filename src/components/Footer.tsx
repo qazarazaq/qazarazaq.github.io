@@ -8,7 +8,7 @@ const contactLinks = [
   { label: "GitHub", href: socialLinks.github },
 ];
 
-export function Footer() {
+export function Footer({ motion }: { motion: { reduced: boolean; systemReduced: boolean; toggle: () => void } }) {
   return (
     <footer id="contact" className="contact-section" aria-labelledby="contact-title">
       <div className="container contact-section__grid">
@@ -36,6 +36,7 @@ export function Footer() {
           {siteContent.identity.monogram}
         </div>
         <p>© 2026 {siteContent.identity.name}</p>
+        <button className="motion-toggle" type="button" aria-pressed={motion.reduced} onClick={motion.toggle} disabled={motion.systemReduced}>{motion.systemReduced ? "Reduced motion (system)" : "Reduce motion"}</button>
         <a href="#top">Back to top</a>
       </div>
     </footer>

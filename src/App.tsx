@@ -7,8 +7,10 @@ import { Navbar } from "./components/Navbar";
 import { Portfolio } from "./components/Portfolio";
 import { ProfessionalProof } from "./components/ProfessionalProof";
 import { TravelSection } from "./components/TravelSection";
+import { useSceneMotion } from "./hooks/useSceneMotion";
 
 function App() {
+  const motion = useSceneMotion();
   return (
     <>
       <a className="skip-link" href="#main-content">
@@ -17,14 +19,14 @@ function App() {
       <Navbar />
       <main id="main-content">
         <Hero />
-        <ProfessionalProof />
         <Portfolio />
+        <ProfessionalProof />
         <Approach />
         <TravelSection />
         <About />
         <Archive />
       </main>
-      <Footer />
+      <Footer motion={motion} />
     </>
   );
 }

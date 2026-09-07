@@ -3,7 +3,6 @@ import { siteContent } from "../data/site";
 
 const navItems = [
   { label: "Work", href: "#work", id: "work" },
-  { label: "Approach", href: "#approach", id: "approach" },
   { label: "Travel", href: "#travel", id: "travel" },
   { label: "About", href: "#about", id: "about" },
   { label: "Contact", href: "#contact", id: "contact" },
@@ -26,18 +25,19 @@ export function Navbar() {
       .map((item) => document.getElementById(item.id))
       .filter((section): section is HTMLElement => Boolean(section));
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    let observer: IntersectionObserver;
+    const observe = () => {
+      observer?.disconnect();
+      // Percentage margins resolve against width, not height.
+      observer = new IntersectionObserver(entries => {
+        const visible = entries.find(entry => entry.isIntersecting);
         if (visible) setActiveSection(visible.target.id);
-      },
-      { rootMargin: "-24% 0px -58% 0px", threshold: [0.05, 0.2, 0.5] },
-    );
-
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+      }, { rootMargin: `-${window.innerHeight * .15}px 0px -${window.innerHeight * .7}px 0px`, threshold: 0 });
+      sections.forEach(section => observer.observe(section));
+    };
+    observe();
+    window.addEventListener("resize", observe);
+    return () => { observer.disconnect(); window.removeEventListener("resize", observe); };
   }, []);
 
   useEffect(() => {

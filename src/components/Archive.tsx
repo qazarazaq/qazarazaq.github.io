@@ -2,7 +2,7 @@ import { archiveItems } from "../data/archive";
 
 export function Archive() {
   return (
-    <section className="archive section section--compact" aria-labelledby="archive-title">
+    <section id="archive" className="archive section section--compact" aria-labelledby="archive-title">
       <div className="container">
         <div className="section-heading section-heading--split">
           <div>

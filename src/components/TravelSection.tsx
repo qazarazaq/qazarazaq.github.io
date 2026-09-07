@@ -7,6 +7,7 @@ export function TravelSection() {
   const itemRefs = useRef<Array<HTMLElement | null>>([]);
   const frameRef = useRef<number | null>(null);
   const dragRef = useRef({ active: false, startX: 0, scrollLeft: 0 });
+  const activeIndexRef = useRef(0);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const activeItem = travelItems[activeIndex];
@@ -29,6 +30,7 @@ export function TravelSection() {
       }
     });
 
+    activeIndexRef.current = closestIndex;
     setActiveIndex((current) => (current === closestIndex ? current : closestIndex));
   }, []);
 
@@ -42,10 +44,14 @@ export function TravelSection() {
 
   useEffect(() => {
     updateActiveItem();
-    const onResize = () => updateActiveItem();
-    window.addEventListener("resize", onResize);
+    const observer = new ResizeObserver(() => {
+      const track = trackRef.current;
+      if (!track) return;
+      track.scrollTo({ left: track.clientWidth * activeIndexRef.current, behavior: "instant" });
+    });
+    if (trackRef.current) observer.observe(trackRef.current);
     return () => {
-      window.removeEventListener("resize", onResize);
+      observer.disconnect();
       if (frameRef.current !== null) window.cancelAnimationFrame(frameRef.current);
     };
   }, [updateActiveItem]);
@@ -55,7 +61,7 @@ export function TravelSection() {
     const item = itemRefs.current[index];
     if (!track || !item) return;
 
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches || document.documentElement.dataset.reducedMotion === "true";
     const left = item.offsetLeft - (track.clientWidth - item.offsetWidth) / 2;
     track.scrollTo({ left, behavior: reduceMotion ? "auto" : "smooth" });
   }, []);
@@ -108,11 +114,11 @@ export function TravelSection() {
   };
 
   return (
-    <section id="travel" className="travel-section section" aria-labelledby="travel-title">
+    <section id="travel" className="travel-section section motion-scene" aria-labelledby="travel-title">
       <div className="container travel-intro">
         <div>
-          <p className="kicker">Travel notes / KaburAja Dulu</p>
-          <h2 id="travel-title">Outside the interface.</h2>
+          <p className="kicker">Outside the interface / Travel Photo Dump</p>
+          <h2 id="travel-title">KaburAja Dulu*</h2>
         </div>
         <p>
           A personal photography archive of streets, transport, architecture, signs,
@@ -121,6 +127,8 @@ export function TravelSection() {
       </div>
 
       <div className="travel-experience">
+        <div className="travel-echo travel-echo--left" aria-hidden="true"><img src={travelItems[(activeIndex + travelItems.length - 1) % travelItems.length].image} alt="" loading="lazy" /></div>
+        <div className="travel-echo travel-echo--right" aria-hidden="true"><img src={travelItems[(activeIndex + 1) % travelItems.length].image} alt="" loading="lazy" /></div>
         <div className="travel-window-shell">
           <div className="travel-window-opening">
             <div
@@ -150,7 +158,7 @@ export function TravelSection() {
                     alt={item.alt}
                     width={item.width}
                     height={item.height}
-                    loading={index === 0 ? "eager" : "lazy"}
+                    loading="lazy"
                     decoding="async"
                     draggable={false}
                     style={{ objectPosition: item.imagePosition }}
@@ -174,15 +182,17 @@ export function TravelSection() {
         </div>
       </div>
 
+      <div className="container travel-destinations" aria-label="Choose a destination">
+        {travelItems.map((item, index) => <button type="button" key={item.id} aria-pressed={index === activeIndex} onClick={() => scrollToIndex(index)}>{item.location}</button>)}
+      </div>
+
       <div className="container travel-details">
         <div className="travel-details__copy" aria-live="polite" aria-atomic="true">
           <span>
             {activeItem.country} / {activeItem.year}
           </span>
           <h3>{activeItem.location}</h3>
-          <p className={activeItem.caption ? "" : "content-placeholder"}>
-            {activeItem.caption ?? "Editable: add an original travel note."}
-          </p>
+          {activeItem.caption && <p>{activeItem.caption}</p>}
         </div>
 
         <div className="travel-details__controls">
@@ -199,7 +209,7 @@ export function TravelSection() {
               disabled={activeIndex === 0}
               aria-label="Previous destination"
             >
-              Previous
+              <span aria-hidden="true">←</span>
             </button>
             <button
               type="button"
@@ -207,7 +217,7 @@ export function TravelSection() {
               disabled={activeIndex === travelItems.length - 1}
               aria-label="Next destination"
             >
-              Next
+              <span aria-hidden="true">→</span>
             </button>
           </div>
 
