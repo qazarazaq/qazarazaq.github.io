@@ -39,3 +39,7 @@ The original portrait is in `public/assets/`. The airplane-window frame and trav
 Pushes to `master` trigger `.github/workflows/deploy.yml`. The workflow installs dependencies with Node 20, builds the Vite app, uploads `dist/`, and deploys the artifact to GitHub Pages.
 
 GitHub Pages must use **GitHub Actions** as its publishing source.
+
+## Presentation conventions
+
+Shared type sizes live in `src/portfolio.css`: section heading, product title, subtitle, body and caption. Preview captions share a grid row, even when source images have different aspect ratios. Contribution context is written into the product overview. Expanded stories use vertical journeys and icon-led design decisions, without repeated screen blocks.
