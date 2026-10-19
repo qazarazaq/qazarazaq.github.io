@@ -361,3 +361,6 @@ html[data-reduced-motion="true"] .travel-photo { transition: none; }
 .design-decision { display: grid; grid-template-columns: 28px 1fr; gap: 18px; align-items: start; }
 .design-decision > img { width: 24px; height: 24px; margin-top: 2px; filter: brightness(0) invert(.86); }
 .design-decision h4 { margin-bottom: 8px; }
+.experience-tiles figcaption .experience-tiles__dates { margin-top: 6px; color: #b5c1d2; font-size: 11px; }
+/* Show device trim only when its interface is ready, avoiding empty shells. */
+.phone-device:not([data-ready="true"]) :is(.phone-device__hardware,.phone-device__island) { visibility: hidden; }

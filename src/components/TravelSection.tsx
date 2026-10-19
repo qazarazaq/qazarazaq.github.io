@@ -21,7 +21,7 @@ export function TravelSection() {
     <section id="travel" className="travel-section section" aria-labelledby="travel-title">
       <div className="container travel-intro">
         <h2 id="travel-title">Travel</h2>
-        <p>Photographs from Japan and Singapore.</p>
+        <p>Outside work, I enjoy travelling and taking photographs of the places I visit—streets, transport, architecture, and everyday details.</p>
       </div>
       <div
         className={`travel-experience travel-carousel${drag ? " travel-carousel--dragging" : ""}`}

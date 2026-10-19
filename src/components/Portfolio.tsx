@@ -9,11 +9,12 @@ function ProductContext({ devices, medium }: { devices: readonly string[]; mediu
 }
 
 function DeviceImage({ screen }: { screen: ProjectScreen }) {
+  const [loadedSrc, setLoadedSrc] = useState<string | null>(null);
   if (screen.kind === "atm") return <img src={screen.src} alt={screen.title} width={screen.width} height={screen.height} loading="lazy" decoding="async" />;
   if (screen.width > screen.height) {
     return <img src={screen.src} alt={screen.title} width={screen.width} height={screen.height} loading="lazy" decoding="async" />;
   }
-  return <span className="phone-device"><img className="phone-device__hardware" src="/work/phone-frame.webp" alt="" aria-hidden="true" width="420" height="851" loading="lazy" /><img className="phone-device__screen" src={screen.src} alt={screen.title} width={screen.width} height={screen.height} loading="lazy" decoding="async" /><span className="phone-device__island" aria-hidden="true" /></span>;
+  return <span className="phone-device" data-ready={loadedSrc === screen.src}><img className="phone-device__hardware" src="/work/phone-frame.webp" alt="" aria-hidden="true" width="420" height="851" loading="lazy" /><img className="phone-device__screen" onLoad={() => setLoadedSrc(screen.src)} src={screen.src} alt={screen.title} width={screen.width} height={screen.height} loading="lazy" decoding="async" /><span className="phone-device__island" aria-hidden="true" /></span>;
 }
 
 function ScreenViewer({ screen, onClose }: { screen: ProjectScreen; onClose: () => void }) {
