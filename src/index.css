@@ -407,7 +407,7 @@ html[data-reduced-motion="true"] { scroll-behavior: auto; }
 html[data-reduced-motion="true"] *,html[data-reduced-motion="true"] *::before,html[data-reduced-motion="true"] *::after { animation: none !important; transition: none !important; }
 html[data-reduced-motion="true"] .project-stage { position: relative; top: auto; }
 html[data-reduced-motion="true"] .project-story { min-height: 0; }
-html[data-reduced-motion="true"] :is(.hero__work,.hero-object,.journey-node,.journey-nodes,.journey-composition__word,.travel-window-shell,.travel-echo) { transform: none; translate: none; }
+html[data-reduced-motion="true"] :is(.hero__work,.hero-object,.journey-node,.journey-nodes,.journey-composition__word,.travel-echo) { transform: none; translate: none; }
 @media (min-width: 900px) and (max-height: 759px) {
   .project-stage { position: relative; top: auto !important; }
 }
