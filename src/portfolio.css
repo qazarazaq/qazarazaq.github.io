@@ -266,9 +266,6 @@ body { background: #13171d; }
 .contact-links a:hover { background: #2d4058; }
 .contact-links a:hover img { filter: brightness(0) saturate(100%) invert(86%) sepia(14%) saturate(716%) hue-rotate(176deg); }
 .phone-device__hardware { z-index: 2; }
-.atm-device { display: block; position: relative; aspect-ratio: 941 / 1672; clip-path: polygon(15% 6%,85% 6%,90.5% 8.5%,90.5% 59%,92% 60%,92% 94.5%,8% 94.5%,8% 60%,9.5% 59%,9.5% 8.5%); }
-.atm-device .atm-device__hardware { width: 100%; height: 100%; border-radius: 0; box-shadow: none; }
-.atm-device .atm-device__screen { position: absolute; left: 17.44%; top: 20.32%; width: 36.15%; height: 36.125%; object-fit: fill; border-radius: 2px; box-shadow: none; }
 .supporting-work__scm { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; column-gap: 60px; }
 .supporting-work__scm .supporting-preview { grid-column: 1 / -1; height: auto; padding: 40px; margin-bottom: 8px; }
 .supporting-work__scm .supporting-preview img { width: 100%; max-height: none; }
@@ -298,3 +295,5 @@ body { background: #13171d; }
 }
 @media (prefers-reduced-motion: reduce) { .travel-photo,.travel-progress b { transition: none; } }
 html[data-reduced-motion="true"] .travel-photo { transition: none; }
+
+.screen-preview--atm > img { border-radius: 10px; }

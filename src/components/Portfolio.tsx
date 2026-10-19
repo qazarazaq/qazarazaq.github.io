@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { portfolioProjects, supportingProjects, type PortfolioProject, type ProjectScreen } from "../data/portfolio";
 
 function DeviceImage({ screen }: { screen: ProjectScreen }) {
-  if (screen.kind === "atm") return <span className="atm-device"><img className="atm-device__hardware" src="/work/atm-hardware.webp" alt="" aria-hidden="true" width="941" height="1672" loading="lazy" /><img className="atm-device__screen" src={screen.src} alt={screen.title} width={screen.width} height={screen.height} loading="lazy" /></span>;
+  if (screen.kind === "atm") return <img src={screen.src} alt={screen.title} width={screen.width} height={screen.height} loading="lazy" decoding="async" />;
   if (screen.width > screen.height) {
     return <img src={screen.src} alt={screen.title} width={screen.width} height={screen.height} loading="lazy" decoding="async" />;
   }
