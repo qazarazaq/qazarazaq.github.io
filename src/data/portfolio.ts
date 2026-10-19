@@ -29,11 +29,11 @@ export const portfolioProjects: PortfolioProject[] = [
     summary: "I designed pickup guidance, gold selection, fees, and location information across the mobile and ATM journey for withdrawing physical gold.",
     medium: "Mobile app and ATM",
     devices: ["phone", "atm"],
-    problem: "A withdrawal crosses two interfaces. Customers need to understand where to go, what they can collect, and how the app connects to the machine.",
+    problem: "Gold is selected in grams, while printing fees are paid in rupiah. Customers also move between Livin’ and a physical ATM, so the selected piece, cost, and pickup instructions need to stay clear.",
     decisions: [
-      { title: "Separate weight from cost", description: "Show the gold denomination and printing fee as distinct information. Keep the selected product and total fee visible as the customer compares options." },
-      { title: "Make the next action explicit", description: "Use direct pickup instructions and a clear scan action to connect Livin’ to the ATM. Carry that clarity through to collecting the physical gold." },
-      { title: "Organize locations by city", description: "Group the ATM directory by city, with a consistent name, address, and map action. A longer list stays useful when customers can scan their area first." },
+      { title: "One piece, one clear total", description: "The selection is one piece from one brand. Weight and printing fee have separate labels, while a shared summary keeps the selected piece and total fee visible across the brand choices." },
+      { title: "Give the handoff a primary action", description: "The mobile guide makes “Scan QR di ATM” the primary action and keeps ATM locations as a secondary link. Starting a pickup and finding a machine have different priorities, without needing separate entry screens." },
+      { title: "Organize locations by city", description: "The directory is grouped by city. Each location keeps its name, address, and map action in one repeated row, so expanding the list does not change how a customer scans their area." },
     ],
     flow: ["Open Ambil Emas", "Choose gold account", "Find an ATM", "Scan at the machine", "Select & review gold", "Confirm & collect"],
     screens: [
@@ -50,11 +50,11 @@ export const portfolioProjects: PortfolioProject[] = [
     summary: "I worked on discovery, categories, ordering states, and cart detail for Livin’ Food, connecting dine-in and delivery journeys to payment.",
     medium: "Mobile commerce",
     devices: ["phone"],
-    problem: "Dine-in and delivery start with different needs. Discovery should make those choices clear while keeping the ordering experience consistent.",
+    problem: "Customers need a dining mode, a way into a large menu of categories, and a cart that reflects whether a restaurant can still fulfil the order. Those states need to feel connected inside Livin’.",
     decisions: [
-      { title: "Keep dining modes distinct", description: "Give dine-in and delivery their own context, so customers can see which service they are choosing before committing to an order." },
-      { title: "Make discovery easy to scan", description: "Use recognizable categories and consistent restaurant information. Keep menu imagery, item names, and prices readable in a compact mobile layout." },
-      { title: "Keep the order understandable", description: "Maintain a clear relationship between selected items, quantities, and the total. Give payment a deliberate next step from the cart." },
+      { title: "Choose the dining context first", description: "Dine-in and delivery have distinct entry points before the restaurant and menu. The shared ordering structure stays familiar, while the chosen service gives discovery its context." },
+      { title: "Keep categories consistent across states", description: "The same category artwork and labels carry across the scroll states, with “Terdekat” retained as a nearby shortcut. This accommodates a longer category set without changing the visual meaning of each choice." },
+      { title: "Make unavailable carts distinguishable", description: "Saved carts distinguish restaurants that are available, closing, closed, or outside the delivery area. Availability belongs beside the saved order, where customers decide which cart to continue." },
     ],
     flow: ["Choose dining mode", "Discover a restaurant", "Choose menu items", "Review the cart", "Continue to payment"],
     screens: [
@@ -69,7 +69,7 @@ export const portfolioProjects: PortfolioProject[] = [
 // Retained from the existing portfolio. Brief summaries avoid implying that
 // additional case-study evidence or measured outcomes are available.
 export const supportingProjects = [
-  { title: "Kopra SCM", medium: "Wholesale banking", devices: ["laptop"] as const, description: "I worked on invoice overview, search, and status flows for customer-facing supply-chain banking, focusing on information hierarchy and consistent interactions.", screen: { src: "/work/kopra.webp", title: "Kopra SCM invoice search & status", caption: "A detail of invoice search, status tabs, and table structure. Customer records and account details are omitted.", width: 1138, height: 208 } },
+  { title: "Kopra SCM", medium: "Wholesale banking", devices: ["laptop"] as const, description: "I worked on the invoice overview, search, and status flows. A shared workspace keeps status filters, invoice identifiers, buyers, amounts, and dates together, with row labels distinguishing the status of each invoice.", screen: { src: "/work/kopra.webp", title: "Kopra SCM invoice overview & status", caption: "Invoice overview and status variants from the original design. Profile details are excluded; identifying and financial record values are masked for public display.", width: 1154, height: 844 } },
   { title: "Livin Auto", medium: "Vehicle financing", devices: ["phone"] as const, description: "I worked on the journey and reusable mobile states for vehicle discovery, affordability simulation, and financing applications.", screen: { src: "/work/auto.webp", title: "Livin Auto vehicle detail", caption: "Vehicle variant, availability, price, and the continuation into credit simulation.", width: 375, height: 812 } },
   { title: "Sukha Donasi", medium: "Donations", devices: ["phone"] as const, description: "I worked on the donation flow from campaign context and amount selection to review and payment, keeping the interface consistent across steps.", screen: { src: "/work/donasi.webp", title: "Sukha Donasi amount selection", caption: "Preset and custom donation amounts for a conservation campaign.", width: 375, height: 812 } },
 ];

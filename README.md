@@ -43,3 +43,7 @@ GitHub Pages must use **GitHub Actions** as its publishing source.
 ## Presentation conventions
 
 Shared type sizes live in `src/portfolio.css`: section heading, product title, subtitle, body and caption. Preview captions share a grid row, even when source images have different aspect ratios. Contribution context is written into the product overview. Expanded stories use vertical journeys and icon-led design decisions, without repeated screen blocks.
+
+On mobile, experience tiles sit in About so projects appear earlier. Project previews use a native horizontal snap gallery, with previous/next controls and arrow-key navigation; desktop previews retain aligned captions. The Kopra viewer preserves a readable desktop canvas on narrow screens through horizontal panning. Record values are masked in its public asset.
+
+Case-study copy draws on the owner’s earlier Gold pricing, single-piece selection, city-directory and Food category-state discussions. New-flow explorations and unverified research or performance claims are excluded.

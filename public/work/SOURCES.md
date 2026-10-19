@@ -6,8 +6,8 @@ All product images are read-only exports from the owner's supplied Figma files. 
 - Gold interfaces: Bullion `4XfBZPIpXteTNPgmNKxz2I` and Corpweb `tAsckvdoLnl3Di6vop96D8`.
 - Phone casing: original transparent image fill from Corpweb node `259:75582`, rotated into portrait orientation and resized. Interface screens are layered separately.
 - Food: `UYlw7mp5EeBYLPaSr3f8Yv`, published consumer ordering interfaces.
-- Kopra: `haCN6fgBQmWByoXQ1lqrZW`, node `11969:931888`. Only the invoice search, status tabs and column headings are included. Profile, email, account balances and customer invoice records are excluded. The image is a cropped interface detail, not a complete dashboard.
+- Kopra: `haCN6fgBQmWByoXQ1lqrZW`, node `21004:797719`. The full account-receivable invoice workspace includes limits, search, status filters, column hierarchy and seven example status rows. The profile area is excluded. Limit amounts, the utilization bar, invoice identifiers, buyer names, financial values and dates are masked in the flattened public asset. The original export and its unmasked data are not included in the repository. UI layout and status labels are retained from the original design.
 - Auto: `lfXXOH3If96sNF5cVcAjMX`.
 - Donations: `nTOHMwtbqaTIw83tR9ySUh`.
 
-Original portrait and travel photographs remain unchanged. WebP optimization and layout framing are applied only in the website repository.
+The current portrait is the exact PNG supplied by the owner on 19 October 2026; no generative editing or retouching was applied. Travel photographs remain unchanged. WebP optimization and layout framing are applied only in the website repository.
