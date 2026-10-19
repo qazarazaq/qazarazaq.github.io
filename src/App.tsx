@@ -1,11 +1,8 @@
 import { About } from "./components/About";
-import { Approach } from "./components/Approach";
-import { Archive } from "./components/Archive";
 import { Footer } from "./components/Footer";
 import { Hero } from "./components/Hero";
 import { Navbar } from "./components/Navbar";
 import { Portfolio } from "./components/Portfolio";
-import { ProfessionalProof } from "./components/ProfessionalProof";
 import { TravelSection } from "./components/TravelSection";
 import { useSceneMotion } from "./hooks/useSceneMotion";
 
@@ -20,11 +17,8 @@ function App() {
       <main id="main-content">
         <Hero />
         <Portfolio />
-        <ProfessionalProof />
-        <Approach />
-        <TravelSection />
         <About />
-        <Archive />
+        <TravelSection />
       </main>
       <Footer motion={motion} />
     </>

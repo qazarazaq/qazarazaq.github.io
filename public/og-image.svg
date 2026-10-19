@@ -1,14 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
   <title id="title">Wildan Razaq — Product and UI Designer</title>
-  <desc id="description">A typographic portfolio sharing image in warm off-white, black, and rust.</desc>
-  <rect width="1200" height="630" fill="#f3f0e8"/>
-  <rect x="64" y="64" width="76" height="76" fill="none" stroke="#171714" stroke-width="2"/>
-  <text x="102" y="112" text-anchor="middle" fill="#171714" font-family="Arial, sans-serif" font-size="24" font-weight="700">WR</text>
-  <line x1="64" y1="185" x2="1136" y2="185" stroke="#c8c3b8" stroke-width="2"/>
-  <rect x="64" y="234" width="12" height="118" fill="#b9422d"/>
-  <text x="104" y="284" fill="#171714" font-family="Arial, sans-serif" font-size="76" font-weight="700">Wildan Razaq</text>
-  <text x="104" y="366" fill="#171714" font-family="Arial, sans-serif" font-size="52" font-weight="500">Product and UI Designer</text>
-  <text x="64" y="486" fill="#68665f" font-family="Arial, sans-serif" font-size="28">Clear digital products for complex everyday systems.</text>
-  <text x="64" y="558" fill="#68665f" font-family="Arial, sans-serif" font-size="22">Digital banking  /  Commerce  /  Mobility  /  Design systems</text>
+  <desc id="description">Product design across mobile banking, commerce, and physical gold ATMs.</desc>
+  <rect width="1200" height="630" fill="#13171d"/>
+  <text x="80" y="105" fill="#edf0f4" font-family="Arial, sans-serif" font-size="27">Wildan Razaq</text>
+  <text x="80" y="280" fill="#edf0f4" font-family="Arial, sans-serif" font-size="68" letter-spacing="-2">Making everyday finance</text>
+  <text x="80" y="365" fill="#edf0f4" font-family="Arial, sans-serif" font-size="68" letter-spacing="-2">easier to navigate.</text>
+  <text x="80" y="475" fill="#a4afbd" font-family="Arial, sans-serif" font-size="25">UI/CX design · Bank Mandiri · Previously Telkom Indonesia</text>
+  <text x="80" y="550" fill="#b8d4f3" font-family="Arial, sans-serif" font-size="23">qazarazaq.github.io</text>
 </svg>
-

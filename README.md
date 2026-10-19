@@ -20,15 +20,19 @@ The production build is written to `dist/`.
 
 ## Content editing
 
-- Profile, capabilities, approach, about, and contact copy: `src/data/site.ts`
-- Selected professional work: `src/data/portfolio.ts`
-- Travel destinations and photography metadata: `src/data/travel.ts`
-- Earlier work: `src/data/archive.ts`
+- Introduction and work/education logo tiles: `src/components/Hero.tsx`
+- Featured projects and supporting project copy: `src/data/portfolio.ts`
+- Project previews and expandable stories: `src/components/Portfolio.tsx`
+- About and contact: `src/components/About.tsx`, `src/components/Footer.tsx`
+- Portfolio layout and pastel-blue accents: `src/portfolio.css`
+- Travel destinations and metadata: `src/data/travel.ts`
 - Social links: `src/data/social.ts`
 
-Professional project dates, outcomes, links, and project-specific constraints are intentionally left empty until approved content is available. Add them only in `src/data/portfolio.ts`.
+The featured work is Livin’ Gold / ATM Emas and Livin’ Food. Kopra SCM, Livin Auto, and Sukha Donasi provide supporting examples. Do not add unpublished Belanja work, internal operations, or transaction-security case studies. Only publish verified outcomes.
 
-The airplane-window frame and travel photographs live in `public/travel/`. Earlier-work images live in `public/archive/`.
+Customer interface previews are real Figma exports, optimized as WebP under `public/work/`. Device artwork comes from the supplied Corpweb reference. Source Figma files are read-only. Brand SVG sources are documented in `public/logos/SOURCES.md`.
+
+The original portrait is in `public/assets/`. The airplane-window frame and travel photographs are in `public/travel/`. The travel component, data, original stylesheet, motion hook, and all travel assets were preserved for this redesign.
 
 ## Deployment
 

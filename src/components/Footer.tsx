@@ -14,10 +14,10 @@ export function Footer({ motion }: { motion: { reduced: boolean; systemReduced: 
       <div className="container contact-section__grid">
         <div>
           <p className="kicker">Contact</p>
-          <h2 id="contact-title">{siteContent.contact.title}</h2>
-          <p>{siteContent.contact.description}</p>
+          <h2 id="contact-title">Let’s talk product design.</h2>
+          <p>For product design opportunities and conversations about the work.</p>
           <a className="button button--light" href={socialLinks.email}>
-            Email Wildan
+            qazarazaq@gmail.com <span aria-hidden="true">↗</span>
           </a>
         </div>
 
