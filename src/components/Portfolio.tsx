@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { portfolioProjects, supportingProjects, type PortfolioProject, type ProjectScreen } from "../data/portfolio";
 
 function DeviceImage({ screen }: { screen: ProjectScreen }) {
-  if (screen.previewSrc || screen.kind === "atm" || screen.width > screen.height) {
-    return <img src={screen.previewSrc ?? screen.src} alt={screen.title} width={screen.previewSrc ? 420 : screen.width} height={screen.previewSrc ? 851 : screen.height} loading="lazy" decoding="async" />;
+  if (screen.kind === "atm") return <span className="atm-device"><img className="atm-device__hardware" src="/work/atm-hardware.webp" alt="" aria-hidden="true" width="941" height="1672" loading="lazy" /><img className="atm-device__screen" src={screen.src} alt={screen.title} width={screen.width} height={screen.height} loading="lazy" /></span>;
+  if (screen.width > screen.height) {
+    return <img src={screen.src} alt={screen.title} width={screen.width} height={screen.height} loading="lazy" decoding="async" />;
   }
   return <span className="phone-device"><img className="phone-device__hardware" src="/work/phone-frame.webp" alt="" aria-hidden="true" width="420" height="851" loading="lazy" /><img className="phone-device__screen" src={screen.src} alt={screen.title} width={screen.width} height={screen.height} loading="lazy" decoding="async" /><span className="phone-device__island" aria-hidden="true" /></span>;
 }
@@ -75,7 +76,7 @@ export function Portfolio() {
     <section id="work" className="selected-work container" aria-labelledby="work-title">
       <div className="section-label"><h2 id="work-title">Selected work</h2><p>Customer products / Bank Mandiri</p></div>
       {portfolioProjects.map(project => <Project key={project.slug} project={project} />)}
-      <div className="supporting-work"><h2>More of my work</h2><div className="supporting-work__grid">{supportingProjects.map(project => <article key={project.title}><button type="button" className={`supporting-preview ${project.title === "Kopra SCM" ? "supporting-preview--desktop" : ""}`} onClick={() => setPreview(project.screen)} aria-label={`Enlarge ${project.screen.title}`}><DeviceImage screen={project.screen} /></button><h3>{project.title}</h3><p className="supporting-work__medium">{project.medium}</p><p>{project.description}</p><details><summary>My contribution</summary><p>{project.contribution}</p></details></article>)}</div></div>
+      <div className="supporting-work"><h2>More of my work</h2><div className="supporting-work__grid">{supportingProjects.map(project => <article key={project.title} className={project.title === "Kopra SCM" ? "supporting-work__scm" : undefined}><button type="button" className={`supporting-preview ${project.title === "Kopra SCM" ? "supporting-preview--desktop" : ""}`} onClick={() => setPreview(project.screen)} aria-label={`Enlarge ${project.screen.title}`}><DeviceImage screen={project.screen} /></button><h3>{project.title}</h3><p className="supporting-work__medium">{project.medium}</p><p>{project.description}</p><details><summary>My contribution</summary><p>{project.contribution}</p></details></article>)}</div></div>
       {preview ? <ScreenViewer screen={preview} onClose={() => setPreview(null)} /> : null}
     </section>
   );

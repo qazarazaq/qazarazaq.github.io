@@ -1,6 +1,5 @@
 export type ProjectScreen = {
   src: string;
-  previewSrc?: string;
   title: string;
   caption: string;
   width: number;
@@ -38,9 +37,9 @@ export const portfolioProjects: PortfolioProject[] = [
     ],
     flow: ["Open Ambil Emas", "Choose gold account", "Find an ATM", "Scan at the machine", "Select & review gold", "Confirm & collect"],
     screens: [
-      { src: "/work/gold-guide.webp", previewSrc: "/work/gold-guide-device.webp", title: "Mobile pickup guide", caption: "A clear scan action and a direct link to ATM locations.", width: 375, height: 812 },
-      { src: "/work/gold-selection.webp", previewSrc: "/work/gold-selection-device.webp", title: "Denomination & fee", caption: "Brand, weight, printing fee, and selected total on the ATM.", width: 720, height: 1280, kind: "atm" },
-      { src: "/work/gold-pickup.webp", previewSrc: "/work/gold-pickup-device.webp", title: "Physical pickup", caption: "Instructions point to the final action at the machine.", width: 720, height: 1280, kind: "atm" },
+      { src: "/work/gold-guide.webp", title: "Mobile pickup guide", caption: "A clear scan action and a direct link to ATM locations.", width: 375, height: 812 },
+      { src: "/work/gold-selection.webp", title: "Denomination & fee", caption: "Brand, weight, printing fee, and selected total on the ATM.", width: 720, height: 1280, kind: "atm" },
+      { src: "/work/gold-pickup.webp", title: "Physical pickup", caption: "Instructions point to the final action at the machine.", width: 720, height: 1280, kind: "atm" },
       { src: "/work/gold-locations.webp", title: "City-grouped ATM directory", caption: "Consistent location rows grouped by city, with a map action.", width: 750, height: 10318, kind: "directory" },
     ],
     publicUrl: "https://www.bankmandiri.co.id/livin/emas/ambil-emas-di-atm",
@@ -72,7 +71,7 @@ export const portfolioProjects: PortfolioProject[] = [
 // Retained from the existing portfolio. Brief summaries avoid implying that
 // additional case-study evidence or measured outcomes are available.
 export const supportingProjects = [
-  { title: "Kopra SCM", medium: "Desktop / wholesale banking", description: "Customer-facing supply-chain banking with dense information, task flows, approvals, and account-receivable states.", contribution: "Workflow mapping, information hierarchy, reusable interaction patterns, and interface detail.", screen: { src: "/work/kopra.webp", title: "Kopra SCM invoice submission", caption: "An empty invoice-entry state from the customer-facing wholesale workflow.", width: 2369, height: 1290 } },
+  { title: "Kopra SCM", medium: "Desktop / wholesale banking", description: "Invoice overview, search, and status flows for customer-facing supply-chain banking.", contribution: "Invoice overview, search, and status flows, with a focus on information hierarchy and consistent interaction patterns.", screen: { src: "/work/kopra.webp", title: "Kopra SCM invoice search & status", caption: "A detail of invoice search, status tabs, and table structure. Customer records and account details are omitted.", width: 1138, height: 208 } },
   { title: "Livin Auto", medium: "Mobile / financing", description: "Vehicle discovery, affordability simulation, and the continuation into a financing application.", contribution: "Journey structure, interaction design, and reusable mobile UI states.", screen: { src: "/work/auto.webp", title: "Livin Auto vehicle detail", caption: "Vehicle variant, availability, price, and the continuation into credit simulation.", width: 375, height: 812 } },
   { title: "Sukha Donasi", medium: "Mobile / donations", description: "A donation journey connecting campaign context, amount selection, review, and payment.", contribution: "Flow definition, interface consistency, and payment continuity.", screen: { src: "/work/donasi.webp", title: "Sukha Donasi amount selection", caption: "Preset and custom donation amounts for a conservation campaign.", width: 375, height: 812 } },
 ];

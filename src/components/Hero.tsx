@@ -4,7 +4,7 @@ export function Hero() {
       <h1 id="hero-title">Making everyday finance<br className="desktop-break" /> easier to navigate.</h1>
       <p className="intro__description">I’m Wildan, a UI/CX designer at Bank Mandiri. I work on mobile banking, commerce, and the moments where digital journeys meet the physical world.</p>
       <div className="intro__foot">
-        <p>Jakarta, Indonesia <span aria-hidden="true">·</span> Previously at Telkom Indonesia</p>
+        <p>Jakarta, Indonesia</p>
         <a href="#work">View selected work <span aria-hidden="true">↓</span></a>
       </div>
       <div className="experience-tiles" aria-label="Work experience and education">

@@ -5,7 +5,7 @@
   --ink: #f5f5f1;
   --muted: #a2a5a9;
   --line: #343639;
-  --accent: #d5f7a0;
+  --accent: #b8d4f3;
   --gutter: 48px;
   --container: 1200px;
   --ease: cubic-bezier(.2,.7,.2,1);
@@ -37,8 +37,8 @@ h3 { line-height: 1.15; }
 .skip-link:focus { transform: translateY(0); }
 .button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 22px; gap: 24px; border: 1px solid transparent; border-radius: 6px; font-size: 14px; font-weight: 600; transition: background .2s, transform .25s var(--ease); }
 .button:hover { transform: translateY(-2px); }
-.button--primary,.button--light { background: var(--accent); color: #172018; }
-.button--primary:hover,.button--light:hover { background: #e6ffc2; }
+.button--primary,.button--light { background: var(--accent); color: #142235; }
+.button--primary:hover,.button--light:hover { background: #d4e7fc; }
 .button--text { color: var(--ink); }
 .button--text:hover { background: var(--surface); }
 .text-link { display: inline-flex; gap: 24px; align-items: center; min-height: 44px; border-bottom: 1px solid var(--line); font-size: 14px; font-weight: 600; }

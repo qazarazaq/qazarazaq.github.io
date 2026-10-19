@@ -3,8 +3,8 @@ import { siteContent } from "../data/site";
 
 const navItems = [
   { label: "Work", href: "#work", id: "work" },
-  { label: "Travel", href: "#travel", id: "travel" },
   { label: "About", href: "#about", id: "about" },
+  { label: "Travel", href: "#travel", id: "travel" },
   { label: "Contact", href: "#contact", id: "contact" },
 ];
 
@@ -14,33 +14,32 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => {
+    let frame = 0;
+    const update = () => {
+      frame = 0;
       setScrolled(window.scrollY > 24);
-      if (window.scrollY < 40) setActiveSection("");
+      const atBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4;
+      const anchor = Math.min(160, window.innerHeight * .25);
+      let current = "";
+      for (const item of navItems) {
+        if ((document.getElementById(item.id)?.getBoundingClientRect().top ?? Infinity) <= anchor) current = item.id;
+      }
+      setActiveSection(atBottom ? "contact" : current);
     };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    const sections = navItems
-      .map((item) => document.getElementById(item.id))
-      .filter((section): section is HTMLElement => Boolean(section));
-
-    let observer: IntersectionObserver;
-    const observe = () => {
-      observer?.disconnect();
-      // Percentage margins resolve against width, not height.
-      observer = new IntersectionObserver(entries => {
-        const visible = entries.find(entry => entry.isIntersecting);
-        if (visible) setActiveSection(visible.target.id);
-      }, { rootMargin: `-${window.innerHeight * .15}px 0px -${window.innerHeight * .7}px 0px`, threshold: 0 });
-      sections.forEach(section => observer.observe(section));
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
+    update();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    window.addEventListener("hashchange", schedule);
+    const observer = new ResizeObserver(schedule);
+    observer.observe(document.body);
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      window.removeEventListener("hashchange", schedule);
     };
-    observe();
-    window.addEventListener("resize", observe);
-    return () => { observer.disconnect(); window.removeEventListener("resize", observe); };
   }, []);
 
   useEffect(() => {

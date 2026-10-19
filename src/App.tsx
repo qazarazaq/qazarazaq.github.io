@@ -7,7 +7,7 @@ import { TravelSection } from "./components/TravelSection";
 import { useSceneMotion } from "./hooks/useSceneMotion";
 
 function App() {
-  const motion = useSceneMotion();
+  useSceneMotion();
   return (
     <>
       <a className="skip-link" href="#main-content">
@@ -20,7 +20,7 @@ function App() {
         <About />
         <TravelSection />
       </main>
-      <Footer motion={motion} />
+      <Footer />
     </>
   );
 }
