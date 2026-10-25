@@ -20,11 +20,11 @@ The production build is written to `dist/`.
 
 ## Content editing
 
-- Introduction and work/education logo tiles: `src/components/Hero.tsx`
+- Introduction: `src/components/Hero.tsx`; work/education tiles: `src/components/ExperienceTiles.tsx`
 - Featured projects and supporting project copy: `src/data/portfolio.ts`
-- Project previews and expandable stories: `src/components/Portfolio.tsx`
+- Project feature cards: `src/components/Portfolio.tsx`; device previews and viewer: `src/components/WorkMedia.tsx`
 - About and contact: `src/components/About.tsx`, `src/components/Footer.tsx`
-- Portfolio layout and pastel-blue accents: `src/portfolio.css`
+- Portfolio layout and Flighty-derived palette: `src/portfolio.css`
 - Travel destinations and metadata: `src/data/travel.ts`
 - Social links: `src/data/social.ts`
 
@@ -32,7 +32,7 @@ The featured work is Livin’ Gold / ATM Emas and Livin’ Food. Kopra SCM, Livi
 
 Customer interface previews are real Figma exports, optimized as WebP under `public/work/`. Device artwork comes from the supplied Corpweb reference. Source Figma files are read-only. Brand SVG sources are documented in `public/logos/SOURCES.md` and `public/icons/SOURCES.md`. Asset provenance is in `public/work/SOURCES.md`.
 
-The original portrait is in `public/assets/`. The airplane-window frame and travel photographs are in `public/travel/`. Travel photo files, destination metadata, album links, and the airplane-window artwork are preserved. The gallery uses a shared positional transition so a side photo moves into the center. Site controls and text selection share the pastel-blue accent.
+The original portrait is in `public/assets/`. The airplane-window frame and travel photographs are in `public/travel/`. Travel photo files, destination metadata, album links, and the airplane-window artwork are preserved. The gallery uses a shared positional transition so a side photo moves into the center. Site controls and text selection use the yellow accent from the reference. No new raster assets or font downloads are needed for this redesign.
 
 ## Deployment
 
@@ -42,8 +42,8 @@ GitHub Pages must use **GitHub Actions** as its publishing source.
 
 ## Presentation conventions
 
-Shared type sizes live in `src/portfolio.css`: section heading, product title, subtitle, body and caption. Preview captions share a grid row, even when source images have different aspect ratios. Contribution context is written into the product overview. Expanded stories use vertical journeys and icon-led design decisions, without repeated screen blocks.
+Typography uses Flighty’s system font stack and measured sizes: hero 65px/700, section headings 56px/700 on desktop and 32px/700 on mobile, and wide feature titles 32px/600 with supporting titles at 28px/600. The page uses a 1000px content grid, white and near-black sections, a yellow scene dock, generous spacing, and native scrolling. Card visuals move within clipped containers. System reduced-motion preferences are respected without a separate toggle.
 
-On mobile, experience tiles sit in About so projects appear earlier. Project previews use a native horizontal snap gallery, with previous/next controls and arrow-key navigation; desktop previews retain aligned captions. The Kopra viewer preserves a readable desktop canvas on narrow screens through horizontal panning. Record values are masked in its public asset.
+The hero transitions between the existing Gold, Food, and masked Kopra assets. Three monochrome work/education tiles reveal their original logo colors on hover. The photo and all travel assets and behavior remain intact. ATM screens are rounded and frameless. The Kopra viewer preserves a readable desktop canvas on narrow screens through horizontal panning. Record values are masked in its public asset.
 
 Case-study copy draws on the owner’s earlier Gold pricing, single-piece selection, city-directory and Food category-state discussions. New-flow explorations and unverified research or performance claims are excluded.

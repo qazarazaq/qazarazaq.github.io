@@ -12,12 +12,24 @@ export function Navbar() {
   const [activeSection, setActiveSection] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [dark, setDark] = useState(false);
 
   useEffect(() => {
     let frame = 0;
     const update = () => {
       frame = 0;
       setScrolled(window.scrollY > 24);
+      const sections = document.querySelectorAll<HTMLElement>("[data-tone], #travel");
+      let isDark = false;
+      sections.forEach(section => { const box = section.getBoundingClientRect(); if (box.top <= 55 && box.bottom > 55) isDark = section.dataset.tone === "dark" || section.id === "travel"; });
+      const hero = document.querySelector<HTMLElement>(".hero");
+      if (hero && hero.getBoundingClientRect().bottom > 55) {
+        const scene = document.getElementById("hero-scenes");
+        const box = scene?.getBoundingClientRect();
+        const progress = box ? Math.max(0, -box.top / Math.max(1, box.height - window.innerHeight + 120)) : 0;
+        isDark = progress >= .67;
+      }
+      setDark(isDark);
       const atBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4;
       const anchor = Math.min(160, window.innerHeight * .25);
       let current = "";
@@ -52,7 +64,7 @@ export function Navbar() {
   }, [menuOpen]);
 
   return (
-    <header className={scrolled ? "site-header site-header--scrolled" : "site-header"}>
+    <header className={`site-header${scrolled ? " site-header--scrolled" : ""}${dark ? " site-header--dark" : ""}`}>
       <nav className="site-nav container" aria-label="Primary navigation">
         <a className="wordmark" href="#top" aria-label={`${siteContent.identity.shortName}, home`}>
           <span aria-hidden="true">{siteContent.identity.monogram}</span>

@@ -4,4 +4,4 @@
 - Telkom Indonesia: https://en.wikipedia.org/wiki/File:Telkom_Indonesia_2013.svg
 - BINUS University: https://zonalogo.com/logo-binus-university-png-svg (white SVG lockup).
 
-Original vector artwork is retained. The portfolio applies a single muted color through CSS for the work and education tiles. Logos identify the designer's employment and education history.
+Original vector artwork is retained. The portfolio applies a single muted color through CSS for the work and education tiles, revealing the original colors on hover. The white-and-orange BINUS variant retains a dark hover background for contrast. Logos identify the designer's employment and education history.
