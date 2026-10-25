@@ -275,17 +275,12 @@
 .portrait-block { width: 240px; }
 .designer-about__portrait { width: 240px; }
 .portrait-switch { position: relative; display: block; padding: 0; border: 0; background: #f5f0e5; color: #943c2d; overflow: hidden; isolation: isolate; }
-.portrait-switch__photo,.portrait-switch__illustration,.portrait-switch__drawing { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.portrait-switch__photo { opacity: 1; transition: opacity .5s var(--ease), transform .7s var(--ease); }
-.portrait-switch__drawing { opacity: 0; }
-.portrait-switch__drawing path { stroke-dasharray: 1; stroke-dashoffset: 1; }
-.portrait-switch__illustration { opacity: 0; transform: scale(.985); transition: opacity .55s var(--ease), transform .55s var(--ease); }
-.portrait-switch:is([data-draw="true"],:focus-visible) .portrait-switch__photo { opacity: 0; transform: scale(1.025); }
-.portrait-switch:is([data-draw="true"],:focus-visible) .portrait-switch__drawing { animation: portrait-ink 2.5s var(--ease) both; }
-.portrait-switch:is([data-draw="true"],:focus-visible) .portrait-switch__drawing path { animation: portrait-line 1.45s var(--ease) both; }
-.portrait-switch:is([data-draw="true"],:focus-visible) .portrait-switch__illustration { opacity: 1; transform: scale(1); transition-duration: .95s; transition-delay: 1.55s; }
-@keyframes portrait-line { to { stroke-dashoffset: 0; } }
-@keyframes portrait-ink { 0% { opacity: 0; } 12%,68% { opacity: 1; } 100% { opacity: 0; } }
+.portrait-switch__photo,.portrait-switch__illustration { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+/* Keep the real photo fully underneath: one continuous blend, with no blank phase. */
+.portrait-switch__photo { opacity: 1; transform: scale(1); transition: transform 1.15s var(--ease); }
+.portrait-switch__illustration { opacity: 0; transform: scale(1.015); filter: blur(1.2px); transition: opacity 1.15s var(--ease), transform 1.15s var(--ease), filter 1.15s var(--ease); }
+.portrait-switch:is([data-draw="true"],:focus-visible) .portrait-switch__photo { transform: scale(1.015); }
+.portrait-switch:is([data-draw="true"],:focus-visible) .portrait-switch__illustration { opacity: 1; transform: scale(1); filter: blur(0); }
 .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 @media (max-width: 809px) { .designer-about__grid { grid-template-columns: 200px 1fr; } .portrait-block,.designer-about__portrait { width: 200px; } }
 @media (max-width: 599px) { .designer-about__grid { grid-template-columns: 1fr; } .portrait-block,.designer-about__portrait { width: 220px; } .scene-dock .text-link { font-size: 12px; } }
@@ -296,7 +291,6 @@
   .phone-pair [data-shot-motion] { transform: rotate(-20deg); }
   .motion-active { will-change: auto; }
   .portrait-switch:is([data-draw="true"],:focus-visible) .portrait-switch__illustration { opacity: 1; transform: none; }
-  .portrait-switch__drawing { display: none; }
   .arrow-flight svg { transition: none; }
 }
 
@@ -309,12 +303,13 @@
   box-shadow: inset 0 1px 0 #ffffff24,inset 0 -1px 0 #ffffff05,0 10px 32px #00000025;
 }
 .site-header--scrolled .site-nav { border-color: #ffffff24; }
-/* Kiko lives behind the contact block; the foreground remains clickable. */
-.contact-section { position: relative; min-height: 620px; overflow: hidden; isolation: isolate; padding-block: 180px 120px; }
+/* The footer grid and Kiko stay behind the interactive contact block. */
+.contact-section { position: relative; min-height: 700px; overflow: hidden; isolation: isolate; padding-block: 160px 160px; background: #111315; }
+.contact-section::after { content: ""; position: absolute; inset: 0; z-index: -3; pointer-events: none; background-image: linear-gradient(#b8d4f30c 1px,transparent 1px),linear-gradient(90deg,#b8d4f30c 1px,transparent 1px),linear-gradient(#b8d4f309 1px,transparent 1px),linear-gradient(90deg,#b8d4f309 1px,transparent 1px); background-size: 32px 32px,32px 32px,128px 128px,128px 128px; background-position: center top; mask-image: linear-gradient(transparent,#000 16%,#000 84%,transparent); -webkit-mask-image: linear-gradient(transparent,#000 16%,#000 84%,transparent); }
 .contact-cat { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: .82; z-index: -2; }
-.contact-section::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(ellipse 32% 36% at 50% 39%,#121212c9 5%,#12121270 42%,#12121200 100%),linear-gradient(#12121266,#12121200 30%,#12121200 80%,#12121299); }
+.contact-section::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(ellipse 35% 35% at 50% 38%,#111315a6 5%,#11131550 42%,#11131500 100%),linear-gradient(#121212,#12121200 16%,#12121200 84%,#11131570); }
 .contact-content { position: relative; z-index: 1; }
-@media (max-width: 599px) { .contact-section { min-height: 540px; padding-block: 120px 100px; } }
+@media (max-width: 599px) { .contact-section { min-height: 600px; padding-block: 110px 150px; } .contact-section::after { background-size: 24px 24px,24px 24px,96px 96px,96px 96px; } }
 
 .site-header .nav-links a { opacity: .85; }
 .site-header .nav-links a:is(:hover,[aria-current]),.site-header .nav-links a:last-child { opacity: 1; }
