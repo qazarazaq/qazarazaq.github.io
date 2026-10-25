@@ -1,10 +1,11 @@
+import { ArrowLink } from "./ArrowLink";
 import { portfolioProjects, supportingProjects } from "../data/portfolio";
 import { DeviceImage } from "./WorkMedia";
 
 const scenes = [
-  { title: "Livin’ Gold / ATM Emas", detail: "A mobile journey that continues at the ATM.", screen: portfolioProjects[0].screens[0], notes: ["Choose a gold piece", "Understand the printing fee", "Collect at the ATM"] },
-  { title: "Livin’ Food", detail: "Discovery, dining modes, and the order ahead.", screen: portfolioProjects[1].screens[0], notes: ["Find a restaurant", "Choose how to dine", "Continue the right cart"] },
-  { title: "Kopra SCM", detail: "Invoice overview, search, and status in one workspace.", screen: supportingProjects[0].screen, notes: ["Search invoices", "Filter by status", "Keep the details together"] },
+  { title: "Livin’ Gold / ATM Emas", detail: "The Livin’ app and the screens at the gold ATM.", screen: portfolioProjects[0].screens[0], notes: ["Choose a gold piece", "Check the printing fee", "Pick up at the ATM"] },
+  { title: "Livin’ Food", detail: "Finding a meal, choosing an order, and paying for it.", screen: portfolioProjects[1].screens[0], notes: ["Find a restaurant", "Choose how to dine", "Check a saved cart"] },
+  { title: "Kopra SCM", detail: "An invoice overview with search and status close by.", screen: supportingProjects[0].screen, notes: ["Search invoices", "Filter by status", "Keep the details together"] },
 ];
 
 export function Hero() {
@@ -16,9 +17,9 @@ export function Hero() {
     window.scrollTo({ top: target, behavior: reduced ? "instant" : "smooth" });
   };
   return <section id="top" className="hero" data-phase="0" data-dock="true" aria-labelledby="hero-title">
-    <div className="hero-copy container">
+    <div className="hero-copy container" data-depth="intro">
       <h1 id="hero-title">Designing everyday finance.</h1>
-      <p>I’m Wildan, a UI/CX designer at Bank Mandiri. I work on mobile banking, commerce, and the moments where digital journeys meet the physical world.</p>
+      <p>I’m Wildan, a UI/CX designer at Bank Mandiri in Jakarta. Most of my work sits in banking and everyday services, from ordering food to picking up physical gold.</p>
     </div>
     <div id="hero-scenes" className="hero-scenes">
       <div className="hero-stage">
@@ -31,7 +32,7 @@ export function Hero() {
     </div>
     <nav className="scene-dock" aria-label="Explore selected work">
       {["Gold", "Food", "Kopra"].map((label, i) => <button key={label} type="button" data-scene-target={i} aria-pressed={i === 0} onClick={() => goToScene(i)}><img src={i === 0 ? "/icons/gold.svg" : `/icons/device-${i === 2 ? "laptop" : "phone"}.svg`} alt="" width="16" height="16" />{label}</button>)}
-      <a href="#contact">Contact <span aria-hidden="true">↗</span></a>
+      <ArrowLink href="#contact">Contact</ArrowLink>
     </nav>
   </section>;
 }

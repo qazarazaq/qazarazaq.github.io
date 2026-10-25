@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { HandDrawnMark } from "./HandDrawnMark";
 import { siteContent } from "../data/site";
 
 const navItems = [
@@ -66,7 +67,7 @@ export function Navbar() {
     <header className={`site-header${scrolled ? " site-header--scrolled" : ""} site-header--dark`}>
       <nav ref={navRef} className="site-nav container" aria-label="Primary navigation">
         <a className="wordmark" href="#top" aria-label={`${siteContent.identity.shortName}, home`}>
-          <img className="wordmark__icon" src="/assets/wildan-avatar.webp" alt="" width="64" height="64" />
+          <span className="wordmark__icon" aria-hidden="true"><img className="wordmark__avatar" src="/assets/wildan-avatar.webp" alt="" width="64" height="64" /><HandDrawnMark /></span>
           <span>{siteContent.identity.shortName}</span>
         </a>
 

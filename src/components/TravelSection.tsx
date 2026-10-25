@@ -1,3 +1,4 @@
+import { ArrowLink } from "./ArrowLink";
 import { useRef, useState } from "react";
 import type { CSSProperties, PointerEvent as ReactPointerEvent } from "react";
 import { travelItems } from "../data/travel";
@@ -21,7 +22,7 @@ export function TravelSection() {
     <section id="travel" className="travel-section section" aria-labelledby="travel-title">
       <div className="container travel-intro">
         <h2 id="travel-title">Travel</h2>
-        <p>Outside work, I enjoy travelling and taking photographs of the places I visit—streets, transport, architecture, and everyday details.</p>
+        <p>Outside work, I like travelling and taking photos along the way. Usually it’s the streets, transport, buildings, and small everyday things that end up in my camera roll.</p>
       </div>
       <div
         className={`travel-experience travel-carousel${drag ? " travel-carousel--dragging" : ""}`}
@@ -109,9 +110,7 @@ export function TravelSection() {
             </button>
           </div>
 
-          <a className="text-link text-link--light" href={activeItem.href} target="_blank" rel="noreferrer">
-            Open full album <span aria-hidden="true">↗</span>
-          </a>
+          <ArrowLink href={activeItem.href} external>Open full album</ArrowLink>
         </div>
       </div>
     </section>

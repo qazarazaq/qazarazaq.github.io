@@ -25,8 +25,8 @@ export const portfolioProjects: PortfolioProject[] = [
   {
     slug: "livin-gold",
     title: "Livin’ Gold / ATM Emas",
-    headline: "From a gold balance to gold in hand.",
-    summary: "I designed pickup guidance, gold selection, fees, and location information across the mobile and ATM journey for withdrawing physical gold.",
+    headline: "Picking up physical gold, from app to ATM.",
+    summary: "I worked on the mobile and ATM screens for physical gold pickup, including the guide, gold selection, printing fees, and location information.",
     medium: "Mobile app and ATM",
     devices: ["phone", "atm"],
     problem: "Gold is selected in grams, while printing fees are paid in rupiah. Customers also move between Livin’ and a physical ATM, so the selected piece, cost, and pickup instructions need to stay clear.",
@@ -46,8 +46,8 @@ export const portfolioProjects: PortfolioProject[] = [
   {
     slug: "livin-food",
     title: "Livin’ Food",
-    headline: "From finding a meal to placing an order.",
-    summary: "I worked on discovery, categories, ordering states, and cart detail for Livin’ Food, connecting dine-in and delivery journeys to payment.",
+    headline: "A food order has a few different paths.",
+    summary: "My work on Livin’ Food covered discovery, categories, and cart states, connecting dine-in and delivery orders with payment.",
     medium: "Mobile commerce",
     devices: ["phone"],
     problem: "Customers need a dining mode, a way into a large menu of categories, and a cart that reflects whether a restaurant can still fulfil the order. Those states need to feel connected inside Livin’.",
@@ -69,7 +69,7 @@ export const portfolioProjects: PortfolioProject[] = [
 // Retained from the existing portfolio. Brief summaries avoid implying that
 // additional case-study evidence or measured outcomes are available.
 export const supportingProjects = [
-  { title: "Kopra SCM", medium: "Wholesale banking", devices: ["laptop"] as const, description: "I worked on the invoice overview, search, and status flows. A shared workspace keeps status filters, invoice identifiers, buyers, amounts, and dates together, with row labels distinguishing the status of each invoice.", screen: { src: "/work/kopra.webp", title: "Kopra SCM invoice overview & status", caption: "Invoice overview and status variants from the original design. Profile details are excluded; identifying and financial record values are masked for public display.", width: 1154, height: 844 } },
-  { title: "Livin Auto", medium: "Vehicle financing", devices: ["phone"] as const, description: "I worked on the journey and reusable mobile states for vehicle discovery, affordability simulation, and financing applications.", screen: { src: "/work/auto.webp", title: "Livin Auto vehicle detail", caption: "Vehicle variant, availability, price, and the continuation into credit simulation.", width: 375, height: 812 } },
-  { title: "Sukha Donasi", medium: "Donations", devices: ["phone"] as const, description: "I worked on the donation flow from campaign context and amount selection to review and payment, keeping the interface consistent across steps.", screen: { src: "/work/donasi.webp", title: "Sukha Donasi amount selection", caption: "Preset and custom donation amounts for a conservation campaign.", width: 375, height: 812 } },
+  { title: "Kopra SCM", medium: "Wholesale banking", devices: ["laptop"] as const, description: "I worked on the invoice overview, search, and status flows. A shared workspace keeps status filters, invoice identifiers, buyers, amounts, and dates together, with row labels distinguishing the status of each invoice.", screen: { src: "/work/kopra.webp", title: "Kopra SCM invoice overview & status", caption: "Search, status filters, and invoice details in the same workspace.", width: 1154, height: 844 } },
+  { title: "Livin Auto", medium: "Vehicle financing", devices: ["phone"] as const, description: "I worked on vehicle discovery, the credit simulation, and reusable screens for the financing application. The aim was to keep the information useful as customers moved from browsing to considering a loan.", screen: { src: "/work/auto.webp", title: "Livin Auto vehicle detail", caption: "Vehicle variant, availability, price, and the continuation into credit simulation.", width: 375, height: 812 } },
+  { title: "Sukha Donasi", medium: "Donations", devices: ["phone"] as const, description: "I worked on the donation flow, from reading about a campaign to choosing an amount and paying. Preset and custom amounts sit in the same step, with a consistent path into review and payment.", screen: { src: "/work/donasi.webp", title: "Sukha Donasi amount selection", caption: "Preset and custom donation amounts for a conservation campaign.", width: 375, height: 812 } },
 ];
