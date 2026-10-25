@@ -5,3 +5,5 @@
 - BINUS University: https://zonalogo.com/logo-binus-university-png-svg (white SVG lockup).
 
 Original vector artwork is retained. The portfolio applies a single muted color through CSS for the work and education tiles, revealing the original colors on hover. The white-and-orange BINUS variant retains a dark hover background for contrast. Logos identify the designer's employment and education history.
+
+Dark presentation uses inverse white wordmarks for Mandiri and Telkom while retaining the original gold/red brand symbols and all vector geometry.

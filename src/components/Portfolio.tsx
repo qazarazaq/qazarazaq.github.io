@@ -41,7 +41,7 @@ export function Portfolio() {
         </div>
       </div>
     </section>
-    <section id="project-livin-food" className="food-section light-section" data-tone="light" aria-labelledby="food-title">
+    <section id="project-livin-food" className="food-section content-section" data-tone="dark" aria-labelledby="food-title">
       <div className="container">
         <div className="project-heading" data-reveal><ProductContext devices={food.devices} /><p className="product-name">{food.title}</p><h2 id="food-title">{food.headline}</h2><p className="project-intro">{food.summary}</p><a className="quiet-link" href={food.publicUrl} target="_blank" rel="noreferrer">View public product <span aria-hidden="true">↗</span></a></div>
         <div className="feature-grid">
@@ -54,7 +54,7 @@ export function Portfolio() {
         </div>
       </div>
     </section>
-    <section id="project-kopra" className="kopra-section light-section" data-tone="light" aria-labelledby="kopra-title">
+    <section id="project-kopra" className="kopra-section content-section" data-tone="dark" aria-labelledby="kopra-title">
       <div className="container">
         <div className="project-heading" data-reveal><ProductContext devices={kopra.devices} /><p className="product-name">{kopra.title}</p><h2 id="kopra-title">Invoice overview,<br />with the detail in reach.</h2><p className="project-intro">I worked on invoice overview, search, and status flows for customer-facing wholesale banking. The workspace brings dense invoice data into a consistent view.</p></div>
         <article className="feature-card feature-card--desktop" data-reveal><div className="desktop-card-copy"><h3>{kopra.title}</h3><p>Status filters, search, and a shared table keep invoice details together. Row labels distinguish where each invoice stands.</p></div><Preview screen={kopra.screen} onPreview={setPreview} /><p className="privacy-note">Names and financial values are masked for this portfolio.</p></article>

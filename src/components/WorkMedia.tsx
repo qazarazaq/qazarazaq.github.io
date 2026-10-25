@@ -15,14 +15,15 @@ export function ScreenViewer({ screen, onClose }: { screen: ProjectScreen; onClo
   useEffect(() => {
     const dialog = dialogRef.current;
     const previousOverflow = document.body.style.overflow;
+    const previousFocus = document.activeElement as HTMLElement | null;
     document.body.style.overflow = "hidden";
     dialog?.showModal();
     dialog?.focus({ preventScroll: true });
-    return () => { dialog?.close(); document.body.style.overflow = previousOverflow; };
+    return () => { dialog?.close(); document.body.style.overflow = previousOverflow; previousFocus?.focus({ preventScroll: true }); };
   }, []);
   return (
-    <dialog ref={dialogRef} className={`screen-viewer${screen.width > screen.height ? " screen-viewer--desktop" : ""}`} tabIndex={-1} aria-labelledby="viewer-title" onCancel={onClose} onClick={event => { if (event.target === event.currentTarget) onClose(); }}>
-      <div className="screen-viewer__header"><div><h2 id="viewer-title">{screen.title}</h2><p>{screen.caption}</p></div><button type="button" onClick={onClose} aria-label="Close screen preview"><span aria-hidden="true">×</span></button></div>
+    <dialog ref={dialogRef} className={`screen-viewer${screen.width > screen.height ? " screen-viewer--desktop" : ""}`} tabIndex={-1} aria-labelledby="viewer-title" onCancel={event => { event.preventDefault(); onClose(); }} onClick={event => { if (event.target === event.currentTarget) onClose(); }}>
+      <div className="screen-viewer__header"><div><h2 id="viewer-title">{screen.title}</h2><p>{screen.caption}</p></div><button type="button" onClick={onClose} aria-label="Close screen preview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg></button></div>
       <div className="screen-viewer__image"><img src={screen.src} alt={screen.title} width={screen.width} height={screen.height} /></div>
     </dialog>
   );

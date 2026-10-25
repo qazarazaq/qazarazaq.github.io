@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { siteContent } from "../data/site";
 
 const navItems = [
@@ -9,27 +9,16 @@ const navItems = [
 ];
 
 export function Navbar() {
+  const navRef = useRef<HTMLElement>(null);
   const [activeSection, setActiveSection] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [dark, setDark] = useState(false);
 
   useEffect(() => {
     let frame = 0;
     const update = () => {
       frame = 0;
       setScrolled(window.scrollY > 24);
-      const sections = document.querySelectorAll<HTMLElement>("[data-tone], #travel");
-      let isDark = false;
-      sections.forEach(section => { const box = section.getBoundingClientRect(); if (box.top <= 55 && box.bottom > 55) isDark = section.dataset.tone === "dark" || section.id === "travel"; });
-      const hero = document.querySelector<HTMLElement>(".hero");
-      if (hero && hero.getBoundingClientRect().bottom > 55) {
-        const scene = document.getElementById("hero-scenes");
-        const box = scene?.getBoundingClientRect();
-        const progress = box ? Math.max(0, -box.top / Math.max(1, box.height - window.innerHeight + 120)) : 0;
-        isDark = progress >= .67;
-      }
-      setDark(isDark);
       const atBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4;
       const anchor = Math.min(160, window.innerHeight * .25);
       let current = "";
@@ -59,15 +48,25 @@ export function Navbar() {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setMenuOpen(false);
     };
+    const onPointerDown = (event: PointerEvent) => {
+      if (event.target instanceof Node && !navRef.current?.contains(event.target)) setMenuOpen(false);
+    };
+    const onResize = () => { if (window.innerWidth >= 600) setMenuOpen(false); };
     window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+    document.addEventListener("pointerdown", onPointerDown);
+    window.addEventListener("resize", onResize);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("pointerdown", onPointerDown);
+      window.removeEventListener("resize", onResize);
+    };
   }, [menuOpen]);
 
   return (
-    <header className={`site-header${scrolled ? " site-header--scrolled" : ""}${dark ? " site-header--dark" : ""}`}>
-      <nav className="site-nav container" aria-label="Primary navigation">
+    <header className={`site-header${scrolled ? " site-header--scrolled" : ""} site-header--dark`}>
+      <nav ref={navRef} className="site-nav container" aria-label="Primary navigation">
         <a className="wordmark" href="#top" aria-label={`${siteContent.identity.shortName}, home`}>
-          <span aria-hidden="true">{siteContent.identity.monogram}</span>
+          <img className="wordmark__icon" src="/assets/wildan-avatar.webp" alt="" width="64" height="64" />
           <span>{siteContent.identity.shortName}</span>
         </a>
 

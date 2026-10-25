@@ -22,9 +22,6 @@ export function useSceneMotion() {
       const phase = p < .31 ? 0 : p < .67 ? 1 : 2;
       hero.dataset.phase = String(phase);
       hero.dataset.dock = String(hero.getBoundingClientRect().bottom > h - 20 && !document.querySelector("dialog[open]"));
-      const blend = smooth(.08, .78, p);
-      hero.style.setProperty("--warm", String(Math.sin(blend * Math.PI) * .7));
-      hero.style.setProperty("--night", String(smooth(.53, .85, p)));
       const weights = [1 - smooth(.23, .37, p), smooth(.23, .37, p) * (1 - smooth(.59, .73, p)), smooth(.59, .73, p)];
       layers.forEach((layer, i) => {
         const opacity = media.matches ? (phase === i ? 1 : 0) : weights[i];
@@ -38,7 +35,7 @@ export function useSceneMotion() {
     const schedule = () => { if (!frame) frame = requestAnimationFrame(render); };
     const observer = new IntersectionObserver(entries => { entries.forEach(entry => { const el = entry.target as HTMLElement; entry.isIntersecting ? visible.add(el) : visible.delete(el); }); schedule(); }, { rootMargin: "150px" });
     visuals.forEach(el => observer.observe(el));
-    const reveal = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add("is-visible"); reveal.unobserve(entry.target); } }), { threshold: .06 });
+    const reveal = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add("is-visible"); reveal.unobserve(entry.target); } }), { threshold: .01, rootMargin: "120px" });
     document.querySelectorAll<HTMLElement>("[data-reveal]").forEach(el => { if (el.getBoundingClientRect().top > hSafe()) el.classList.add("will-reveal"); reveal.observe(el); });
     function hSafe() { return window.innerHeight - 20; }
     const updatePreference = () => { document.documentElement.dataset.reducedMotion = String(media.matches); schedule(); };

@@ -30,7 +30,7 @@ export function Hero() {
       </div>
     </div>
     <nav className="scene-dock" aria-label="Explore selected work">
-      {["Gold", "Food", "Kopra"].map((label, i) => <button key={label} type="button" data-scene-target={i} aria-pressed={i === 0} onClick={() => goToScene(i)}><img src={`/icons/device-${i === 2 ? "laptop" : i === 0 ? "atm" : "phone"}.svg`} alt="" width="16" height="16" />{label}</button>)}
+      {["Gold", "Food", "Kopra"].map((label, i) => <button key={label} type="button" data-scene-target={i} aria-pressed={i === 0} onClick={() => goToScene(i)}><img src={i === 0 ? "/icons/gold.svg" : `/icons/device-${i === 2 ? "laptop" : "phone"}.svg`} alt="" width="16" height="16" />{label}</button>)}
       <a href="#contact">Contact <span aria-hidden="true">↗</span></a>
     </nav>
   </section>;
