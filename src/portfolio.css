@@ -168,25 +168,31 @@ figcaption { font-size:12px; line-height:1.5; color:var(--muted); }
 
 @media (hover:hover) { .portrait-switch:hover .portrait-switch__photo { transform:scale(1.015); } .portrait-switch:hover .portrait-switch__illustration { opacity:1; transform:scale(1); filter:blur(0); } }
 
-/* A finite opening, led by the actual work rather than a second navigation list. */
+/* Independent, scroll-linked planes; the page itself remains normal document flow. */
 .hero { overflow:clip; }
-.hero-layout { display:grid; grid-template-columns:.95fr 1.1fr; gap:42px; align-items:center; padding-block:144px 66px; }
+.hero-layout { display:grid; grid-template-columns:.86fr 1.14fr; gap:30px; align-items:center; padding-block:140px 64px; }
 .hero h1 { font-size:clamp(62px,6vw,84px); line-height:1.025; letter-spacing:-3px; font-weight:600; }
 .hero h1 > span { display:block; }
 .hero-word { color:var(--accent); }
-.hero-copy > p { max-width:420px; margin-top:26px; color:var(--muted); font-size:17px; line-height:1.7; }
+.hero-copy { position:relative; z-index:2; }
+.hero-copy > p { max-width:400px; margin-top:26px; color:var(--muted); font-size:17px; line-height:1.7; }
 .hero-actions { display:flex; align-items:center; flex-wrap:wrap; gap:24px; margin-top:30px; }
 .hero-actions .button { min-height:50px; padding:12px 22px; font-size:14px; gap:16px; }
-.hero-art { position:relative; width:100%; aspect-ratio:1.03; transform:translate3d(0,var(--depth-y,0px),0); }
-.hero-shot { position:absolute; animation:hero-arrive .8s cubic-bezier(.2,.8,.2,1) both; }
-.hero-shot--gold { width:42%; left:30%; top:4%; rotate:-4deg; z-index:3; animation-delay:.08s; }
-.hero-shot--atm { width:36%; left:0; top:18%; rotate:-9deg; z-index:1; animation-delay:.17s; }
-.hero-shot--food { width:36%; right:0; top:24%; rotate:9deg; z-index:2; animation-delay:.24s; }
-.hero-shot--atm > img { width:100%; border-radius:16px; box-shadow:0 22px 40px #0003; }
-.hero-shot .phone-device { filter:drop-shadow(0 22px 26px #0004); }
-@keyframes hero-arrive { from { translate:0 18px; } to { translate:0 0; } }
-@media (max-width:1050px) { .hero-layout { gap:28px; } .hero h1 { font-size:clamp(52px,6.1vw,70px); letter-spacing:-2.4px; } }
-@media (max-width:809px) { .hero-layout { padding-top:130px; gap:20px; } .hero h1 { font-size:clamp(42px,6.4vw,54px); letter-spacing:-1.8px; } .hero-copy > p { font-size:15px; margin-top:22px; } .hero-actions { gap:18px; margin-top:24px; } .hero-actions .button { padding-inline:18px; font-size:13px; } }
+.hero-art { position:relative; width:100%; height:540px; perspective:1100px; --hero-scroll:0; --hero-pointer-x:0; --hero-pointer-y:0; }
+.hero-shot { position:absolute; animation:hero-arrive .85s cubic-bezier(.2,.8,.2,1) both; }
+.hero-layer { will-change:transform; }
+.hero-shot--workspace { --arrive-x:-32px; --arrive-r:-2deg; width:93%; top:13%; right:-6%; animation-delay:.1s; z-index:1; }
+.hero-shot--workspace .hero-layer { padding:10px; background:#202328; border-radius:20px; transform:translate3d(calc(var(--hero-scroll)*22px + var(--hero-pointer-x)*-5px),calc(var(--hero-scroll)*88px + var(--hero-pointer-y)*-5px),0) rotate(calc(4deg - var(--hero-scroll)*5deg)); box-shadow:0 26px 65px #0005; }
+.hero-shot--workspace img { width:100%; border-radius:11px; }
+.hero-shot--atm { --arrive-x:-26px; --arrive-r:-3deg; width:34%; left:1%; top:38%; z-index:2; animation-delay:.22s; }
+.hero-shot--atm .hero-layer { transform:translate3d(calc(var(--hero-scroll)*-48px + var(--hero-pointer-x)*8px),calc(var(--hero-scroll)*-20px + var(--hero-pointer-y)*8px),0) rotate(calc(-5deg - var(--hero-scroll)*4deg)); }
+.hero-shot--atm img { width:100%; border-radius:16px; box-shadow:0 22px 40px #0004; }
+.hero-shot--gold { --arrive-x:28px; --arrive-r:2deg; width:39%; right:11%; top:3%; z-index:3; animation-delay:.32s; }
+.hero-shot--gold .hero-layer { transform:translate3d(calc(var(--hero-scroll)*38px + var(--hero-pointer-x)*14px),calc(var(--hero-scroll)*-66px + var(--hero-pointer-y)*14px),0) rotate(calc(3deg + var(--hero-scroll)*4deg)); }
+.hero-shot .phone-device { filter:drop-shadow(0 24px 28px #0005); }
+@keyframes hero-arrive { from { translate:var(--arrive-x,0px) 26px; rotate:var(--arrive-r,0deg); } to { translate:0 0; rotate:0deg; } }
+@media (max-width:1050px) { .hero-layout { gap:24px; } .hero h1 { font-size:clamp(52px,6.1vw,70px); letter-spacing:-2.4px; } .hero-art { height:470px; } }
+@media (max-width:809px) { .hero-layout { padding-top:130px; gap:16px; } .hero h1 { font-size:clamp(42px,6.4vw,54px); letter-spacing:-1.8px; } .hero-copy > p { font-size:15px; margin-top:22px; } .hero-actions { gap:18px; margin-top:24px; } .hero-actions .button { padding-inline:18px; font-size:13px; } .hero-art { height:400px; } }
 @media (max-width:599px) {
   .hero-layout { display:block; padding-block:124px 32px; }
   .hero h1 { font-size:clamp(32px,10.1vw,52px); line-height:1.08; letter-spacing:-1.6px; }
@@ -194,10 +200,12 @@ figcaption { font-size:12px; line-height:1.5; color:var(--muted); }
   .hero h1 > span:last-child { margin-left:.16em; }
   .hero-copy > p { max-width:460px; font-size:16px; line-height:1.65; margin-top:20px; }
   .hero-actions { margin-top:24px; gap:24px; }
-  .hero-art { width:calc(100% - 16px); height:clamp(220px,72vw,300px); aspect-ratio:auto; margin:30px auto 0; }
-  .hero-shot--gold { width:42%; left:30%; top:0; }
-  .hero-shot--atm { width:36%; top:17%; }
-  .hero-shot--food { width:36%; top:23%; }
-  .hero-shot--atm > img { border-radius:10px; }
+  .hero-art { width:calc(100% - 12px); height:clamp(240px,76vw,340px); margin:30px auto 0; }
+  .hero-shot--workspace { width:92%; top:13%; right:-1%; }
+  .hero-shot--workspace .hero-layer { padding:6px; border-radius:13px; }
+  .hero-shot--workspace img { border-radius:8px; }
+  .hero-shot--gold { width:36%; top:0; right:10%; }
+  .hero-shot--atm { width:33%; top:36%; left:2%; }
+  .hero-shot--atm img { border-radius:10px; }
 }
-@media (prefers-reduced-motion:reduce) { .hero-art { transform:none; } .hero-shot { animation:none; } }
+@media (prefers-reduced-motion:reduce) { .hero-shot { animation:none; } .hero-layer { will-change:auto; } .hero-shot .hero-layer { transform:none; } }

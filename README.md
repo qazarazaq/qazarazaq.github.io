@@ -14,7 +14,7 @@ The build is written to `dist/`. No new runtime dependencies are required for th
 
 ## Editing content
 
-- Opening and actual-screen composition: `src/components/Hero.tsx`.
+- Opening and layered actual-screen composition: `src/components/Hero.tsx`.
 - Project narratives and evidence layout: `src/components/Portfolio.tsx`.
 - Screen assets, product names, and public product URLs: `src/data/portfolio.ts`.
 - About and work/education tiles: `src/components/About.tsx` and `ExperienceTiles.tsx`.
@@ -39,9 +39,9 @@ Open the HTML in a browser to edit or print it. To regenerate with Playwright in
 
 ## Interaction and accessibility
 
-The Work CTA jumps directly to the projects; direct section URLs also resolve after the React application mounts. Normal scrolling provides small screen translations and reveals, without scroll trapping. Screen dialogs fit the entire interface by default, offer explicit zoom/pan, close with a centered SVG or Escape, contain keyboard focus, and restore focus to their trigger. Section navigation, the mobile menu, portrait hover/tap, and travel keyboard/touch controls work without a motion toggle. System reduced-motion preferences are respected.
+The Work CTA jumps directly to the projects; direct section URLs also resolve after the React application mounts. The hero uses independently scroll-linked phone, ATM and desktop planes, plus a small desktop pointer response. Other screens retain subtle translations and reveals. There is no scroll trapping. Screen dialogs fit the entire interface by default, offer explicit zoom/pan, close with a centered SVG or Escape, contain keyboard focus, and restore focus to their trigger. Section navigation, the mobile menu, portrait hover/tap, and travel keyboard/touch controls work without a motion toggle. System reduced-motion preferences are respected.
 
-Kiko is a separately loaded resting Persian cat modeled as an ASCII character sculpture in a small contact illustration area. It never covers the email or social links; the loop pauses offscreen and in a hidden tab. No cat photo or video is loaded.
+Kiko is a separately loaded walking orange-and-white Persian cat built from animated contours on a character grid in a small contact illustration area. It never covers the email or social links; the loop pauses offscreen and in a hidden tab. No cat photo or video is loaded.
 
 ## Deployment and rollback
 
