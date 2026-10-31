@@ -25,8 +25,8 @@ export function AsciiCat() {
     };
     // Kiko from above: a broad fluffy back, compact head, small ears and bushy tail.
     // Natural proportions keep the silhouette distinct from the former side-on character.
-    ellipsoid(.22, .02, 0, .99, .40, .51);
-    ellipsoid(-.44, .06, 0, .64, .41, .45);
+    ellipsoid(.22, .02, 0, .99, .40, .57);
+    ellipsoid(-.44, .06, 0, .64, .41, .49);
     ellipsoid(-.80, .08, 0, .31, .30, .33, 1);
     ellipsoid(-1.10, .10, 0, .39, .31, .36, 1);
     // Only a sliver of the white bib is visible from this camera angle.
@@ -35,10 +35,12 @@ export function AsciiCat() {
     ellipsoid(-1.53, .06, 0, .045, .06, .065, 1, false, true);
     ellipsoid(-1.29, .27, -.22, .045, .035, .055, 1, false, true);
     ellipsoid(-1.29, .27, .22, .045, .035, .055, 1, false, true);
-    for (const side of [-1, 1]) for (let h = 0; h < 1; h += .035) for (let a = 0; a < Math.PI * 2; a += .10) {
-      points.push({ x: -1.10 + h * .035 + Math.cos(a) * .17 * (1 - h), y: .22 + h * .32, z: side * (.28 + h * .19) + Math.sin(a) * .15 * (1 - h), nx: Math.cos(a), ny: .65, nz: Math.sin(a), part: 1, cream: false, dark: false, fur: Math.sin(a * 9) });
+    // Triangular, furred ear surfaces remain distinct in the overhead silhouette.
+    for (const side of [-1, 1]) for (let u = 0; u <= 1; u += .025) for (let v = 0; v <= 1 - u; v += .025) {
+      const w = 1 - u - v;
+      points.push({ x: -.95 * u - .77 * v - 1.09 * w, y: .28 * u + .30 * v + .48 * w, z: side * (.17 * u + .38 * v + .55 * w), nx: -.1, ny: .9, nz: side * .3, part: 1, cream: false, dark: false, fur: Math.sin(u * 31 + v * 23) });
     }
-    const legs = [{ x: -.62, z: -.32 }, { x: .65, z: -.32 }, { x: -.62, z: .32 }, { x: .65, z: .32 }];
+    const legs = [{ x: -.62, z: -.36 }, { x: .65, z: -.36 }, { x: -.62, z: .36 }, { x: .65, z: .36 }];
     legs.forEach((leg, i) => {
       const front = i % 2 === 0;
       const side = Math.sign(leg.z);
@@ -67,7 +69,7 @@ export function AsciiCat() {
       const headTurn = Math.sin(t * .9) * .09;
       const ct = Math.cos(headTurn), st = Math.sin(headTurn);
       // A near-overhead camera shows the back and paw placement, with a little depth.
-      const cameraSin = .96, cameraCos = .28;
+      const cameraSin = .92, cameraCos = .392;
       const scale = artW / 4.7;
       const strides = [Math.PI, 0, 0, Math.PI].map(phase => Math.sin(gait + phase));
       for (const point of points) {
@@ -107,7 +109,7 @@ export function AsciiCat() {
         material[i] = point.dark ? 3 : point.cream ? 2 : 1;
       }
       const left = (width - artW) / 2 + Math.sin(t * .43) * Math.min(22, width * .035);
-      const top = height * (width < 600 ? .71 : .62) - artH / 2;
+      const top = height * (.50) - artH / 2;
 
       ink.font = `${fontSize}px ui-monospace, SFMono-Regular, Menlo, monospace`;
       ink.textAlign = "center"; ink.textBaseline = "middle";
@@ -136,7 +138,7 @@ export function AsciiCat() {
       canvas.width = Math.round(width * ratio); canvas.height = Math.round(height * ratio);
       ink.setTransform(ratio, 0, 0, ratio, 0, 0);
       artW = Math.min(width * .96, 1000, height * 1.35);
-      cols = width < 600 ? 80 : 132; fontSize = artW / cols / .64;
+      cols = width < 480 ? 64 : 104; fontSize = artW / cols / .64;
       cellW = artW / cols; cellH = fontSize * 1.16;
       rows = Math.round(artW / 1.65 / cellH); artH = rows * cellH;
       depth = new Float32Array(cols * rows); shade = new Float32Array(cols * rows); material = new Uint8Array(cols * rows);

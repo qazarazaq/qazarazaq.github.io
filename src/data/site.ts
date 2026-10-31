@@ -3,7 +3,7 @@ export const siteContent = {
     name: "Wildan Razaq Ramadhan",
     shortName: "Wildan Razaq",
     monogram: "WR",
-    role: "Product and UI Designer",
+    role: "UI/CX Designer",
     headline: "Designing clear digital products for complex everyday systems.",
     introduction:
       "I’m Wildan Razaq, a product and UI designer focused on digital banking, commerce, mobility, and scalable design systems.",
@@ -75,7 +75,7 @@ export const siteContent = {
       "My collaboration style is practical and iterative: make the problem visible, compare options, involve product and engineering early, and keep refining until the experience and specification are ready to build.",
       "Outside product work, I document travel through photography, with a particular interest in streets, transport, signage, public spaces, and the small details that shape everyday experience.",
     ],
-    resumeUrl: null,
+    resumeUrl: "/resume/Wildan-Razaq-Ramadhan-Resume.pdf",
   },
   contact: {
     title: "Have a complex product that needs to feel simpler?",

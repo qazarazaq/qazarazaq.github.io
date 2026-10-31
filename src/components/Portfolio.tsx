@@ -1,7 +1,6 @@
-import { ArrowLink } from "./ArrowLink";
 import { useState } from "react";
+import { ArrowLink, LinkArrow } from "./ArrowLink";
 import { portfolioProjects, supportingProjects, type ProjectScreen } from "../data/portfolio";
-import { ExperienceTiles } from "./ExperienceTiles";
 import { DeviceImage, ScreenViewer } from "./WorkMedia";
 
 function ProductContext({ devices }: { devices: readonly string[] }) {
@@ -16,52 +15,42 @@ export function Portfolio() {
   const [gold, food] = portfolioProjects;
   const [kopra, ...more] = supportingProjects;
   return <div id="work" className="work">
-    <section className="gold-section dark-section" data-tone="dark" aria-labelledby="gold-title">
+    <section id="project-livin-gold" className="project-section gold-section" aria-labelledby="gold-title">
       <div className="container">
-        <ExperienceTiles className="experience-tiles--work" />
-        <div id="project-livin-gold" className="project-heading" data-reveal>
-          <ProductContext devices={gold.devices} />
-          <p className="product-name">{gold.title}</p>
-          <h2 id="gold-title">{gold.headline}</h2>
-          <p className="project-intro">{gold.summary}</p>
-          <ArrowLink href={gold.publicUrl} external>View public product</ArrowLink>
+        <div className="project-heading" data-reveal>
+          <div><ProductContext devices={gold.devices} /><p className="product-name">{gold.title}</p><h2 id="gold-title">From Livin’ to<br />physical gold.</h2></div>
+          <div className="project-heading__detail"><p>I designed the mobile and ATM interfaces for physical gold pickup: the guide, denomination selection, printing fees, and pickup instructions.</p><ArrowLink href={gold.publicUrl} external>See the live product</ArrowLink></div>
         </div>
-        <div className="feature-grid">
-          <article className="feature-card feature-card--wide feature-card--gold" data-reveal>
-            <div className="feature-copy"><h3>A guide for<br />the handoff.</h3><p>In Livin’, the guide brings the scan action and the location list together. Customers can check where to go, then scan when they reach the machine.</p></div>
-            <div className="feature-media" data-parallax><Preview screen={gold.screens[0]} onPreview={setPreview} /></div>
-          </article>
-          <article className="feature-card feature-card--atm" data-reveal>
-            <div className="feature-copy"><h3>Weight and fees,<br />shown separately.</h3><p>Customers choose one gold piece at a time. Weight and printing fees have separate labels, with the selected piece and total fee kept in view while comparing brands.</p></div>
-            <Preview screen={gold.screens[1]} onPreview={setPreview} className="atm-visual" />
-          </article>
-          <article className="feature-card feature-card--atm" data-reveal>
-            <div className="feature-copy"><h3>At the machine,<br />through to pickup.</h3><p>The ATM instructions continue through to collecting the gold. For finding a machine, the directory groups locations by city, with the name, address, and map link together.</p></div>
-            <Preview screen={gold.screens[2]} onPreview={setPreview} className="atm-visual" />
-          </article>
+        <div className="gold-evidence" data-reveal>
+          {gold.screens.map((screen, i) => <figure key={screen.src}><div className="gold-evidence__screen"><Preview screen={screen} onPreview={setPreview} className={i ? "atm-visual" : ""} /></div><figcaption>{["Guide and scan action in Livin’", "Gold weight and printing fee at the ATM", "Instructions through to collection"][i]}</figcaption></figure>)}
+        </div>
+        <div className="decision-grid" data-reveal>
+          <article><h3>Grams and rupiah,<br />kept separate.</h3><p>Customers choose one piece from one brand. Gold weight and the printing fee have different labels, with the selected piece and total fee kept in view while comparing options.</p><p className="decision-detail">The customer can compare the selected piece and its fee without switching views.</p></article>
+          <article><h3>A handoff with<br />a next step.</h3><p>“Scan QR di ATM” is the main action in the mobile guide. ATM locations stay one step away as a secondary link; finding a machine and starting a pickup have different priorities.</p><p className="decision-detail">The final ATM screen asks the customer to collect the gold before leaving.</p></article>
         </div>
       </div>
     </section>
-    <section id="project-livin-food" className="food-section content-section" data-tone="dark" aria-labelledby="food-title">
+    <section id="project-livin-food" className="project-section food-section" aria-labelledby="food-title">
       <div className="container">
-        <div className="project-heading" data-reveal><ProductContext devices={food.devices} /><p className="product-name">{food.title}</p><h2 id="food-title">{food.headline}</h2><p className="project-intro">{food.summary}</p><ArrowLink href={food.publicUrl} external>View public product</ArrowLink></div>
-        <div className="feature-grid">
-          <article className="feature-card feature-card--wide feature-card--food" data-reveal>
-            <div className="feature-copy"><h3>Start with how<br />you want to eat.</h3><p>Dine-in and delivery start differently, but the restaurant, menu, and cart need to work together. A shared ordering structure keeps the selected dining mode in context through each step.</p></div>
-            <div className="feature-media phone-pair" data-parallax><Preview screen={food.screens[0]} onPreview={setPreview} /><Preview screen={food.screens[1]} onPreview={setPreview} /></div>
-          </article>
-          <article className="feature-card feature-card--phone" data-reveal><div className="feature-copy"><h3>Finding the right<br />category.</h3><p>The category artwork and labels stay consistent as customers scroll. I kept “Terdekat” as a nearby shortcut alongside the broader food categories.</p></div><div className="feature-media" data-parallax><Preview screen={food.screens[0]} onPreview={setPreview} /></div></article>
-          <article className="feature-card feature-card--phone" data-reveal><div className="feature-copy"><h3>A saved cart<br />can change.</h3><p>Restaurant availability can change after an order is saved. The cart shows whether a place is closing, closed, or outside the delivery area before a customer continues.</p></div><div className="feature-media" data-parallax><Preview screen={food.screens[2]} onPreview={setPreview} /></div></article>
+        <div className="project-heading" data-reveal><div><ProductContext devices={food.devices} /><p className="product-name">{food.title}</p><h2 id="food-title">An order starts<br />before the menu.</h2></div><div className="project-heading__detail"><p>My work on Livin’ Food covered restaurant discovery, categories, menu selection, and cart states, connecting dine-in and delivery orders with payment.</p><ArrowLink href={food.publicUrl} external>See the live product</ArrowLink></div></div>
+        <div className="food-ordering" data-reveal>
+          <div className="food-ordering__copy"><h3>Keep the dining<br />mode in context.</h3><p>Delivery, pick-up, and dine-in begin in the same discovery area. The selected mode stays visible as customers move into a restaurant and its menu.</p><p>Categories use consistent artwork and labels across scroll states. “Terdekat” remains a nearby shortcut alongside the broader food categories.</p></div>
+          <div className="food-ordering__screens">{food.screens.slice(0, 2).map((screen, i) => <figure key={screen.src}><Preview screen={screen} onPreview={setPreview} /><figcaption>{i ? "Restaurant and menu" : "Dining modes and discovery"}</figcaption></figure>)}</div>
+        </div>
+        <div className="cart-story" data-reveal>
+          <div className="cart-story__visual"><Preview screen={food.screens[2]} onPreview={setPreview} /></div>
+          <div className="cart-story__copy"><h3>A saved cart<br />isn’t always ready.</h3><p>A restaurant may close or fall outside the delivery area after an order is saved. Those states belong beside the cart, where a customer decides whether to continue.</p><div className="cart-states"><div><strong>Available</strong><p>Available carts stay visually active.</p></div><div><strong>Closing soon</strong><p>The ordering deadline stays beside the saved order.</p></div><div><strong>Closed or out of range</strong><p>Muted carts explain whether the restaurant is closed or too far away.</p></div></div></div>
         </div>
       </div>
     </section>
-    <section id="project-kopra" className="kopra-section content-section" data-tone="dark" aria-labelledby="kopra-title">
+    <section id="project-kopra" className="project-section kopra-section" aria-labelledby="kopra-title">
       <div className="container">
-        <div className="project-heading" data-reveal><ProductContext devices={kopra.devices} /><p className="product-name">{kopra.title}</p><h2 id="kopra-title">Keeping track of invoices<br />and their status.</h2><p className="project-intro">I worked on the invoice overview, search, and status flows in Kopra SCM. There’s a lot to fit on one screen, so I focused on the information people need while working through the list.</p></div>
-        <article className="feature-card feature-card--desktop" data-reveal><div className="desktop-card-copy"><h3>{kopra.title}</h3><p>Search and status filters sit above the invoice list. The rows keep the invoice details together, while status labels help distinguish where each one stands.</p></div><Preview screen={kopra.screen} onPreview={setPreview} /></article>
-        <div className="feature-grid more-work">{more.map(project => <article key={project.title} className="feature-card feature-card--phone feature-card--supporting" data-reveal><div className="feature-copy"><h3>{project.title}</h3><p>{project.description}</p></div><div className="feature-media" data-parallax><Preview screen={project.screen} onPreview={setPreview} /></div></article>)}</div>
+        <div className="project-heading" data-reveal><div><ProductContext devices={kopra.devices} /><p className="product-name">{kopra.title}</p><h2 id="kopra-title">Find the invoice.<br />Read its status.</h2></div><div className="project-heading__detail"><p>I worked on the invoice overview, search, and status flows in Kopra SCM. The challenge was fitting a dense set of records into a workspace people could work through.</p><button type="button" className="text-link" onClick={() => setPreview(kopra.screen)}>View the full workspace<LinkArrow /></button></div></div>
+        <figure className="kopra-evidence" data-reveal><button type="button" className="work-visual kopra-evidence__crop" aria-label="Enlarge Kopra SCM invoice overview & status" onClick={() => setPreview(kopra.screen)}><img src={kopra.screen.src} alt="Kopra SCM search, status filters, and invoice column hierarchy" width="1154" height="844" loading="lazy" /></button><figcaption>Search, status filters, and invoice details share the same workspace.</figcaption></figure>
+        <div className="kopra-decisions" data-reveal><article><h3>Find the record.</h3><p>An invoice number or a buyer name can be the starting point. The same search accepts either; status filters narrow the list in place.</p></article><article><h3>Read the status.</h3><p>Pending approval and pending bank approval remain distinct, rather than sharing a generic “pending” label. Rejected records have their own status.</p></article><article><h3>Keep the context.</h3><p>Status sits in the first column, alongside the invoice number, buyer, amount, and dates. The list keeps the record and its status together.</p></article></div>
       </div>
     </section>
+    <section className="more-work-section" aria-labelledby="more-work-title"><div className="container"><div className="section-heading" data-reveal><h2 id="more-work-title">More work</h2><p>Other journeys I’ve worked on inside Livin’.</p></div><div className="more-work-grid">{more.map(project => <article key={project.title} className="supporting-project" data-reveal><div className="supporting-project__media"><Preview screen={project.screen} onPreview={setPreview} /></div><div><h3>{project.title}</h3><p>{project.title === "Livin Auto" ? "Vehicle discovery, credit simulation, and reusable interface states for the financing application." : "The donation journey, from campaign context and amount selection through to review and payment."}</p></div></article>)}</div></div></section>
     {preview && <ScreenViewer screen={preview} onClose={() => setPreview(null)} />}
   </div>;
 }
