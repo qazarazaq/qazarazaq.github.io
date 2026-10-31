@@ -35,4 +35,4 @@ The portrait animation reveals the owner's original illustration through paths a
 
 The preceding production version is preserved at tag `portfolio-before-dimensional-footer-2026-10-31`, commit `26793dacb878527d11c786b1c48d995bfbc6d80e`.
 
-On GitHub, open this release's merged pull request and choose **Revert**. Create the resulting pull request and merge it into `master`; GitHub Pages rebuilds automatically. This keeps both versions in history. If newer changes have since landed, use a targeted restore rather than resetting or force-pushing the branch.
+On GitHub, revert the footer-bounds follow-up pull request first, then the main portfolio release pull request. For each, choose **Revert**, create the resulting pull request, and merge it into `master`; GitHub Pages rebuilds automatically. This keeps both versions in history. If newer changes have since landed, use a targeted restore rather than resetting or force-pushing the branch.
