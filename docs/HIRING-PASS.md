@@ -52,3 +52,19 @@ The follow-up release removes the redundant project index, opens with a permanen
 Kiko uses a newly modeled resting pose rather than the former overhead walking silhouette: a broad Persian face, small ears, sleepy eyes, whiskers, cream bib/paws and a curved bushy tail. Breathing, head movement, blinking, ear flicks and a tail swish animate the character grid. The renderer samples native geometry; no photograph filter or new raster asset is involved.
 
 Initial React fragment navigation is restored after mount, so direct About/Travel/Contact links land at their sections. The prior hiring release is saved under `portfolio-hiring-v1-2026-10-31` at `a8535eaacd3642fefebb552981749d3959a527e9`. Reverting the follow-up PR restores that release without removing the resume or case-study changes. The original pre-hiring tag remains available independently.
+
+## Layered hero and walking Kiko follow-up
+
+The flow under test is: initial page -> hero entrance and scroll/pointer input -> independently moving real product layers, with a stable layout and normal section navigation; Contact -> walking Kiko -> four-leg stride without clipping or obstructing contact actions.
+
+The two owner-supplied dashboard/profile Figma references were read as inspiration only. They suggested strong grouping, soft containers and contrast. Their screens, people and records are not used in the website. No Figma mutations were made. The public hero uses only the existing approved Gold guide, frameless ATM selection, and already-masked Kopra export. The charcoal/blue/Jakarta system is preserved.
+
+Reference mismatch decisions: keep the portfolio dark rather than copying the light personal-data reference; retain the user's own content, typography and product names; use the existing approved screenshots rather than any reference-file screen or data. The hero composition is staged on entry and separates into three independent planes during normal scrolling. Pointer movement is damped and small, touch uses scroll only, and reduced motion disables the transformations. Progress is measured from the untransformed section to avoid positional feedback.
+
+Kiko is rebuilt as an articulated side-on walking character. Short legs, a broad short-muzzled head, small ears, fluffy body, raised plume, cream bib and paws follow the supplied orange-and-white cat reference. The opposite diagonal legs swing while planted paws stay low. Procedural contour/fur shading generates the ASCII glyphs directly; no photograph, raster filter, model download, dependency or new public asset is added. The footer module remains lazy-loaded and pauses offscreen or when the tab is hidden.
+
+The preceding live version is preserved under tag `portfolio-before-walking-kiko-2026-10-31` at `77f3511bb64b88fd809e8f9632ecbc1dc07c7c99`. This follow-up is separately reversible through its squash-merged PR.
+
+QA uses IAB for direct visual review and bundled Chromium/Playwright for repeatable seven-width checks because the Browser plugin/skill is unavailable. No browser dependencies are installed.
+
+Final follow-up QA: production build passed; seven widths (320, 390, 599, 768, 1024, 1440, 1920); independent scroll transforms, pointer settling and return-to-top stability; reduced motion; walking cycle bounds and offscreen pause; unobstructed contact controls; preview zoom/fit/Escape; mobile Contact navigation and direct Contact loading; resume response. No application warnings/errors or missing assets were observed. Chromium emits a diagnostic only when the QA script repeatedly reads canvas pixels for its clipping checks; that test-generated readback message is excluded from application-console findings.
