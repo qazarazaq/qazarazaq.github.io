@@ -8,6 +8,7 @@ export function useSceneMotion() {
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     const hero = document.getElementById("top");
     const heroArt = hero?.querySelector<HTMLElement>(".hero-art");
+    const heroTrack = hero?.querySelector<HTMLElement>(".hero-track");
     const header = document.querySelector<HTMLElement>(".site-header");
     const targets = Array.from(document.querySelectorAll<HTMLElement>("[data-shot-motion], [data-depth]"));
     const anchors = new Map(targets.map(el => [el, el.closest<HTMLElement>("figure, .cart-story__visual, .supporting-project__media, .designer-about__grid") || el]));
@@ -18,13 +19,16 @@ export function useSceneMotion() {
       const h = window.innerHeight;
       if (hero && heroArt) {
         // Measure the untransformed section so moving layers never feed back into progress.
-        const rect = hero.getBoundingClientRect();
+        const rect = heroTrack!.getBoundingClientRect();
         const active = rect.bottom > 0 && rect.top < h;
-        const strength = preference.matches ? 0 : window.innerWidth < 600 ? .55 : 1;
-        const progress = clamp(-rect.top / (rect.height * .8));
+        const mobile = window.innerWidth < 600;
+        const progress = preference.matches || mobile ? 0 : clamp((100 - rect.top) / Math.max(1, heroTrack!.offsetHeight - heroArt.offsetHeight));
+        const strength = preference.matches || mobile ? 0 : 1;
+        heroArt.style.setProperty("--hero-open", String(smooth(0, .7, progress)));
+        heroArt.style.setProperty("--hero-reveal", String(smooth(.3, .9, progress)));
+        heroArt.style.setProperty("--hero-atm-fade", String(smooth(0, .28, progress)));
         pointerX += (targetX - pointerX) * .13;
         pointerY += (targetY - pointerY) * .13;
-        heroArt.style.setProperty("--hero-scroll", String(progress * strength));
         heroArt.style.setProperty("--hero-pointer-x", String(pointerX * strength));
         heroArt.style.setProperty("--hero-pointer-y", String(pointerY * strength));
         if (active && !preference.matches && (Math.abs(targetX-pointerX)>.001 || Math.abs(targetY-pointerY)>.001)) frame = requestAnimationFrame(render);

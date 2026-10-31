@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { catRoamPose } from "../lib/catPath";
 
 const clamp = (n: number, low = 0, high = 1) => Math.max(low, Math.min(high, n));
 const ellipse = (x: number, y: number, cx: number, cy: number, rx: number, ry: number) => (Math.hypot((x - cx) / rx, (y - cy) / ry) - 1) * Math.min(rx, ry);
@@ -15,17 +16,23 @@ export function AsciiCat() {
   useEffect(() => {
     const canvas = canvasRef.current, ink = canvas?.getContext("2d");
     if (!canvas || !ink) return;
+    const sprite = document.createElement("canvas");
+    const paint = sprite.getContext("2d");
+    if (!paint) return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     let width = 0, height = 0, visible = false, frame = 0, last = 0, time = 0;
     const draw = (t: number) => {
       if (!width || !height) return;
       ink.clearRect(0, 0, width, height);
-      const cols = width < 350 ? 88 : 112;
-      const cell = Math.min(width * .97 / cols, height * 1.54 / cols);
-      const cellH = cell * 1.72, rows = Math.round(height * .94 / cellH);
+      const pose = catRoamPose(t, width, height, reduced.matches);
+      const w = pose.artWidth, h = pose.artHeight;
+      const cols = w < 230 ? 88 : 112;
+      const cell = Math.min(w * .97 / cols, h * 1.54 / cols);
+      const cellH = cell * 1.72, rows = Math.round(h * .94 / cellH);
       const scale = Math.min(cols * cell / 4.35, rows * cellH / 2.65);
-      const left = (width - cols * cell) / 2, top = (height - rows * cellH) / 2;
-      const gait = t * 3.4, bob = Math.cos(gait * 2) * .018;
+      const left = (w - cols * cell) / 2, top = (h - rows * cellH) / 2;
+      paint.clearRect(0, 0, w, h);
+      const gait = t * (40 * Math.PI / (.48 * scale)), bob = Math.cos(gait * 2) * .018;
       const drift = Math.sin(gait * .5) * .025;
       const legs: Leg[] = [0, 1, 2, 3].map(i => {
         const far = i < 2, front = i % 2 === 1;
@@ -46,8 +53,8 @@ export function AsciiCat() {
         tail.push({ x: -1.06 - .88 * Math.sin(u * 1.34), y: .03 + .87 * u + Math.sin(t * 1.1 - u) * .085 * u,
           r: .15 + .035 * Math.sin(u * Math.PI) - .10 * u ** 5 });
       }
-      ink.font = `${cell * 1.63}px ui-monospace, SFMono-Regular, Menlo, monospace`;
-      ink.textAlign = "center"; ink.textBaseline = "middle";
+      paint.font = `${cell * 1.63}px ui-monospace, SFMono-Regular, Menlo, monospace`;
+      paint.textAlign = "center"; paint.textBaseline = "middle";
       for (let row = 0; row < rows; row++) for (let col = 0; col < cols; col++) {
         const x = (col - cols / 2) * cell / scale - drift;
         const y = (rows / 2 - row) * cellH / scale;
@@ -72,15 +79,15 @@ export function AsciiCat() {
         // The head is round and short-faced. Small ears sit inside a long-haired ruff.
         for (const side of [-1, 1]) {
           const ex = headX + side * .245, ey = headY + .33;
-          const ear = Math.max(Math.abs(x-ex) - (.145 - clamp((y-ey)/.20)*.105), ey-y, y-(ey+.20));
+          const ear = Math.max(Math.abs(x-ex) - (.145 - clamp((y-ey)/.18)*.105), ey-y, y-(ey+.18));
           put(ear + fur * .4, "ear");
           if (Math.abs(x-ex) < .035 && y > ey+.08 && y < ey+.19) put(-.01,"ear-inner");
         }
-        const head = ellipse(x,y,headX,headY,.43,.36);
+        const head = ellipse(x,y,headX,headY,.46,.38);
         put(head + fur * 1.5, "head");
-        put(ellipse(x,y,headX-.29,headY-.10,.19,.22) + fur, "head");
-        put(ellipse(x,y,headX+.29,headY-.10,.19,.22) + fur, "head");
-        put(ellipse(x,y,headX,headY-.17,.20,.13), "muzzle");
+        put(ellipse(x,y,headX-.29,headY-.10,.21,.24) + fur, "head");
+        put(ellipse(x,y,headX+.29,headY-.10,.21,.24) + fur, "head");
+        put(ellipse(x,y,headX,headY-.17,.22,.11), "muzzle");
         if (!shape) continue;
         const surface = clamp(-distance / .24);
         const grain = Math.sin(x * 39 + y * 11) * Math.cos(y * 34 - x * 8);
@@ -95,21 +102,27 @@ export function AsciiCat() {
         if (shape === "head" || shape === "muzzle") {
           const fx = (x-headX)/.40, fy = (y-headY)/.36;
           // Narrow sleepy eyes, a small flat nose, and the forehead tabby markings.
-          if (Math.abs(Math.abs(fx)-.43)<.16 && Math.abs(fy-.10)<.09) { char = "−"; color = "#3a2b22"; }
+          if (Math.abs(Math.abs(fx)-.43)<.16 && Math.abs(fy-.10)<.09) { char = "-"; color = "#3a2b22"; }
           if (Math.abs(fx)<.11 && Math.abs(fy+.30)<.10) { char = "v"; color = "#664237"; }
           if (Math.abs(fx)<.065 && fy<-.42 && fy>-.60) { char = ":"; color = "#644838"; }
           if (fy>.45 && fy<.82 && Math.abs(fx)<.54 && Math.sin(fx*17+fy*2)>.67) color = "#9b6b43";
         }
-        ink.fillStyle = color;
-        ink.fillText(char,left+(col+.5)*cell,top+(row+.5)*cellH);
+        paint.fillStyle = color;
+        paint.fillText(char,left+(col+.5)*cell,top+(row+.5)*cellH);
       }
       // Sparse whiskers are characters too; they follow the head bob without a line overlay.
-      ink.fillStyle = "#e0cfac";
+      paint.fillStyle = "#e0cfac";
       for (const side of [-1,1]) for (let line=0;line<3;line++) for (let i=0;i<4;i++) {
         const x=headX+side*(.22+i*.085), y=headY-.12+(line-1)*(.035+i*.018);
         const gx=cols/2+(x+drift)*scale/cell, gy=rows/2-y*scale/cellH;
-        ink.fillText(i%2 ? "." : "-",left+(gx+.5)*cell,top+(gy+.5)*cellH);
+        paint.fillText(i%2 ? "." : "-",left+(gx+.5)*cell,top+(gy+.5)*cellH);
       }
+      ink.save();
+      ink.translate(pose.x, pose.y);
+      ink.rotate(pose.tilt);
+      ink.scale(pose.facing * pose.turn, 1);
+      ink.drawImage(sprite, -w / 2, -h / 2, w, h);
+      ink.restore();
     };
     const tick = (now: number) => {
       frame = 0;
@@ -120,7 +133,10 @@ export function AsciiCat() {
     const sync = () => { cancelAnimationFrame(frame); frame=0; last=performance.now(); draw(time); if (visible&&!document.hidden&&!reduced.matches) frame=requestAnimationFrame(tick); };
     const resize = new ResizeObserver(entries => {
       const box=entries[0].contentRect; width=box.width; height=box.height;
-      const ratio=Math.min(2,window.devicePixelRatio||1); canvas.width=Math.round(width*ratio); canvas.height=Math.round(height*ratio); ink.setTransform(ratio,0,0,ratio,0,0); sync();
+      const ratio=Math.min(2,window.devicePixelRatio||1); canvas.width=Math.round(width*ratio); canvas.height=Math.round(height*ratio); ink.setTransform(ratio,0,0,ratio,0,0);
+      const pose=catRoamPose(time,width,height,reduced.matches);
+      sprite.width=Math.ceil(pose.artWidth*ratio); sprite.height=Math.ceil(pose.artHeight*ratio);
+      paint.setTransform(ratio,0,0,ratio,0,0); sync();
     });
     resize.observe(canvas);
     const observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;sync();},{rootMargin:"80px"}); observer.observe(canvas);
