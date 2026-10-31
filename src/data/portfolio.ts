@@ -73,3 +73,13 @@ export const supportingProjects = [
   { title: "Livin Auto", medium: "Vehicle financing", devices: ["phone"] as const, description: "I worked on vehicle discovery, the credit simulation, and reusable screens for the financing application. The aim was to keep the information useful as customers moved from browsing to considering a loan.", screen: { src: "/work/auto.webp", title: "Livin Auto vehicle detail", caption: "Vehicle variant, availability, price, and the continuation into credit simulation.", width: 375, height: 812 } },
   { title: "Sukha Donasi", medium: "Donations", devices: ["phone"] as const, description: "I worked on the donation flow, from reading about a campaign to choosing an amount and paying. Preset and custom amounts sit in the same step, with a consistent path into review and payment.", screen: { src: "/work/donasi.webp", title: "Sukha Donasi amount selection", caption: "Preset and custom donation amounts for a conservation campaign.", width: 375, height: 812 } },
 ];
+
+export const moreWorkProjects: { title: string; description: string; screen: ProjectScreen }[] = [
+  { ...supportingProjects[1], description: "Vehicle discovery and credit simulation, continuing into a financing application." },
+  { ...supportingProjects[2], description: "Campaign information, donation amounts, and the path to payment." },
+  { title: "Misi", description: "Mission progress, reward levels, and claiming completed rewards in Livin’.", screen: { src: "/work/misi.webp", title: "Misi reward and completion", caption: "", width: 375, height: 812 } },
+  { title: "Virtual Account", description: "Virtual-account lookup and choosing the right payment provider.", screen: { src: "/work/virtual-account.webp", title: "Virtual Account provider lookup", caption: "", width: 375, height: 812 } },
+  { title: "Passport onboarding", description: "Preparing a passport and supporting documents before opening an account in Livin’.", screen: { src: "/work/passport-onboarding.webp", title: "Passport document preparation", caption: "", width: 375, height: 812 } },
+  { title: "Sukha — Maroon 5", description: "Concert ticket access and the transition from Sukha to booking.", screen: { src: "/work/sukha-maroon5.webp", title: "Sukha Maroon 5 ticketing", caption: "", width: 375, height: 812 } },
+  { title: "GEALILEO", description: "Procurement records, search, and status stages for Telkom’s partner workspace.", screen: { src: "/work/gealileo-mitra.webp", title: "GEALILEO Mitra procurement list", caption: "", width: 1440, height: 900 } },
+];

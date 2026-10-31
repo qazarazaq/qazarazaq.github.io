@@ -77,20 +77,11 @@ export function TravelSection() {
 
       <div className="container travel-details">
         <div className="travel-details__copy" aria-live="polite" aria-atomic="true">
-          <span>
-            {activeItem.country} / {activeItem.year}
-          </span>
           <h3>{activeItem.location}</h3>
           {activeItem.caption && <p>{activeItem.caption}</p>}
         </div>
 
         <div className="travel-details__controls">
-          <div className="travel-progress" aria-label={`Destination ${activeIndex + 1} of ${travelItems.length}`}>
-            <span>{String(activeIndex + 1).padStart(2, "0")}</span>
-            <i aria-hidden="true"><b style={{ width: `${((activeIndex + 1) / travelItems.length) * 100}%` }} /></i>
-            <span>{String(travelItems.length).padStart(2, "0")}</span>
-          </div>
-
           <div className="travel-buttons">
             <button
               type="button"
