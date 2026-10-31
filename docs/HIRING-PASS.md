@@ -4,7 +4,7 @@
 
 Keep the existing charcoal / pastel blue / Plus Jakarta Sans system and actual exported product screens, portrait, avatar, company logos and travel assets. No Figma mutations, invented projects, results, testimonials, or product screens. Image generation is omitted because the owner's real assets are the visual authority for this editorial refinement.
 
-- Opening: finite, compact introduction, a real product composition, direct project links and resume access. No scroll-gated preview sequence, floating note cards or numeric project labels.
+- Opening: finite, compact introduction, a real product composition, prominent Work and resume access. No scroll-gated preview sequence, floating note cards or numeric project labels.
 - Main work: Gold / ATM Emas, Livin' Food, Kopra SCM. Distinct layouts with readable uncropped evidence, short constraints and decisions, and accurately scoped ownership. Gold/Food public product links establish availability without fabricated metrics.
 - Food: discovery and menu shown once in the project; saved-cart availability gets a dedicated explanation.
 - Kopra: preserve all masking; focus the preview on search/status and offer an optional full workspace view. Never recreate confidential records.
@@ -35,12 +35,20 @@ If later changes have been made, ask for a targeted restore so those changes are
 
 ## Final verification record
 
-- The first project begins at approximately 774px on a 1440x1000 desktop viewport and 648px on a 390x844 mobile viewport, rather than the preceding roughly 3063px / 2852px opening.
+- The first project begins at approximately 751px on a 1440x1000 desktop viewport and 725px on a 390x844 mobile viewport, rather than the preceding roughly 3063px / 2852px opening.
 - Seven responsive widths checked: 320, 390, 599, 768, 1024, 1440, 1920. Additional hero checks at 810px.
 - All nine unique screen previews tested for initial fit, explicit zoom/fit, centered SVG close, Escape dismissal and restored focus.
-- Direct project links, mobile menu, Contact highlight, exact About copy, portrait hover/tap, travel keyboard/next/album and touch swipe checked.
+- Work CTA, direct section URLs, mobile menu, Contact highlight, exact About copy, portrait hover/tap, travel keyboard/next/album and touch swipe checked.
 - Gold mobile native swipe, shared screen-caption baseline and compact company-logo alignment checked separately.
 - Kiko is isolated from contact controls; animation and reduced motion checked. The ASCII module is loaded only near the footer.
 - Original work exports, redacted Kopra asset, portrait/avatar, travel photo files and travel metadata are unchanged. Travel source changes are limited to SVG arrow icons; carousel gesture logic is retained.
 - Resume verified as one selectable-text A4 page, with exact names/dates/tools, clickable contact links, and no freelance/GPA/high-school section. Its rendered page was visually inspected.
 - Visual comparison used the owner's existing site and source assets plus this release design contract, rather than generated product imagery. Palette, font, hierarchy, media cropping, captions, responsive spacing and controls were inspected in browser screenshots. IAB was used for direct visual inspection; bundled Playwright was used for repeatable multi-viewport and touch checks because the Browser plugin was not available.
+
+## Hero and Kiko refinement
+
+The follow-up release removes the redundant project index, opens with a permanent composition of the real Gold guide, ATM selection and Food menu, and retains the composition on mobile. The ATM export has no hardware frame. The opening has a short staggered arrival and restrained scroll movement, disabled under reduced motion.
+
+Kiko uses a newly modeled resting pose rather than the former overhead walking silhouette: a broad Persian face, small ears, sleepy eyes, whiskers, cream bib/paws and a curved bushy tail. Breathing, head movement, blinking, ear flicks and a tail swish animate the character grid. The renderer samples native geometry; no photograph filter or new raster asset is involved.
+
+Initial React fragment navigation is restored after mount, so direct About/Travel/Contact links land at their sections. The prior hiring release is saved under `portfolio-hiring-v1-2026-10-31` at `a8535eaacd3642fefebb552981749d3959a527e9`. Reverting the follow-up PR restores that release without removing the resume or case-study changes. The original pre-hiring tag remains available independently.
