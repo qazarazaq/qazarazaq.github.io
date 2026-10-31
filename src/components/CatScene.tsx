@@ -38,7 +38,7 @@ export function CatScene() {
         const pose = catRoamPose(elapsed * .72 + cat.phase, width, height);
         let tx = pose.x, ty = pose.y;
         if (follow) { tx = pointerX + (i - 1) * 95; ty = pointerY + 48 + Math.sin(i * 2.2) * 42; }
-        tx = clamp(tx, 125 * cat.scale, width - 125 * cat.scale); ty = clamp(ty, 135 * cat.scale, height - 85 * cat.scale);
+        tx = clamp(tx, 125 * cat.scale, width - 125 * cat.scale); ty = clamp(ty, 165 * cat.scale, height - 155 * cat.scale);
         const dx = tx - cat.x, dy = ty - cat.y, distance = Math.hypot(dx, dy);
         const speed = Math.min(follow ? 58 : 42, distance * 1.7);
         const move = Math.min(distance, speed * dt);
