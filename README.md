@@ -1,51 +1,52 @@
 # Wildan Razaq Portfolio
 
-A responsive product-design portfolio built with Vite, React, TypeScript, and plain CSS. The site is static and deploys to GitHub Pages through GitHub Actions.
+A responsive UI/CX design portfolio built with React, TypeScript, Vite, and plain CSS. The static site deploys to GitHub Pages from `master`.
 
-## Local development
+## Development
 
 ```bash
-npm install
+npm ci
 npm run dev
-```
-
-## Build and preview
-
-```bash
 npm run build
-npm run preview
 ```
 
-The production build is written to `dist/`.
+The build is written to `dist/`. No new runtime dependencies are required for the hiring portfolio release.
 
-## Content editing
+## Editing content
 
-- Introduction: `src/components/Hero.tsx`; work/education tiles: `src/components/ExperienceTiles.tsx`
-- Featured projects and supporting project copy: `src/data/portfolio.ts`
-- Project feature cards: `src/components/Portfolio.tsx`; device previews and viewer: `src/components/WorkMedia.tsx`
-- About and contact: `src/components/About.tsx`, `src/components/Footer.tsx`
-- Portfolio layout, all-dark charcoal palette and pastel-blue accents: `src/portfolio.css`
-- Travel destinations and metadata: `src/data/travel.ts`
-- Social links: `src/data/social.ts`
+- Opening and direct project links: `src/components/Hero.tsx`.
+- Project narratives and evidence layout: `src/components/Portfolio.tsx`.
+- Screen assets, product names, and public product URLs: `src/data/portfolio.ts`.
+- About and work/education tiles: `src/components/About.tsx` and `ExperienceTiles.tsx`.
+- Contact and the isolated ASCII Kiko: `src/components/Footer.tsx` and `AsciiCat.tsx`.
+- Social links: `src/data/social.ts`.
+- Design tokens: `src/index.css`; layout and components: `src/portfolio.css`.
+- Preserved airplane-window gallery styling: `src/travel.css`; destination metadata: `src/data/travel.ts`.
 
-The featured work is Livin’ Gold / ATM Emas and Livin’ Food. Kopra SCM, Livin Auto, and Sukha Donasi provide supporting examples. Do not add unpublished Belanja work, internal operations, or transaction-security case studies. Only publish verified outcomes.
+Gold / ATM Emas, Livin' Food, and Kopra SCM are the main projects. Livin Auto and Sukha Donasi are grouped separately as more work. Keep all product names, verified ownership, and the owner's exact About copy intact. Do not publish internal operations, transaction-security work, or unpublished Belanja designs. Do not invent outcomes, metrics, or research.
 
-Customer interface previews are real Figma exports, optimized as WebP under `public/work/`. Device artwork comes from the supplied Corpweb reference. Source Figma files are read-only. Brand SVG sources are documented in `public/logos/SOURCES.md` and `public/icons/SOURCES.md`. Asset provenance is in `public/work/SOURCES.md`.
+## Assets and privacy
 
-The original portrait is in `public/assets/`. The airplane-window frame and travel photographs are in `public/travel/`. Travel photo files, destination metadata, album links, and the airplane-window artwork are preserved. The gallery uses a shared positional transition so a side photo moves into the center. Site controls and text selection share the pastel-blue accent. Plus Jakarta Sans is self-hosted as a compact variable WOFF2 with its SIL Open Font License. The supplied illustrated avatar has matching square WebP, PNG and ICO derivatives for the navigation and app/browser icons.
+All product screens are the owner's actual read-only Figma exports, optimized as WebP. No source Figma file is edited. ATM screens remain rounded and frameless; phone artwork is from the supplied Corpweb reference. Kopra identifiers, names, financial values, and dates remain masked in the original public asset. See `public/work/SOURCES.md` for provenance.
 
-## Deployment
+Travel photos, destination metadata, album links, the airplane-window artwork and carousel gesture logic are retained. The owner's original portrait and illustrated avatar are also preserved. Brand logos reveal their original colors on hover. The self-hosted Plus Jakarta Sans font includes its SIL license.
 
-Pushes to `master` trigger `.github/workflows/deploy.yml`. The workflow installs dependencies with Node 20, builds the Vite app, uploads `dist/`, and deploys the artifact to GitHub Pages.
+## Resume
 
-GitHub Pages must use **GitHub Actions** as its publishing source.
+The downloadable, single-page PDF is `public/resume/Wildan-Razaq-Ramadhan-Resume.pdf`. Its editable source is `content/resume.html`. It uses the owner's LinkedIn employment and education dates plus verified project scope, without freelance work, high school, GPA or invented results. Standard Arial is used in the PDF for reliable text extraction; the site uses Plus Jakarta Sans.
 
-## Presentation conventions
+Open the HTML in a browser to edit or print it. To regenerate with Playwright installed, use `node scripts/build-resume.mjs`; `PLAYWRIGHT_MODULE` can point to a bundled Playwright installation. Recheck the one-page layout, text extraction and links after editing. The committed PDF is copied into production, so generating it is not a deployment dependency.
 
-Typography uses self-hosted Plus Jakarta Sans and the measured type scale: hero 65px/700 (56px on the narrowest phones), section headings 56px/700 on desktop and 32px/700 on mobile, and wide feature titles 32px/600 with supporting titles at 28px/600. The page uses a 1000px content grid, charcoal sections and surfaces, a pastel-blue scene dock, generous spacing, and native scrolling. Card visuals move within clipped containers. System reduced-motion preferences are respected without a separate toggle.
+## Interaction and accessibility
 
-The hero transitions between the existing Gold, Food, and masked Kopra assets. Screen previews use scroll-linked translation, small tilts, and a maximum 2.4% scale increase; mobile motion is reduced. Original Figma exports are unchanged. Three monochrome work/education tiles reveal their brand-color symbols and inverse wordmarks on hover. The original portrait photograph remains intact. Its About button smoothly blends the original photo into the existing avatar on hover, keyboard focus, or tap, with reversible transitions and no intermediate drawing. The header avatar changes into a hand-drawn SVG WR mark as the page scrolls. Secondary links share the album link’s blue text and animated SVG arrow. Travel images, destination data, album links, and gallery behavior remain intact. ATM screens are rounded and frameless. The Kopra viewer preserves a readable desktop canvas on narrow screens through horizontal panning. Record values are masked in its public asset. Screen dialogs use a centered SVG close control, native focus containment, Escape/backdrop dismissal, and focus restoration. The mobile menu also closes on Escape, an outside pointer, or navigation.
+Project links jump directly to the actual sections. Normal scrolling provides small screen translations and reveals, without scroll trapping. Screen dialogs fit the entire interface by default, offer explicit zoom/pan, close with a centered SVG or Escape, contain keyboard focus, and restore focus to their trigger. Section navigation, the mobile menu, portrait hover/tap, and travel keyboard/touch controls work without a motion toggle. System reduced-motion preferences are respected.
 
-Case-study copy draws on the owner’s earlier Gold pricing, single-piece selection, city-directory and Food category-state discussions. New-flow explorations and unverified research or performance claims are excluded.
+Kiko is a separately loaded ASCII character model in a small contact illustration area. It never covers the email or social links; the loop pauses offscreen and in a hidden tab. No cat photo or video is loaded.
 
-The contact background combines a single, evenly spaced square grid with a stylized ASCII animation of Kiko. An articulated 3D model is viewed from above, with a broad fluffy back, compact rounded head, small ears, full tail, and cream paws based on the owner's Kiko reference. Procedural fur contours, directional shading, and visible glyphs provide detail without a photo texture. Alternating steps, small turns, a flexible back, and a swishing tail keep the walking loop visible. No cat photo or video is loaded. The animation pauses offscreen or in a hidden tab and stays static under reduced motion. The centered email and social links remain interactive.
+## Deployment and rollback
+
+Pushes to `master` trigger `.github/workflows/deploy.yml`, which builds with Node 20 and deploys to GitHub Pages. Pages must use GitHub Actions as its publishing source. There is no Vercel deployment.
+
+The pre-release website is saved under tag `portfolio-pre-hiring-2026-10-31` and branch `archive/portfolio-pre-hiring-2026-10-31`, both at `8cc23c34ba0424af7e89b7e5b03fd0e124b13050`.
+
+The hiring release uses a single squash-merged pull request. On GitHub, open that merged pull request, choose **Revert**, and merge the generated revert pull request. Pages redeploys the previous version and both versions remain in history. See `docs/HIRING-PASS.md` for source details and the release design contract. Do not reset or force-push `master`.
