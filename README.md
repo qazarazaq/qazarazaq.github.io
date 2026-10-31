@@ -14,7 +14,7 @@ The build is written to `dist/`. No new runtime dependencies are required for th
 
 ## Editing content
 
-- Opening and direct project links: `src/components/Hero.tsx`.
+- Opening and actual-screen composition: `src/components/Hero.tsx`.
 - Project narratives and evidence layout: `src/components/Portfolio.tsx`.
 - Screen assets, product names, and public product URLs: `src/data/portfolio.ts`.
 - About and work/education tiles: `src/components/About.tsx` and `ExperienceTiles.tsx`.
@@ -39,9 +39,9 @@ Open the HTML in a browser to edit or print it. To regenerate with Playwright in
 
 ## Interaction and accessibility
 
-Project links jump directly to the actual sections. Normal scrolling provides small screen translations and reveals, without scroll trapping. Screen dialogs fit the entire interface by default, offer explicit zoom/pan, close with a centered SVG or Escape, contain keyboard focus, and restore focus to their trigger. Section navigation, the mobile menu, portrait hover/tap, and travel keyboard/touch controls work without a motion toggle. System reduced-motion preferences are respected.
+The Work CTA jumps directly to the projects; direct section URLs also resolve after the React application mounts. Normal scrolling provides small screen translations and reveals, without scroll trapping. Screen dialogs fit the entire interface by default, offer explicit zoom/pan, close with a centered SVG or Escape, contain keyboard focus, and restore focus to their trigger. Section navigation, the mobile menu, portrait hover/tap, and travel keyboard/touch controls work without a motion toggle. System reduced-motion preferences are respected.
 
-Kiko is a separately loaded ASCII character model in a small contact illustration area. It never covers the email or social links; the loop pauses offscreen and in a hidden tab. No cat photo or video is loaded.
+Kiko is a separately loaded resting Persian cat modeled as an ASCII character sculpture in a small contact illustration area. It never covers the email or social links; the loop pauses offscreen and in a hidden tab. No cat photo or video is loaded.
 
 ## Deployment and rollback
 
@@ -49,4 +49,4 @@ Pushes to `master` trigger `.github/workflows/deploy.yml`, which builds with Nod
 
 The pre-release website is saved under tag `portfolio-pre-hiring-2026-10-31` and branch `archive/portfolio-pre-hiring-2026-10-31`, both at `8cc23c34ba0424af7e89b7e5b03fd0e124b13050`.
 
-The hiring release uses a single squash-merged pull request. On GitHub, open that merged pull request, choose **Revert**, and merge the generated revert pull request. Pages redeploys the previous version and both versions remain in history. See `docs/HIRING-PASS.md` for source details and the release design contract. Do not reset or force-push `master`.
+The hiring release and hero/Kiko refinement use separate squash-merged pull requests. The intermediate hiring version is also saved as `portfolio-hiring-v1-2026-10-31` (`a8535eaacd3642fefebb552981749d3959a527e9`). Reverting only the refinement keeps the resume and hiring-focused case studies. On GitHub, open that merged pull request, choose **Revert**, and merge the generated revert pull request. Pages redeploys the previous version and both versions remain in history. See `docs/HIRING-PASS.md` for source details and the release design contract. Do not reset or force-push `master`.

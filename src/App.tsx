@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { About } from "./components/About";
 import { Footer } from "./components/Footer";
 import { Hero } from "./components/Hero";
@@ -8,6 +9,14 @@ import { useSceneMotion } from "./hooks/useSceneMotion";
 
 function App() {
   useSceneMotion();
+  useEffect(() => {
+    // React mounts after the browser's initial fragment lookup.
+    let target: string;
+    try { target = decodeURIComponent(window.location.hash.slice(1)); } catch { return; }
+    if (!target) return;
+    const frame = requestAnimationFrame(() => document.getElementById(target)?.scrollIntoView());
+    return () => cancelAnimationFrame(frame);
+  }, []);
   return (
     <>
       <a className="skip-link" href="#main-content">

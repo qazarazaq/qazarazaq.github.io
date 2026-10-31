@@ -16,43 +16,59 @@ export function AsciiCat() {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     const points: Point[] = [];
     const ellipsoid = (cx: number, cy: number, cz: number, rx: number, ry: number, rz: number, part = 0, cream = false, dark = false) => {
-      for (let v = .09; v < Math.PI; v += .075) for (let u = 0; u < Math.PI * 2; u += .075) {
-        const nx = Math.sin(v) * Math.cos(u), ny = Math.cos(v), nz = Math.sin(v) * Math.sin(u);
+      for (let v = .04; v < Math.PI; v += .045) for (let u = 0; u < Math.PI * 2; u += .045) {
+        const ax = Math.sin(v) * Math.cos(u), ay = Math.cos(v), az = Math.sin(v) * Math.sin(u);
         const fur = Math.sin(u * 17 + Math.sin(v * 11)) * Math.sin(v * 23);
-        const fluff = dark ? 1 : 1 + .025 * fur + .012 * Math.sin(v * 37 + u * 29);
-        points.push({ x: cx + nx * rx * fluff, y: cy + ny * ry * fluff, z: cz + nz * rz * fluff, nx, ny, nz, part, cream, dark, fur });
+        const fluff = dark ? 1 : 1 + .035 * fur + .015 * Math.sin(v * 37 + u * 29);
+        const n = Math.hypot(ax / rx, ay / ry, az / rz);
+        points.push({ x: cx + ax * rx * fluff, y: cy + ay * ry * fluff, z: cz + az * rz * fluff, nx: ax / rx / n, ny: ay / ry / n, nz: az / rz / n, part, cream, dark, fur });
       }
     };
-    // Kiko from above: a broad fluffy back, compact head, small ears and bushy tail.
-    // Natural proportions keep the silhouette distinct from the former side-on character.
-    ellipsoid(.22, .02, 0, .99, .40, .57);
-    ellipsoid(-.44, .06, 0, .64, .41, .49);
-    ellipsoid(-.80, .08, 0, .31, .30, .33, 1);
-    ellipsoid(-1.10, .10, 0, .39, .31, .36, 1);
-    // Only a sliver of the white bib is visible from this camera angle.
-    ellipsoid(-.86, -.07, .27, .18, .23, .13, 1, true);
-    ellipsoid(-1.40, .01, 0, .16, .14, .21, 1);
-    ellipsoid(-1.53, .06, 0, .045, .06, .065, 1, false, true);
-    ellipsoid(-1.29, .27, -.22, .045, .035, .055, 1, false, true);
-    ellipsoid(-1.29, .27, .22, .045, .035, .055, 1, false, true);
-    // Triangular, furred ear surfaces remain distinct in the overhead silhouette.
-    for (const side of [-1, 1]) for (let u = 0; u <= 1; u += .025) for (let v = 0; v <= 1 - u; v += .025) {
-      const w = 1 - u - v;
-      points.push({ x: -.95 * u - .77 * v - 1.09 * w, y: .28 * u + .30 * v + .48 * w, z: side * (.17 * u + .38 * v + .55 * w), nx: -.1, ny: .9, nz: side * .3, part: 1, cream: false, dark: false, fur: Math.sin(u * 31 + v * 23) });
+    // Resting Persian proportions: broad face, low ears, a cream bib and a curled plume.
+    // Geometry is sampled directly into glyphs; no photograph or image filter is used.
+    ellipsoid(-.45, -.10, -.08, .95, .58, .56);
+    ellipsoid(-.92, -.15, .02, .51, .48, .52);
+    ellipsoid(.57, -.06, .35, .38, .44, .28, 0, true);
+    ellipsoid(.66, .47, .25, .47, .48, .35, 1);
+    ellipsoid(.35, .29, .44, .20, .24, .22, 1);
+    ellipsoid(.97, .29, .44, .20, .24, .22, 1);
+    ellipsoid(.54, .29, .59, .13, .115, .095, 1);
+    ellipsoid(.79, .29, .59, .13, .115, .095, 1);
+    ellipsoid(.66, .36, .83, .055, .038, .027, 1, false, true);
+    ellipsoid(.66, .24, .83, .045, .016, .012, 1, false, true);
+    for (const x of [.48, .85]) {
+      ellipsoid(x, .52, .80, .087, .032, .03, 2, false, true);
+      ellipsoid(x - .008, .526, .831, .013, .008, .008, 2, true);
     }
-    const legs = [{ x: -.62, z: -.36 }, { x: .65, z: -.36 }, { x: -.62, z: .36 }, { x: .65, z: .36 }];
-    legs.forEach((leg, i) => {
-      const front = i % 2 === 0;
-      const side = Math.sign(leg.z);
-      ellipsoid(leg.x - (front ? .09 : -.07), -.25, leg.z + side * .08, .22, .23, .16, i + 2);
-      ellipsoid(leg.x - (front ? .25 : -.12), -.39, leg.z + side * .20, .19, .11, .15, i + 2, true);
-    });
-    for (let s = 0; s <= 1; s += .012) for (let a = 0; a < Math.PI * 2; a += .10) {
-      const radius = .23 * Math.sqrt(Math.max(0, Math.sin(Math.PI * (.18 + s * .82))));
-      points.push({ x: 1.02 + s * 1.12, y: -.02 + Math.cos(a) * radius, z: Math.sin(s * Math.PI) * .32 + Math.sin(a) * radius, nx: .1, ny: Math.cos(a), nz: Math.sin(a), part: 6, cream: false, dark: false, fur: Math.sin(a * 13 + s * 23) });
+    for (const side of [-1, 1]) {
+      const center = .66 + side * .32;
+      // Small triangular ear with a darker inner plane, tucked into the mane.
+      for (let a = 0; a <= 1; a += .018) for (let b = 0; b <= 1 - a; b += .018) {
+        const c = 1 - a - b;
+        const x = (center - .17) * a + (center + .16) * b + (center + side * .035) * c;
+        points.push({x, y: .76 * a + .77 * b + 1.10 * c, z: .16 + .10 * (a + b), nx: 0, ny: .2, nz: .98, part: side < 0 ? 3 : 4, cream: false, dark: a > .18 && b > .18 && c > .18, fur: Math.sin(a * 29 + b * 33)});
+      }
+      for (let row = 0; row < 3; row++) for (let t = 0; t <= 1; t += .035) {
+        points.push({x: .66 + side * (.16 + t * .42), y: .27 + (row - 1) * .045 + t * (row - 1) * .045, z: .665 - t * .05, nx: 0, ny: .1, nz: 1, part: 1, cream: true, dark: false, fur: 0});
+      }
     }
-    for (const side of [-1, 1]) for (let row = 0; row < 3; row++) for (let s = 0; s < 1; s += .08) {
-      points.push({ x: -1.37 + (row - 1) * .07 + s * .12, y: .03, z: side * (.18 + s * .27), nx: 0, ny: 1, nz: side * .3, part: 1, cream: true, dark: false, fur: 0 });
+    ellipsoid(.36, -.44, .54, .20, .13, .26, 6, true);
+    ellipsoid(.94, -.44, .51, .18, .13, .25, 6, true);
+    // A continuous curved tail lies across the foreground, with a tapered tip.
+    const tail = (t: number) => ({x: -1.22 + 2.34 * t, y: -.30 - .36 * Math.sin(Math.PI * t * .85), z: .20 + .67 * Math.sin(Math.PI * t * .86)});
+    for (let t = 0; t <= 1; t += .007) {
+      const c = tail(t), next = tail(t + .001);
+      const dx = next.x - c.x, dy = next.y - c.y, dz = next.z - c.z;
+      const n = Math.hypot(dx, dz), length = Math.hypot(dx, dy, dz);
+      const ux = -dz / n, uz = dx / n;
+      const vx = dy * uz / length, vy = (dz * ux - dx * uz) / length, vz = -dy * ux / length;
+      const radius = (.17 + .04 * Math.sin(Math.PI * t)) * (1 - .66 * t ** 5);
+      for (let a = 0; a < Math.PI * 2; a += .065) {
+        const nx = ux * Math.cos(a) + vx * Math.sin(a), ny = vy * Math.sin(a), nz = uz * Math.cos(a) + vz * Math.sin(a);
+        const fur = Math.sin(a * 17 + t * 47);
+        const r = radius * (1 + .065 * fur);
+        points.push({x: c.x + nx * r, y: c.y + ny * r, z: c.z + nz * r, nx, ny, nz, part: 5, cream: false, dark: false, fur});
+      }
     }
 
     let width = 0, height = 0, visible = false, frame = 0, last = 0, time = 0;
@@ -62,54 +78,49 @@ export function AsciiCat() {
       if (!width || !height) return;
       ink.clearRect(0, 0, width, height);
       depth.fill(-Infinity); material.fill(0);
-      const gait = t * 2.7;
-      const bob = Math.sin(gait * 2) * .018;
-      const heading = .42 + Math.sin(t * .50) * .12;
-      const ch = Math.cos(heading), sh = Math.sin(heading);
-      const headTurn = Math.sin(t * .9) * .09;
+      const yaw = Math.sin(t * .45) * .035;
+      const ch = Math.cos(yaw), sh = Math.sin(yaw);
+      const headTurn = Math.sin(t * .7) * .045;
       const ct = Math.cos(headTurn), st = Math.sin(headTurn);
-      // A near-overhead camera shows the back and paw placement, with a little depth.
-      const cameraSin = .92, cameraCos = .392;
-      const scale = artW / 4.7;
-      const strides = [Math.PI, 0, 0, Math.PI].map(phase => Math.sin(gait + phase));
+      const blinkPhase = t % 6.4;
+      const blink = blinkPhase > 5.9 && blinkPhase < 6.15;
+      const scale = Math.min(artW / 3.25, artH / 2.2);
       for (const point of points) {
         let { x, y, z, nx, ny, nz } = point;
-        if (point.part === 1) {
-          const dx = x + .82;
-          x = -.82 + dx * ct + z * st; z = z * ct - dx * st;
+        if (point.part >= 1 && point.part <= 4) {
+          const dx = x - .66, dz = z - .25;
+          x = .66 + dx * ct + dz * st; z = .25 + dz * ct - dx * st;
           const normalX = nx * ct + nz * st;
           nz = nz * ct - nx * st; nx = normalX;
-        } else if (point.part >= 2 && point.part <= 5) {
-          const index = point.part - 2;
-          const stride = strides[index];
-          x += stride * .19;
-          y += Math.max(0, stride) * .065;
-          z += Math.sign(legs[index].z) * Math.cos(gait) * .025;
-        } else if (point.part === 6) {
-          const tip = clamp((x - 1.02) / 1.12);
-          z += Math.sin(t * 1.65 - tip * 1.1) * .32 * tip;
-          y += Math.sin(t * 1.65 - tip) * .055 * tip;
-        } else {
-          z += Math.sin(gait - x * 1.8) * .018;
+          if (point.part === 2 && blink) y = .52 + (y - .52) * .18;
+          if (point.part === 3 || point.part === 4) {
+            const flick = Math.max(0, Math.sin(t * 1.1 + point.part) - .92) * .4;
+            x += flick * (y - .76);
+          }
+        } else if (point.part === 5) {
+          const tip = clamp((x + 1.22) / 2.34);
+          y += Math.sin(t * 1.5 - tip * 1.2) * .09 * tip ** 2;
+          z += Math.sin(t * 1.5 - tip) * .06 * tip ** 2;
+        } else if (point.part === 0) {
+          y += Math.sin(t * 1.8) * .015;
         }
-        const worldX = (x - .25) * ch - z * sh;
-        const worldZ = (x - .25) * sh + z * ch;
-        const screenY = (y + bob) * cameraCos - worldZ * cameraSin;
-        const cameraDepth = (y + bob) * cameraSin + worldZ * cameraCos;
+        const worldX = (x + .10) * ch - z * sh;
+        const worldZ = (x + .10) * sh + z * ch;
+        const screenY = y * .94 - worldZ * .342;
+        const cameraDepth = y * .342 + worldZ * .94;
         const gx = Math.round(cols / 2 + worldX * scale / cellW);
-        const gy = Math.round(rows / 2 - screenY * scale / cellH);
+        const gy = Math.round(rows / 2 - (screenY + .04) * scale / cellH);
         if (gx < 0 || gx >= cols || gy < 0 || gy >= rows) continue;
         const i = gy * cols + gx;
         if (cameraDepth < depth[i]) continue;
         depth[i] = cameraDepth;
         const normalX = nx * ch - nz * sh;
         const normalZ = nx * sh + nz * ch;
-        const light = clamp(.31 + (-normalX * .38 + ny * .85 + normalZ * .22) * .55 + point.fur * .055);
-        shade[i] = light;
+        shade[i] = clamp(.41 + (-normalX * .35 + ny * .65 + normalZ * .60) * .40 + point.fur * .07);
         material[i] = point.dark ? 3 : point.cream ? 2 : 1;
       }
-      const left = (width - artW) / 2 + Math.sin(t * .43) * Math.min(22, width * .035);
-      const top = height * (.50) - artH / 2;
+      const left = (width - artW) / 2;
+      const top = (height - artH) / 2;
 
       ink.font = `${fontSize}px ui-monospace, SFMono-Regular, Menlo, monospace`;
       ink.textAlign = "center"; ink.textBaseline = "middle";
@@ -117,7 +128,7 @@ export function AsciiCat() {
         if (!material[i]) continue;
         const light = shade[i];
         const level = Math.min(3, Math.floor(light * 4));
-        ink.fillStyle = material[i] === 3 ? "#47352b" : (material[i] === 2 ? CREAM : ORANGE)[level];
+        ink.fillStyle = material[i] === 3 ? "#37271f" : (material[i] === 2 ? CREAM : ORANGE)[level];
         const char = material[i] === 3 ? "@" : GLYPHS[Math.min(GLYPHS.length - 1, Math.floor(light * GLYPHS.length))];
         ink.fillText(char, left + (i % cols + .5) * cellW, top + (Math.floor(i / cols) + .5) * cellH);
       }
@@ -137,10 +148,10 @@ export function AsciiCat() {
       const ratio = Math.min(2, window.devicePixelRatio || 1);
       canvas.width = Math.round(width * ratio); canvas.height = Math.round(height * ratio);
       ink.setTransform(ratio, 0, 0, ratio, 0, 0);
-      artW = Math.min(width * .96, 1000, height * 1.35);
-      cols = width < 480 ? 64 : 104; fontSize = artW / cols / .64;
+      artW = Math.min(width * .98, 1000, height * 1.65);
+      cols = width < 350 ? 80 : 104; fontSize = artW / cols / .64;
       cellW = artW / cols; cellH = fontSize * 1.16;
-      rows = Math.round(artW / 1.65 / cellH); artH = rows * cellH;
+      rows = Math.round(artW / 1.55 / cellH); artH = rows * cellH;
       depth = new Float32Array(cols * rows); shade = new Float32Array(cols * rows); material = new Uint8Array(cols * rows);
       sync();
     });
