@@ -65,6 +65,7 @@ export function Navbar() {
 
   return (
     <header className={`site-header${scrolled ? " site-header--scrolled" : ""} site-header--dark`}>
+      <svg className="glass-definitions" aria-hidden="true"><defs><filter id="nav-refraction" colorInterpolationFilters="sRGB"><feTurbulence type="fractalNoise" baseFrequency=".012 .018" numOctaves="1" seed="9" result="grain" /><feGaussianBlur in="grain" stdDeviation="1.5" result="soft-grain" /><feDisplacementMap in="SourceGraphic" in2="soft-grain" scale="7" xChannelSelector="R" yChannelSelector="G" /></filter></defs></svg>
       <nav ref={navRef} className="site-nav container" aria-label="Primary navigation">
         <a className="wordmark" href="#top" aria-label={`${siteContent.identity.shortName}, home`}>
           <span className="wordmark__icon" aria-hidden="true"><img className="wordmark__avatar" src="/assets/wildan-avatar.webp" alt="" width="64" height="64" /><HandDrawnMark /></span>
