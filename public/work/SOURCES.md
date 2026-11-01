@@ -11,3 +11,9 @@ All product images are read-only exports from the owner's supplied Figma files. 
 - Donations: `nTOHMwtbqaTIw83tR9ySUh`.
 
 The current portrait is the exact PNG supplied by the owner on 19 October 2026; no generative editing or retouching was applied. Travel photographs remain unchanged. WebP optimization and layout framing are applied only in the website repository.
+
+## Unpublished foldable hero preview
+
+- `livin-duo-preview.webp`: read-only export of `iiAYkBasNYZbnMuWeT8FbQ`, existing app surface `14922:45806` inside exploration `14922:45805`, at 1.5x. Partial sample amount at the lower edge masked in the exported derivative.
+- `livin-mobile-preview.webp`: read-only export of existing homepage `14742:39083`, at 1.5x; cropped to the top 794 design pixels; sample profile name masked in the exported derivative.
+- Figma source nodes unchanged. These are an independent concept exploration, not a claim of a shipped foldable Livin’ app. Hardware is a CSS 3D prototype; it does not use Apple assets. Preview enabled only with `?hero=duo`; `?hero=parallax` compares the original composition with mobile scroll motion.

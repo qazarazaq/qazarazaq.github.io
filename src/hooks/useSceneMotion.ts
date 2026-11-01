@@ -21,7 +21,7 @@ export function useSceneMotion() {
         // Measure the untransformed section so moving layers never feed back into progress.
         const rect = heroTrack!.getBoundingClientRect();
         const active = rect.bottom > 0 && rect.top < h;
-        const mobile = window.innerWidth < 600;
+        const mobile = window.innerWidth < 600 && !hero.classList.contains("hero--mobile-parallax");
         const progress = preference.matches || mobile ? 0 : clamp((100 - rect.top) / Math.max(1, heroTrack!.offsetHeight - heroArt.offsetHeight));
         const strength = preference.matches || mobile ? 0 : 1;
         heroArt.style.setProperty("--hero-open", String(smooth(0, .7, progress)));
