@@ -1,8 +1,8 @@
-/* Review-only fold treatment using the original transparent device bezels. */
-.duo-hero { overflow:visible; --duo-width:min(90vw,940px,calc((100svh - 300px)*1.376502)); --duo-height:calc(var(--duo-width)*.726479); --duo-gutter:calc(var(--duo-height)*.15); }
-.duo-track { height:calc(var(--duo-height) + var(--duo-gutter)*2 + 760px); margin-top:36px; padding-bottom:80px; }
-.duo-stage { position:sticky; top:106px; display:grid; align-content:start; justify-items:center; padding-block:var(--duo-gutter); height:calc(var(--duo-height) + var(--duo-gutter)*2); --duo-fold:180deg; --duo-center:-25%; --duo-open:0; --duo-fixed-opacity:0; --duo-scale:1; --duo-cover-blur:0px; --duo-inner-blur:10px; --duo-right-light:.28; --duo-left-light:.5; --duo-shade:.3; }
-.duo-perspective { width:var(--duo-width); height:var(--duo-height); perspective:3000px; perspective-origin:50% 50%; }
+/* The scroll runway stays compact; device dimensions are independent of its gutters. */
+.duo-hero { overflow:visible; min-width:0; --duo-width:min(90vw,940px,calc((100svh - 300px)*1.376502)); --duo-height:calc(var(--duo-width)*.726479); --duo-gutter:32px; }
+.duo-track { height:calc(var(--duo-height) + var(--duo-gutter)*2 + 420px); margin-top:20px; padding-bottom:0; overflow-x:clip; overflow-y:visible; }
+.duo-stage { position:sticky; top:106px; isolation:isolate; min-width:0; display:grid; align-content:start; justify-items:center; padding-block:var(--duo-gutter); height:calc(var(--duo-height) + var(--duo-gutter)*2); --duo-fold:180deg; --duo-center:-25%; --duo-open:0; --duo-fixed-opacity:0; --duo-scale:1; --duo-cover-blur:0px; --duo-inner-blur:10px; --duo-right-light:.28; --duo-left-light:.5; --duo-shade:.3; }
+.duo-perspective { z-index:2; width:var(--duo-width); height:var(--duo-height); perspective:3000px; perspective-origin:50% 50%; }
 .duo-device { position:relative; width:100%; height:100%; transform-style:preserve-3d; transform-origin:calc(75% - var(--duo-open)*25%) 50%; transform:translateX(var(--duo-center)) scale(var(--duo-scale)); }
 .duo-leaf { position:absolute; top:0; bottom:0; width:50%; transform-style:preserve-3d; }
 .duo-leaf--left { left:0; transform-origin:100% 50%; transform:rotateY(var(--duo-fold)); }
@@ -28,8 +28,8 @@
 .hero-review a { padding:10px 16px; border-radius:999px; font-size:12px; white-space:nowrap; }
 .hero-review a[aria-current] { background:var(--accent); color:#14202e; }
 @media(max-width:599px) {
- .duo-hero { --duo-width:92vw; --duo-gutter:52px; }
- .duo-track { height:calc(var(--duo-height) + var(--duo-gutter)*2 + 640px); margin-top:38px; padding-bottom:80px; }
+ .duo-hero { --duo-width:92vw; --duo-gutter:30px; }
+ .duo-track { height:calc(var(--duo-height) + var(--duo-gutter)*2 + 320px); margin-top:18px; padding-bottom:0; }
  .duo-stage { top:108px; --duo-scale:calc(1.3 - var(--duo-open)*.3); }
  .duo-perspective { perspective:1600px; }
  .hero--mobile-parallax .hero-track { height:calc(clamp(300px,87vw,460px) + 280px); }
@@ -55,7 +55,19 @@
 .duo-3d { position:absolute; inset:0; z-index:3; transform:scale(var(--duo-scale)); pointer-events:none; opacity:0; }
 .duo-3d canvas { display:block; width:100%; height:100%; }
 .duo-3d[data-ready=true] { opacity:1; }
-.duo-3d[data-ready=true] + .duo-device { visibility:hidden; }
+.duo-3d[data-ready=true] + .duo-device { display:none; }
 .duo-stage[data-gl-failed=true] .duo-device { transform:none; }
 .duo-stage[data-gl-failed=true] .duo-unified { display:block; }
 .duo-stage[data-gl-failed=true] .duo-leaf { visibility:hidden; }
+
+/* Decorative assets emerge behind the hardware, never above the screen. */
+.duo-bubbles { --field-width:min(calc(100vw - 32px),calc(var(--duo-width) + 240px)); --field-height:calc(var(--duo-height) + var(--duo-gutter)*2); position:absolute; z-index:1; top:0; left:50%; width:var(--field-width); height:var(--field-height); transform:translateX(-50%); pointer-events:none; }
+.duo-bubble { --origin-x:var(--launch-x); --origin-y:var(--launch-y); position:absolute; left:var(--bubble-x); top:var(--bubble-y); display:block; width:var(--bubble-size); aspect-ratio:1; margin-left:calc(var(--bubble-size)*-.5); margin-top:calc(var(--bubble-size)*-.5); opacity:0; transform:translate3d(calc(var(--field-width)*var(--origin-x)),calc(var(--field-height)*var(--origin-y)),0) scale(.3); filter:blur(5px); transition:transform .45s cubic-bezier(.4,0,.6,1),opacity .18s,filter .3s; }
+.duo-bubble img { width:100%; height:100%; object-fit:contain; }
+.duo-stage[data-burst=true] .duo-bubble { opacity:1; transform:translate3d(0,0,0) scale(1) rotate(var(--bubble-rotation)); filter:blur(0); transition-duration:.85s,.18s,.85s; transition-timing-function:cubic-bezier(.16,1,.3,1); transition-delay:var(--bubble-delay); }
+@media(max-width:599px) {
+ .duo-bubbles { --field-width:calc(100vw - 40px); }
+ .duo-bubble { left:var(--mobile-x); top:var(--mobile-y); --origin-x:var(--mobile-launch-x); --origin-y:var(--mobile-launch-y); --bubble-mobile-size:calc(var(--bubble-size)*.7); width:var(--bubble-mobile-size); margin-left:calc(var(--bubble-mobile-size)*-.5); margin-top:calc(var(--bubble-mobile-size)*-.5); }
+}
+@media(max-width:359px) { .duo-bubble { --bubble-mobile-size:calc(var(--bubble-size)*.6); } }
+@media(prefers-reduced-motion:reduce) { .duo-bubbles { display:none; } }

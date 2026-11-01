@@ -12,11 +12,16 @@ All product images are read-only exports from the owner's supplied Figma files. 
 
 The current portrait is the exact PNG supplied by the owner on 19 October 2026; no generative editing or retouching was applied. Travel photographs remain unchanged. WebP optimization and layout framing are applied only in the website repository.
 
-## Unpublished foldable hero preview
+## Foldable concept hero
 
 - `livin-mobile-preview.webp`: existing user-selected frame `4:55210` in `Ehqx61hGDnxjniDwu3iZmo`, read-only PNG export with `useAbsoluteBounds`, at 1.5x. Display crop: x25/y15/w466/h678 design pixels.
 - `livin-duo-preview.webp`: existing user-selected frame `4:58331` in the same file, read-only PNG export at 1.5x. Display crop: x17/y21/w951/h669 design pixels.
 - Visible sample account identifiers and balances are masked only in these exported copies. No Figma nodes were created or changed.
 - Static fallback bezels: original Star White iPhone Duo assets exported read-only from `iiAYkBasNYZbnMuWeT8FbQ` node `14922:45988` (inner open), and `Ehqx61hGDnxjniDwu3iZmo` node `4:54082` (outer closed). Original transparency and proportions preserved.
 - Animated geometry: Apple's original iPhone Duo viewer model, observed while using its Foldable design slider at https://www.apple.com/iphone-duo/#product-viewer . Source model: https://www.apple.com/v/iphone-duo/e/static//uploads/dIFKSKvliUSYOBw/dOKLAkGZzJBEnNO/gVFBvbhWgzeMQqC/megyEIopJyvbcOt/kifhkaVQkSALvmb/vroIlOhiWPzmavg.gltf and its companion BIN. The original Slider skeletal animation and device geometry are retained; unused Apple texture references and the unused Intro clip are removed. The app displays the user's exported screen textures, uses local studio lighting, and lifts the display surface 0.045 model units to prevent glass-underlay z-fighting.
-- The foldable UI is an independent concept exploration. This preview does not claim that a foldable Livin’ application has shipped. Enabled at `?hero=duo`; `?hero=parallax` compares the previous composition with mobile scroll motion.
+- The foldable UI is an independent concept exploration. This preview does not claim that a foldable Livin’ application has shipped. Shown in the default hero; `?hero=parallax` retains the previous composition with mobile scroll motion.
+
+## Hero product bubbles and emoji
+
+- Eleven product bubbles are unchanged read-only exports from `XJz1ahAGmViOLnq6jP23DD`, group `7420:70621`. Each child was exported at 4x, then compressed to transparent WebP. No source nodes were edited.
+- Five emoji SVGs (distorted face, bowing man, OK hand, cat, robot) are from [Twemoji 17.0.3](https://github.com/jdecked/twemoji/tree/v17.0.3/assets/svg), by Twitter, Inc. and other contributors, licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Original artwork retained; display position and scale are applied in CSS. The license is bundled at `duo/emoji/LICENSE-GRAPHICS`.
