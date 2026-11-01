@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { type CSSProperties, useEffect, useRef } from "react";
 import { HeroCopy } from "./Hero";
 import "../duo-preview.css";
 
@@ -6,11 +6,43 @@ const clamp = (value: number) => Math.max(0, Math.min(1, value));
 const ease = (value: number) => value * value * (3 - 2 * value);
 const between = (a: number, b: number, value: number) => ease(clamp((value-a)/(b-a)));
 
+// Positions leave the display clear, including on narrow touch screens.
+const bubbles = [
+  ["bubbles/travel.webp", 28, 3, 48, -12, 23, 4],
+  ["bubbles/education.webp", 8, 16, 44, 9, 0, 30],
+  ["bubbles/home.webp", 82, 9, 46, -8, 80, 4],
+  ["bubbles/utilities.webp", 5, 46, 36, 12, 0, 54],
+  ["bubbles/bills.webp", 96, 37, 42, -8, 100, 36],
+  ["bubbles/food-lifestyle.webp", 13, 72, 44, -12, 0, 78],
+  ["bubbles/transfer.webp", 94, 69, 40, 10, 100, 67],
+  ["bubbles/savings-top-up.webp", 27, 94, 46, 7, 24, 98],
+  ["bubbles/e-money.webp", 9, 93, 38, -8, 4, 98],
+  ["bubbles/location.webp", 90, 94, 36, 8, 98, 98],
+  ["bubbles/future-plans.webp", 65, 97, 38, -6, 79, 98],
+  ["emoji/distorted-face.svg", 48, 1, 38, 12, 42, 1],
+  ["emoji/bowing-man.svg", 67, 2, 40, -9, 61, 3],
+  ["emoji/ok-hand.svg", 97, 13, 36, 12, 98, 12],
+  ["emoji/cat.svg", 46, 98, 42, -9, 52, 99],
+  ["emoji/robot.svg", 4, 2, 36, -10, 4, 2],
+] as const;
+
+function ProductBubbles() {
+  return <div className="duo-bubbles" aria-hidden="true">{bubbles.map(([asset,x,y,size,rotation,mobileX,mobileY],index) =>
+    <span className="duo-bubble" key={asset} style={{
+      "--bubble-x":`${x}%`, "--bubble-y":`${y}%`, "--bubble-size":`${size}px`,
+      "--launch-x":`${(50-x)/100}`, "--launch-y":`${(65-y)/100}`,
+      "--mobile-x":`${mobileX}%`, "--mobile-y":`${mobileY}%`,
+      "--mobile-launch-x":`${(50-mobileX)/100}`, "--mobile-launch-y":`${(65-mobileY)/100}`,
+      "--bubble-rotation":`${rotation}deg`, "--bubble-delay":`${index*12}ms`,
+    } as CSSProperties}><img src={`/work/duo/${asset}`} alt="" width="64" height="64" decoding="async" /></span>
+  )}</div>;
+}
+
 function InnerDisplay() {
   return <div className="duo-composite"><div className="duo-screen"><img src="/work/livin-duo-preview.webp" alt="" width="1426" height="1003" loading="eager" decoding="async" /></div><img className="duo-hardware" src="/work/iphone-duo-open-frame.webp" alt="" width="1547" height="1124" /></div>;
 }
 
-/** Isolated review version. The published hero remains the default. */
+/** Scroll-driven device reveal; the exported product screens stay unchanged. */
 export function DuoHero() {
   const section = useRef<HTMLElement>(null);
   const track = useRef<HTMLDivElement>(null);
@@ -39,6 +71,8 @@ export function DuoHero() {
       stage.current.style.setProperty("--duo-shade", String((1-between(.5,1,progress))*.3));
       stage.current.dataset.unified = String(progress > .999);
       stage.current.dataset.progress = progress.toFixed(3);
+      if (!preference.matches && progress > .999) stage.current.dataset.burst = "true";
+      else if (progress < .94 || preference.matches) stage.current.dataset.burst = "false";
       const rect=stage.current.getBoundingClientRect();
       if(rect.bottom>0&&rect.top<innerHeight)sceneRender.current?.(progress);
     };
@@ -71,6 +105,7 @@ export function DuoHero() {
     <HeroCopy />
     <div ref={track} className="duo-track">
       <div ref={stage} className="duo-stage" data-progress="0">
+        <ProductBubbles />
         <div className="duo-perspective" role="img" aria-label="Livin’ concept exploration. A folded product overview opens into the wider layout as you scroll.">
           <div ref={sceneHost} className="duo-3d" aria-hidden="true" />
           <div className="duo-device" aria-hidden="true">
