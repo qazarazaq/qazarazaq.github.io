@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { About } from "./components/About";
 import { Footer } from "./components/Footer";
 import { Hero } from "./components/Hero";
@@ -8,6 +8,7 @@ import { TravelSection } from "./components/TravelSection";
 import { useSceneMotion } from "./hooks/useSceneMotion";
 
 function App() {
+  const [menuOpen, setMenuOpen] = useState(false);
   useSceneMotion();
   useEffect(() => {
     // React mounts after the browser's initial fragment lookup.
@@ -22,7 +23,8 @@ function App() {
       <a className="skip-link" href="#main-content">
         Skip to content
       </a>
-      <Navbar />
+      <Navbar menuOpen={menuOpen} onMenuChange={setMenuOpen} />
+      <div id="page-shell" className="page-shell" data-menu-open={menuOpen}>
       <main id="main-content">
         <Hero />
         <Portfolio />
@@ -30,6 +32,7 @@ function App() {
         <TravelSection />
       </main>
       <Footer />
+      </div>
     </>
   );
 }
