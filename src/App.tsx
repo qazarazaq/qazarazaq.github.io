@@ -6,6 +6,9 @@ import { Navbar } from "./components/Navbar";
 import { Portfolio } from "./components/Portfolio";
 import { TravelSection } from "./components/TravelSection";
 import { useSceneMotion } from "./hooks/useSceneMotion";
+import { DuoHero } from "./components/DuoHero";
+
+const useParallaxHero = new URLSearchParams(window.location.search).get("hero") === "parallax";
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -26,7 +29,7 @@ function App() {
       <Navbar menuOpen={menuOpen} onMenuChange={setMenuOpen} />
       <div id="page-shell" className="page-shell" data-menu-open={menuOpen}>
       <main id="main-content">
-        <Hero />
+        {useParallaxHero ? <Hero mobileParallax /> : <DuoHero />}
         <Portfolio />
         <About />
         <TravelSection />
