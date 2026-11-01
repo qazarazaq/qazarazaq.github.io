@@ -32,18 +32,18 @@
 .phone-device__island { position:absolute; z-index:3; left:36.6667%; top:3.525%; width:26.6667%; height:3.525%; background:#050507; border-radius:999px; }
 .phone-device__island::after { content:""; position:absolute; width:7.14%; height:26.67%; right:10.7%; top:36.67%; background:#0c162a; border-radius:50%; }
 .phone-device:not([data-ready=true]) :is(.phone-device__hardware,.phone-device__island) { visibility:hidden; }
-.gold-evidence { display:grid; grid-template-columns:.72fr 1.15fr 1.15fr; gap:30px; padding:44px 40px 28px; border-radius:28px; background:#1b1e23; }
+.gold-evidence { display:grid; grid-template-columns:repeat(3,1fr); gap:30px; padding:44px 40px 28px; border-radius:28px; background:#1b1e23; }
 .gold-evidence figure { display:grid; grid-template-rows:1fr auto; gap:26px; }
 .gold-evidence__screen { min-height:470px; display:flex; align-items:center; justify-content:center; }
 .gold-evidence__screen .work-visual { max-width:225px; }
-.gold-evidence__screen .atm-visual { max-width:380px; }
+.gold-evidence__screen .atm-visual { max-width:225px; }
 .atm-visual > img { width:100%; border-radius:16px; }
 figcaption { font-size:12px; line-height:1.5; color:var(--muted); }
 .gold-evidence figcaption { text-align:center; }
 .decision-grid { display:grid; grid-template-columns:1fr 1fr; gap:100px; margin-top:52px; }
 .decision-grid p,.food-ordering__copy > p,.cart-story__copy > p,.kopra-decisions p { margin-top:20px; color:var(--muted); font-size:16px; line-height:1.75; }
 .decision-grid .decision-detail,.cart-story__copy .decision-detail { color:#d0d5dd; font-size:14px; line-height:1.75; }
-.food-section { background:#151617; }
+.food-section { background:var(--dark); }
 .food-ordering { display:grid; grid-template-columns:.8fr 1.4fr; gap:70px; align-items:center; }
 .food-ordering__copy { max-width:340px; }
 .food-ordering__screens { display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:stretch; padding:40px 28px 24px; border-radius:28px; background:#202226; }
@@ -242,9 +242,9 @@ figcaption { font-size:12px; line-height:1.5; color:var(--muted); }
 .atm-device__body { position:absolute; inset:0; width:100%; aspect-ratio:820 / 1919; }
 .atm-device__hardware { position:absolute; inset:0; width:100%; height:100%; border-radius:0; }
 .atm-device__screen { position:absolute; left:26.22%; top:20.79%; width:29.51%; height:22.93%; background:#000; object-fit:contain; border-radius:0; }
-.atm-device--console { aspect-ratio:490 / 550; overflow:hidden; border-radius:18px; }
-.atm-device--console .atm-device__body { inset:auto; width:167.3469%; left:-34.6939%; top:-67.2727%; }
-@media(max-width:599px) { .kopra-evidence { padding:12px 0 0; } .gold-evidence__screen .atm-visual { max-width:300px; } }
+.atm-device--console { aspect-ratio:420 / 851; overflow:hidden; border-radius:0; mask-image:linear-gradient(#000 0 74%,#0000 99%); -webkit-mask-image:linear-gradient(#000 0 74%,#0000 99%); }
+.atm-device--console .atm-device__body { inset:auto; width:167.3469%; left:-34.6939%; top:-37.27%; }
+@media(max-width:599px) { .kopra-evidence { padding:12px 0 0; } .gold-evidence__screen .atm-visual { max-width:210px; } }
 
 /* Refracted backdrop and a restrained curved highlight; navigation stays sharp. */
 .glass-definitions { position:absolute; width:0; height:0; pointer-events:none; }
