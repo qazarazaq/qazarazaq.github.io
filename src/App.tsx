@@ -8,7 +8,7 @@ import { TravelSection } from "./components/TravelSection";
 import { useSceneMotion } from "./hooks/useSceneMotion";
 import { DuoHero } from "./components/DuoHero";
 
-const heroPreview = new URLSearchParams(window.location.search).get("hero");
+const useParallaxHero = new URLSearchParams(window.location.search).get("hero") === "parallax";
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -29,14 +29,13 @@ function App() {
       <Navbar menuOpen={menuOpen} onMenuChange={setMenuOpen} />
       <div id="page-shell" className="page-shell" data-menu-open={menuOpen}>
       <main id="main-content">
-        {heroPreview === "duo" ? <DuoHero /> : <Hero mobileParallax={heroPreview === "parallax"} />}
+        {useParallaxHero ? <Hero mobileParallax /> : <DuoHero />}
         <Portfolio />
         <About />
         <TravelSection />
       </main>
       <Footer />
       </div>
-      {(heroPreview === "duo" || heroPreview === "parallax") && <nav className="hero-review" aria-label="Hero preview comparison"><a href="?hero=duo#top" aria-current={heroPreview === "duo" ? "page" : undefined}>Fold preview</a><a href="?hero=parallax#top" aria-current={heroPreview === "parallax" ? "page" : undefined}>Parallax fallback</a></nav>}
     </>
   );
 }
