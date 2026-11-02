@@ -25,3 +25,9 @@ The current portrait is the exact PNG supplied by the owner on 19 October 2026; 
 
 - Eleven product bubbles are unchanged read-only exports from `XJz1ahAGmViOLnq6jP23DD`, group `7420:70621`. Each child was exported at 4x, then compressed to transparent WebP. No source nodes were edited.
 - Five emoji SVGs (distorted face, bowing man, OK hand, cat, robot) are from [Twemoji 17.0.3](https://github.com/jdecked/twemoji/tree/v17.0.3/assets/svg), by Twitter, Inc. and other contributors, licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Original artwork retained; display position and scale are applied in CSS. The license is bundled at `duo/emoji/LICENSE-GRAPHICS`.
+
+## Project detail pages and graphite hardware
+
+- Case-study images reuse the existing approved public exports. No new product screens were generated, and no Figma nodes were edited for these pages. Existing Kopra and GEALILEO redactions remain in place, including in detail crops.
+- The Duo uses the same original Apple geometry and Slider animation, with separate graphite hardware materials. The owner's screen textures are unchanged. Static fallback bezel images are darkened through a hardware-only CSS filter.
+- The pixel-art mouse animal cursor is original SVG artwork in `public/cursors`, using the portfolio's pastel-blue accent.

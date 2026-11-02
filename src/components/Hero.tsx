@@ -2,6 +2,7 @@ import { ArrowLink, LinkArrow } from "./ArrowLink";
 import { portfolioProjects, supportingProjects } from "../data/portfolio";
 import { DeviceImage } from "./WorkMedia";
 import { useEffect, useRef } from "react";
+import { scrollToSection } from "../lib/sectionScroll";
 
 export function HeroCopy() {
   const typeRef = useRef<HTMLSpanElement>(null);
@@ -13,9 +14,9 @@ export function HeroCopy() {
     return () => observer.disconnect();
   }, []);
   return <div className="container hero-copy">
-      <h1 id="hero-title">Designing everyday<br /><span ref={typeRef} className="finance-type"><span className="visually-hidden">finance.</span><span className="finance-type__face finance-type__face--sans" aria-hidden="true">finance.</span><span className="finance-type__face finance-type__face--serif" aria-hidden="true">finance.</span><span className="finance-type__face finance-type__face--mono" aria-hidden="true">finance.</span></span></h1>
+      <h1 id="hero-title" tabIndex={-1}>Designing everyday<br /><span ref={typeRef} className="finance-type"><span className="visually-hidden">finance, commerce, and workflows.</span><span className="finance-type__face finance-type__face--finance" aria-hidden="true">finance.</span><span className="finance-type__face finance-type__face--commerce" aria-hidden="true">commerce.</span><span className="finance-type__face finance-type__face--workflows" aria-hidden="true">workflows.</span></span></h1>
       <p>I’m Wildan, a UI/CX designer at Bank Mandiri in Jakarta, working across mobile banking and everyday services.</p>
-      <div className="hero-actions"><a className="button" href="#work">View work<LinkArrow /></a><ArrowLink href="/resume/Wildan-Razaq-Ramadhan-Resume.pdf" external>Résumé</ArrowLink></div>
+      <div className="hero-actions"><a className="button" href="#work" onClick={event=>{if(event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;event.preventDefault();scrollToSection("work");}}>View work<LinkArrow /></a><ArrowLink href="/resume/Wildan-Razaq-Ramadhan-Resume.pdf" external>Résumé</ArrowLink></div>
     </div>;
 }
 
