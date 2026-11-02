@@ -31,3 +31,7 @@ The current portrait is the exact PNG supplied by the owner on 19 October 2026; 
 - Case-study images reuse the existing approved public exports. No new product screens were generated, and no Figma nodes were edited for these pages. Existing Kopra and GEALILEO redactions remain in place, including in detail crops.
 - The Duo uses the same original Apple geometry and Slider animation, with separate graphite hardware materials. The owner's screen textures are unchanged. Static fallback bezel images are darkened through a hardware-only CSS filter.
 - The pixel-art mouse animal cursor is original SVG artwork in `public/cursors`, using the portfolio's pastel-blue accent.
+
+## Favicon
+
+The favicon uses the owner-supplied `Favicon.png` globe-and-plane artwork. The full alpha bounds are contained on square transparent canvases with safe padding, then resized for browser, touch, and tile icons. No illustration or lettering was regenerated.

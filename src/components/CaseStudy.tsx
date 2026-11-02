@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { caseStudies, type CaseStudy as CaseData } from '../data/caseStudies';
 import type { ProjectScreen } from '../data/portfolio';
-import { PageLink, ProjectLink } from '../navigation/PageNavigation';
+import { BackLink, PageLink, ProjectLink } from '../navigation/PageNavigation';
 import { ArrowLink, LinkArrow } from './ArrowLink';
 import { DeviceImage, ScreenViewer } from './WorkMedia';
 import { Footer } from './Footer';
@@ -27,7 +27,7 @@ export function CaseStudy({project}:{project:CaseData}) {
     <main ref={pageRef} id="main-content" className={`case-page${project.journey?'':' case-page--focused'}`}>
       <header className="case-nav">
         <nav className="site-nav container" aria-label="Project navigation">
-          <PageLink className="case-back" href="/#work" title="Selected work"><BackArrow/><span>All work</span></PageLink>
+          <BackLink className="case-back"><BackArrow/><span>Back</span></BackLink>
           <PageLink className="case-brand" href="/#top" title="Wildan Razaq"><img src="/assets/wildan-avatar.webp" alt="" width="32" height="32"/><span>Wildan Razaq</span></PageLink>
           <a className="case-email" href="mailto:qazarazaq@gmail.com">Let’s talk<LinkArrow/></a>
         </nav>
