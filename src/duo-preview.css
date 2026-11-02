@@ -12,7 +12,7 @@
 .duo-composite { position:absolute; inset:0; }
 .duo-face--left > .duo-composite,.duo-face--right > .duo-composite { width:200%; height:100%; }
 .duo-face--right > .duo-composite { left:-100%; }
-.duo-hardware { position:absolute; inset:0; width:100%; height:100%; max-width:none; z-index:2; pointer-events:none; }
+.duo-hardware { position:absolute; inset:0; width:100%; height:100%; max-width:none; z-index:2; pointer-events:none; filter:brightness(.28) saturate(.2); }
 .duo-screen { position:absolute; left:3.879728%; top:5.340454%; width:92.240543%; height:89.319092%; overflow:hidden; border-radius:5.4% / 7.8%; background:#f5f5f7; }
 .duo-screen > img { width:100%; height:100%; object-fit:fill; }
 .duo-face--left .duo-screen > img { filter:blur(var(--duo-inner-blur)) brightness(var(--duo-left-light)); }

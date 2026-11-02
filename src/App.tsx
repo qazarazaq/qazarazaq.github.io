@@ -7,10 +7,13 @@ import { Portfolio } from "./components/Portfolio";
 import { TravelSection } from "./components/TravelSection";
 import { useSceneMotion } from "./hooks/useSceneMotion";
 import { DuoHero } from "./components/DuoHero";
+import { CaseStudy } from "./components/CaseStudy";
+import { usePageNavigation } from "./navigation/PageNavigation";
+import { findCaseStudy } from "./data/caseStudies";
 
 const useParallaxHero = new URLSearchParams(window.location.search).get("hero") === "parallax";
 
-function App() {
+function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false);
   useSceneMotion();
   useEffect(() => {
@@ -40,4 +43,9 @@ function App() {
   );
 }
 
+function App() {
+  const { location } = usePageNavigation();
+  const project = findCaseStudy(location.project);
+  return project ? <CaseStudy key={project.slug} project={project} /> : <HomePage />;
+}
 export default App;

@@ -250,13 +250,13 @@ figcaption { font-size:12px; line-height:1.5; color:var(--muted); }
 .glass-definitions { position:absolute; width:0; height:0; pointer-events:none; }
 .site-nav::before { content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; z-index:-1; box-shadow:inset 1px 1px 1px #ffffff1f,inset -1px -1px 1px #b8d4f31a; background:radial-gradient(ellipse at 20% -50%,#ffffff13,transparent 65%); }
 @supports (backdrop-filter:url(#nav-refraction)) { .site-nav { backdrop-filter:blur(12px) saturate(165%) brightness(.6) url(#nav-refraction); } }
-.finance-type { display:inline-grid; grid-template-areas:"word"; min-width:4.4em; height:1.18em; vertical-align:top; }
-.finance-type__face { grid-area:word; display:block; animation:finance-face 9.6s infinite both; animation-play-state:paused; }
+.finance-type { display:inline-grid; grid-template-areas:"word"; min-width:5.6em; height:1.18em; vertical-align:top; }
+.finance-type__face { grid-area:word; display:block; animation:finance-face 7.2s infinite both; animation-play-state:paused; }
 .finance-type[data-running=true] .finance-type__face { animation-play-state:running; }
-.finance-type__face--sans { animation-delay:-.35s; }
-.finance-type__face--serif { font-family:"Instrument Serif",serif; font-style:italic; font-weight:400; font-size:1.14em; line-height:.99; letter-spacing:-.045em; animation-delay:-6.75s; }
-.finance-type__face--mono { font-family:ui-monospace,"SFMono-Regular",Consolas,monospace; font-weight:500; font-size:.83em; line-height:1.24; letter-spacing:-.065em; animation-delay:-3.55s; }
-@keyframes finance-face { 0%,28% { opacity:1; transform:translateY(0); } 31%,96% { opacity:0; transform:translateY(-.08em); } 97% { opacity:0; transform:translateY(.08em); } 100% { opacity:1; transform:translateY(0); } }
+.finance-type__face--finance { animation-delay:0s; }
+.finance-type__face--commerce { font-family:"Instrument Serif",serif; font-style:italic; font-weight:400; font-size:1.14em; line-height:.99; letter-spacing:-.045em; animation-delay:-4.8s; }
+.finance-type__face--workflows { font-family:ui-monospace,"SFMono-Regular",Consolas,monospace; font-weight:500; font-size:.83em; line-height:1.24; letter-spacing:-.065em; animation-delay:-2.4s; }
+@keyframes finance-face { 0%,26% { opacity:1; transform:translateY(0) rotateX(0); filter:blur(0); } 30%,96% { opacity:0; transform:translateY(-.18em) rotateX(-12deg); filter:blur(6px); } 97% { opacity:0; transform:translateY(.18em) rotateX(12deg); filter:blur(6px); } 100% { opacity:1; transform:translateY(0) rotateX(0); filter:blur(0); } }
 .more-work-heading { margin-bottom:0; }
 .more-work-controls { display:flex; gap:10px; }
 .more-work-controls button { display:grid; place-items:center; width:44px; height:44px; padding:0; border:0; border-radius:50%; background:#ffffff09; color:var(--ink); transition:background .2s; }
@@ -270,7 +270,7 @@ figcaption { font-size:12px; line-height:1.5; color:var(--muted); }
 .more-work-rail .supporting-project h3 { font-size:25px; }
 .more-work-rail .supporting-project p { font-size:14px; }
 @media(max-width:599px) { .more-work-rail { gap:20px; padding-top:28px; mask-image:linear-gradient(90deg,transparent,#000 16px,#000 calc(100% - 16px),transparent); } .more-work-rail .supporting-project { flex-basis:78%; } .more-work-rail .supporting-project__media { height:430px; min-height:430px; padding:24px; } .more-work-rail .supporting-project h3 { min-height:2.44em; } .more-work-controls { margin-top:20px; } }
-@media(prefers-reduced-motion:reduce) { .finance-type__face { display:none; } .finance-type__face--sans { display:block; } .portrait-switch__drawing { display:none; } .portrait-switch:is([data-draw=true],:hover,:focus-visible) .portrait-switch__illustration { opacity:1; } }
+@media(prefers-reduced-motion:reduce) { .finance-type__face { display:none; } .finance-type__face--finance { display:block; } .portrait-switch__drawing { display:none; } .portrait-switch:is([data-draw=true],:hover,:focus-visible) .portrait-switch__illustration { opacity:1; } }
 
 /* Mobile menu: reveal navigation beside a rounded view of the current page. */
 .mobile-menu,.mobile-menu-dismiss { display:none; }
@@ -295,4 +295,10 @@ figcaption { font-size:12px; line-height:1.5; color:var(--muted); }
  .mobile-menu__links a svg { flex:0 0 22px; opacity:0; transform:translateX(-6px); transition:opacity .2s,transform .25s var(--ease); }
  .mobile-menu__links a:is(:hover,:focus-visible,[aria-current]) { color:var(--accent); }
  .mobile-menu__links a:is(:hover,:focus-visible,[aria-current]) svg { opacity:1; transform:none; }
+}
+
+@media (hover:hover) and (pointer:fine) {
+ .contact-section { cursor:url('/cursors/pixel-mouse.svg') 3 14,default; }
+ .contact-section a,.contact-section button { cursor:url('/cursors/pixel-mouse.svg') 3 14,pointer; }
+ .project-section a.work-visual,.supporting-project a.work-visual { cursor:pointer; }
 }

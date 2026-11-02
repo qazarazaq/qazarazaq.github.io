@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import { HandDrawnMark } from "./HandDrawnMark";
 import { siteContent } from "../data/site";
+import { cancelSectionScroll, scrollToSection } from "../lib/sectionScroll";
 
 const navItems = [
   { label: "Work", href: "#work", id: "work" },
@@ -17,7 +18,7 @@ export function Navbar({ menuOpen, onMenuChange }: { menuOpen: boolean; onMenuCh
   const frameTimer = useRef<number>();
   const returnFocusFrame = useRef<number>();
   const unlockScroll = useRef<(() => void) | undefined>();
-  const navigating = useRef(false);
+  const navigating = useRef<string | null>(null);
   const [activeSection, setActiveSection] = useState("");
   const [scrolled, setScrolled] = useState(false);
 
@@ -81,12 +82,10 @@ export function Navbar({ menuOpen, onMenuChange }: { menuOpen: boolean; onMenuCh
         unlockScroll.current = undefined;
       };
       if (navigating.current) {
-        // Let a chosen section's native fragment jump happen without moving
-        // the old viewport's clipped frame across the destination.
-        finish();
-        shell.classList.add("page-shell--menu-jump");
-        frameTimer.current = window.setTimeout(() => shell.classList.remove("page-shell--menu-jump"), 50);
-        navigating.current = false;
+        const destination=navigating.current;
+        navigating.current=null;
+        // Complete the rounded page's return before starting the section glide.
+        frameTimer.current=window.setTimeout(()=>{finish();scrollToSection(destination);},window.matchMedia("(prefers-reduced-motion: reduce)").matches?0:500);
       } else {
         frameTimer.current = window.setTimeout(finish, window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 500);
         const returnTarget = window.innerWidth < 600 ? toggleRef.current : navRef.current?.querySelector<HTMLAnchorElement>("a");
@@ -97,6 +96,7 @@ export function Navbar({ menuOpen, onMenuChange }: { menuOpen: boolean; onMenuCh
 
   useEffect(() => () => {
     window.clearTimeout(frameTimer.current);
+    cancelSectionScroll();
     if (returnFocusFrame.current) cancelAnimationFrame(returnFocusFrame.current);
     const shell = document.getElementById("page-shell");
     if (shell) { shell.inert = false; shell.classList.remove("page-shell--menu-framed", "page-shell--menu-jump"); }
@@ -128,7 +128,7 @@ export function Navbar({ menuOpen, onMenuChange }: { menuOpen: boolean; onMenuCh
     <header className={`site-header${scrolled ? " site-header--scrolled" : ""}${menuOpen ? " site-header--menu-open" : ""} site-header--dark`}>
       <svg className="glass-definitions" aria-hidden="true"><defs><filter id="nav-refraction" colorInterpolationFilters="sRGB"><feTurbulence type="fractalNoise" baseFrequency=".012 .018" numOctaves="1" seed="9" result="grain" /><feGaussianBlur in="grain" stdDeviation="1.5" result="soft-grain" /><feDisplacementMap in="SourceGraphic" in2="soft-grain" scale="7" xChannelSelector="R" yChannelSelector="G" /></filter></defs></svg>
       <nav ref={navRef} className="site-nav container" aria-label="Primary navigation">
-        <a className="wordmark" href="#top" aria-label={`${siteContent.identity.shortName}, home`}>
+        <a className="wordmark" href="#top" onClick={event=>{if(event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;event.preventDefault();scrollToSection("top");}} aria-label={`${siteContent.identity.shortName}, home`}>
           <span className="wordmark__icon" aria-hidden="true"><img className="wordmark__avatar" src="/assets/wildan-avatar.webp" alt="" width="64" height="64" /><HandDrawnMark /></span>
           <span>{siteContent.identity.shortName}</span>
         </a>
@@ -149,6 +149,7 @@ export function Navbar({ menuOpen, onMenuChange }: { menuOpen: boolean; onMenuCh
             <a
               key={item.id}
               href={item.href}
+              onClick={event=>{if(event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;event.preventDefault();scrollToSection(item.id);}}
               aria-current={activeSection === item.id ? "location" : undefined}
             >
               {item.label}
@@ -160,7 +161,7 @@ export function Navbar({ menuOpen, onMenuChange }: { menuOpen: boolean; onMenuCh
       <div ref={dialogRef} id="mobile-menu" className={`mobile-menu${menuOpen ? " mobile-menu--open" : ""}`} role="dialog" aria-modal={menuOpen ? "true" : undefined} aria-label="Mobile navigation" aria-hidden={!menuOpen}>
         <button ref={closeRef} type="button" className="mobile-menu__close" aria-label="Close menu" tabIndex={menuOpen ? 0 : -1} onClick={() => onMenuChange(false)}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg></button>
         <nav aria-label="Mobile sections" className="mobile-menu__links">
-          {navItems.map((item, index) => <a key={item.id} href={item.href} aria-current={activeSection === item.id ? "location" : undefined} tabIndex={menuOpen ? 0 : -1} style={{ "--menu-index": index } as CSSProperties} onClick={() => { navigating.current = true; onMenuChange(false); }}>{item.label}<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" /></svg></a>)}
+          {navItems.map((item, index) => <a key={item.id} href={item.href} aria-current={activeSection === item.id ? "location" : undefined} tabIndex={menuOpen ? 0 : -1} style={{ "--menu-index": index } as CSSProperties} onClick={event=>{if(event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;event.preventDefault();navigating.current=item.id;onMenuChange(false);}}>{item.label}<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" /></svg></a>)}
         </nav>
       </div>
     </header>

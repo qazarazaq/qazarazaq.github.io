@@ -63,6 +63,20 @@ export async function createDuoScene(host: HTMLDivElement) {
       position.needsUpdate=true;object.material=innerScreen.material;screens.push(object as THREE.SkinnedMesh);
     }
   });
+  // Preserve the source geometry and display materials. A graphite finish is
+  // applied to the hardware independently of the user's screen textures.
+  const finishMaterials=new Set<THREE.Material>();
+  gltf.scene.traverse(object=>{
+    if(!(object instanceof THREE.Mesh)||screens.includes(object as THREE.SkinnedMesh))return;
+    const originals=Array.isArray(object.material)?object.material:[object.material];
+    const finishes=originals.map(original=>{
+      const finish=new THREE.MeshStandardMaterial({color:'#17191d',metalness:.55,roughness:.3,opacity:original.opacity,transparent:original.opacity<1,depthWrite:original.opacity===1,side:original.side});
+      finish.envMapIntensity=.35;
+      finishMaterials.add(finish);return finish;
+    });
+    object.material=Array.isArray(object.material)?finishes:finishes[0];
+  });
+  host.dataset.finish='graphite';
   const mixer=new THREE.AnimationMixer(gltf.scene);const clip=gltf.animations.find(c=>c.name==='Slider');if(!clip)throw new Error('Fold animation unavailable');
   const action=mixer.clipAction(clip);action.play();action.paused=true;
   const box=new THREE.Box3(),part=new THREE.Box3(),center=new THREE.Vector3(),size=new THREE.Vector3();
@@ -86,5 +100,5 @@ export async function createDuoScene(host: HTMLDivElement) {
     innerScreen.uniforms.rightLight.value=.28+ease(.4,.72,progress)*.72;
     renderer.render(scene,camera);host.dataset.ready='true';host.dataset.pose=progress.toFixed(3);
   };
-  return {render,dispose(){disposed=true;mixer.stopAllAction();mixer.uncacheRoot(gltf.scene);gltf.scene.traverse(object=>{if(object instanceof THREE.Mesh)object.geometry.dispose();});oldMaterials.forEach(m=>m.dispose());innerScreen.material.dispose();outerScreen.material.dispose();inner.dispose();outer.dispose();environment.dispose();renderer.dispose();renderer.forceContextLoss();renderer.domElement.remove();}};
+  return {render,dispose(){disposed=true;mixer.stopAllAction();mixer.uncacheRoot(gltf.scene);gltf.scene.traverse(object=>{if(object instanceof THREE.Mesh)object.geometry.dispose();});oldMaterials.forEach(m=>m.dispose());finishMaterials.forEach(m=>m.dispose());innerScreen.material.dispose();outerScreen.material.dispose();inner.dispose();outer.dispose();environment.dispose();renderer.dispose();renderer.forceContextLoss();renderer.domElement.remove();}};
 }
