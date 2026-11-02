@@ -2,6 +2,8 @@ import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { LinkArrow } from "./ArrowLink";
 import { socialLinks } from "../data/social";
 const CatScene = lazy(() => import("./CatScene").then(module => ({ default: module.CatScene })));
+const GridKiko = lazy(() => import("./GridKiko").then(module => ({ default: module.GridKiko })));
+const useGridCat = new URLSearchParams(window.location.search).get("footer") !== "3d";
 const links = [{ icon: "linkedin-in", label: "LinkedIn", href: socialLinks.linkedin }, { icon: "behance", label: "Behance", href: socialLinks.behance }, { icon: "instagram", label: "Instagram", href: socialLinks.instagram }, { icon: "github", label: "GitHub", href: socialLinks.github }];
 export function Footer() {
   const footerRef = useRef<HTMLElement>(null);
@@ -13,5 +15,5 @@ export function Footer() {
     const observer = new IntersectionObserver(entries => { if (entries[0].isIntersecting) { setShowCat(true); observer.disconnect(); } }, { rootMargin: "300px" });
     observer.observe(footerRef.current); return () => observer.disconnect();
   }, []);
-  return <footer ref={footerRef} id="contact" className="contact-section" aria-labelledby="contact-title"><div className="container contact-layout"><div className="contact-content"><h2 id="contact-title">Let’s talk<br />product design.</h2><a className="button" href={socialLinks.email}>qazarazaq@gmail.com<LinkArrow /></a><nav className="contact-links" aria-label="Professional profiles">{links.map(link => <a key={link.label} href={link.href} target="_blank" rel="noreferrer" aria-label={link.label} title={link.label}><img src={`/icons/${link.icon}.svg`} width="23" height="23" alt="" /></a>)}</nav></div></div><div className="contact-cat-stage" aria-hidden="true">{showCat && (reduced ? <img className="contact-cat-poster" src="/cats/kiko-poster.webp" alt="" /> : <Suspense fallback={null}><CatScene /></Suspense>)}</div></footer>;
+  return <footer ref={footerRef} id="contact" className={`contact-section${useGridCat ? " contact-section--grid-kiko" : ""}`} aria-labelledby="contact-title"><div className="container contact-layout"><div className="contact-content"><h2 id="contact-title">Let’s talk<br />product design.</h2><a className="button" href={socialLinks.email}>qazarazaq@gmail.com<LinkArrow /></a><nav className="contact-links" aria-label="Professional profiles">{links.map(link => <a key={link.label} href={link.href} target="_blank" rel="noreferrer" aria-label={link.label} title={link.label}><img src={`/icons/${link.icon}.svg`} width="23" height="23" alt="" /></a>)}</nav></div></div><div className="contact-cat-stage" aria-hidden="true">{showCat && (useGridCat ? <Suspense fallback={null}><GridKiko /></Suspense> : reduced ? <img className="contact-cat-poster" src="/cats/kiko-poster.webp" alt="" /> : <Suspense fallback={null}><CatScene /></Suspense>)}</div></footer>;
 }
